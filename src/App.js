@@ -3,7 +3,7 @@ import ScrollToTop from './helpers/scroll-top';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 // home pages
-const HomeFashion = lazy(() => import('./pages/home/HomeFlowerShop'));
+const HomeFashion = lazy(() => import('./pages/home/HomeHandmade'));
 const HomeFashionTwo = lazy(() => import('./pages/home/HomeFashionTwo'));
 const HomeFashionThree = lazy(() => import('./pages/home/HomeFashionThree'));
 const HomeFashionFour = lazy(() => import('./pages/home/HomeFashionFour'));

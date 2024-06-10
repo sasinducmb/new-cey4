@@ -14,8 +14,8 @@ const HomeHandmade = () => {
   return (
     <Fragment>
       <SEO
-        titleTemplate="Handmade Home"
-        description="Handmade home of flone react minimalist eCommerce template."
+        titleTemplate="Online store"
+        description=""
       />
       <LayoutOne headerTop="visible">
         {/* hero slider */}
@@ -31,20 +31,20 @@ const HomeHandmade = () => {
           category="handmade"
         />
         {/* feature icon */}
-        <FeatureIconFour
+        {/* <FeatureIconFour
           bgImg="/assets/img/bg/shape.png"
           containerClass="container-fluid"
           gutterClass="padding-10-row-col"
           spaceTopClass="pt-50"
           spaceBottomClass="pb-40"
-        />
+        /> */}
         {/* countdown */}
-        <CountDownThree
+        {/* <CountDownThree
           spaceTopClass="pt-100"
           spaceBottomClass="pb-100"
           dateTime="November 13, 2023 12:12:00"
           countDownImage="/assets/img/banner/deal-3.png"
-        />
+        /> */}
         {/* testimonial */}
         <TestimonialOne
           spaceTopClass="pt-100"

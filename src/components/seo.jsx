@@ -22,7 +22,7 @@ SEO.propTypes = {
 }
 
 SEO.defaultProps = {
-    title: "Online Store",
+    title: "Cey4Hub",
     titleTemplate: "Product Page",
     description: "",
 };
