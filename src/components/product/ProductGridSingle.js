@@ -27,9 +27,9 @@ const ProductGridSingle = ({
 
   return (
     <Fragment>
-      <div className={clsx("product-wrap", spaceBottomClass)}>
+      <div className={clsx('product-wrap', spaceBottomClass)}>
         <div className="product-img">
-          <Link to={process.env.PUBLIC_URL + "/product/" + product.id}>
+          <Link to={process.env.PUBLIC_URL + '/product/' + product.id}>
             <img
               className="default-img"
               src={process.env.PUBLIC_URL + product.image[0]}
@@ -42,7 +42,7 @@ const ProductGridSingle = ({
                 alt=""
               />
             ) : (
-              ""
+              ''
             )}
           </Link>
           {product.discount || product.new ? (
@@ -50,23 +50,23 @@ const ProductGridSingle = ({
               {product.discount ? (
                 <span className="pink">-{product.discount}%</span>
               ) : (
-                ""
+                ''
               )}
-              {product.new ? <span className="purple">New</span> : ""}
+              {product.new ? <span className="purple">New</span> : ''}
             </div>
           ) : (
-            ""
+            ''
           )}
 
           <div className="product-action">
             <div className="pro-same-action pro-wishlist">
               <button
-                className={wishlistItem !== undefined ? "active" : ""}
+                className={wishlistItem !== undefined ? 'active' : ''}
                 disabled={wishlistItem !== undefined}
                 title={
                   wishlistItem !== undefined
-                    ? "Added to wishlist"
-                    : "Add to wishlist"
+                    ? 'Added to wishlist'
+                    : 'Add to wishlist'
                 }
                 onClick={() => dispatch(addToWishlist(product))}
               >
@@ -74,7 +74,7 @@ const ProductGridSingle = ({
               </button>
             </div>
             <div className="pro-same-action pro-cart">
-              {product.affiliateLink ? (
+              {/* {product.affiliateLink ? (
                 <a
                   href={product.affiliateLink}
                   rel="noopener noreferrer"
@@ -110,7 +110,24 @@ const ProductGridSingle = ({
                 <button disabled className="active">
                   Out of Stock
                 </button>
-              )}
+              )} */}
+
+              <button
+                onClick={() => dispatch(addToCart(product))}
+                className={
+                  cartItem !== undefined && cartItem.quantity > 0
+                    ? 'active'
+                    : ''
+                }
+                disabled={cartItem !== undefined && cartItem.quantity > 0}
+                title={cartItem !== undefined ? 'Added to cart' : 'Add to cart'}
+              >
+                {' '}
+                <i className="pe-7s-cart"></i>{' '}
+                {cartItem !== undefined && cartItem.quantity > 0
+                  ? 'Added'
+                  : 'Add to cart'}
+              </button>
             </div>
             <div className="pro-same-action pro-quickview">
               <button title="Quick View" onClick={() => setModalShow(true)}>
@@ -121,7 +138,7 @@ const ProductGridSingle = ({
         </div>
         <div className="product-content text-center">
           <h3>
-            <Link to={process.env.PUBLIC_URL + "/product/" + product.id}>
+            <Link to={process.env.PUBLIC_URL + '/product/' + product.id}>
               {product.name}
             </Link>
           </h3>
@@ -130,12 +147,12 @@ const ProductGridSingle = ({
               <Rating ratingValue={product.rating} />
             </div>
           ) : (
-            ""
+            ''
           )}
           <div className="product-price">
             {discountedPrice !== null ? (
               <Fragment>
-                <span>{currency.currencySymbol + finalDiscountedPrice}</span>{" "}
+                <span>{currency.currencySymbol + finalDiscountedPrice}</span>{' '}
                 <span className="old">
                   {currency.currencySymbol + finalProductPrice}
                 </span>
