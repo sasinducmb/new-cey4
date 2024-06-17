@@ -91,41 +91,53 @@
   }
 }
 .logo {
-  margin-top: 0px;
+  margin-top: 32px;
+
   @media #{$md-layout} {
-    margin-top: 0px;
+    margin-top: 0;
   }
+
   @media #{$xs-layout} {
-    margin-top: 0px;
-    padding-top: 0px;
+    margin-top: 0;
   }
+
   &.logo-hm5 {
     margin-top: 41px;
+
     a.sticky-block {
       display: none;
       @media #{$md-layout,
-      $xs-layout} {
-        display: block;
-      }
+ $xs-layout
     }
-    a.sticky-none {
+
+      {
       display: block;
-      @media #{$md-layout,
-      $xs-layout} {
-        display: none;
-      }
-    }
-    @media #{$md-layout} {
-      margin-top: 0;
-
-      text-align: left !important;
-    }
-    @media #{$xs-layout} {
-      margin-top: 0;
-
-      text-align: left !important;
     }
   }
+
+  a.sticky-none {
+    display: block;
+    @media #{$md-layout,
+ $xs-layout
+  }
+
+    {
+    display: none;
+  }
+}
+
+@media #{$md-layout} {
+  margin-top: 0;
+
+  text-align: left !important;
+}
+
+@media #{$xs-layout} {
+  margin-top: 0;
+
+  text-align: left !important;
+}
+}
 }
 
 .stick {
@@ -967,6 +979,7 @@
 
 .header-top-area {
   border-bottom: 1px solid #d5d4d4;
+  background-color: #171717;
   .header-top-wap {
     display: flex;
     align-items: center;
@@ -1051,7 +1064,7 @@
       cursor: pointer;
       letter-spacing: 0.8px;
 
-      color: #555252;
+      color: white;
       @media #{$xs-layout} {
         line-height: 35px;
       }
@@ -1064,7 +1077,7 @@
         position: relative;
         top: 2px;
 
-        color: #555252;
+        color: white;
       }
     }
     .lang-car-dropdown {
@@ -1109,7 +1122,7 @@
 
       letter-spacing: 0.8px;
 
-      color: #555252;
+      color: white;
     }
     &:hover {
       & > a,
@@ -1511,7 +1524,7 @@
           transform: rotateX(0deg);
         }
         a {
-          font-size: 18px;
+          font-size: 14px;
           font-weight: 500;
 
           display: block;
