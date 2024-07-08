@@ -29,21 +29,21 @@ const ProductGridSingle = ({
     <Fragment>
       <div className={clsx('product-wrap', spaceBottomClass)}>
         <div className="product-img">
-          <Link to={process.env.PUBLIC_URL + '/product/' + product.id}>
+        <Link to={`${process.env.REACT_APP_MAIN_URL}/product/${product._id}`}>
+        <img
+            className="default-img"
+            src={`${process.env.REACT_APP_BACKEND_URL}/${product.mainImage.replace(/\\/g, '/')}`}
+            alt=""
+          />
+          {product.additionalImages && product.additionalImages.length > 0 ? (
             <img
-              className="default-img"
-              src={process.env.PUBLIC_URL + product.image[0]}
+              className="hover-img"
+              src={`${process.env.REACT_APP_BACKEND_URL}/${product.additionalImages[0].replace(/\\/g, '/')}`}
               alt=""
             />
-            {product.image.length > 1 ? (
-              <img
-                className="hover-img"
-                src={process.env.PUBLIC_URL + product.image[1]}
-                alt=""
-              />
-            ) : (
-              ''
-            )}
+          ) : (
+            ''
+          )}
           </Link>
           {product.discount || product.new ? (
             <div className="product-img-badges">

@@ -13,10 +13,11 @@ import ShopSize from "../../components/product/ShopSize";
 import ShopTag from "../../components/product/ShopTag";
 
 const ShopSidebar = ({ products, getSortParams, sideSpaceClass }) => {
-  const uniqueCategories = getIndividualCategories(products);
-  const uniqueColors = getIndividualColors(products);
-  const uniqueSizes = getProductsIndividualSizes(products);
-  const uniqueTags = getIndividualTags(products);
+  // const uniqueCategories = getIndividualCategories(products);
+  // const uniqueColors = getIndividualColors(products);
+  // const uniqueSizes = getProductsIndividualSizes(products);
+  // const uniqueTags = getIndividualTags(products);
+  const uniqueCategories = ["clothing", "clay", "accessories", "design", "wood", "choir"];
 
   return (
     <div className={clsx("sidebar-style", sideSpaceClass)}>
@@ -30,13 +31,13 @@ const ShopSidebar = ({ products, getSortParams, sideSpaceClass }) => {
       />
 
       {/* filter by color */}
-      <ShopColor colors={uniqueColors} getSortParams={getSortParams} />
+      <ShopColor/>
 
       {/* filter by size */}
-      <ShopSize sizes={uniqueSizes} getSortParams={getSortParams} />
+      <ShopSize/>
 
       {/* filter by tag */}
-      <ShopTag tags={uniqueTags} getSortParams={getSortParams} />
+      <ShopTag  />
     </div>
   );
 };

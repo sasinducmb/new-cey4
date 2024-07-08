@@ -10,12 +10,16 @@ import Swiper, { SwiperSlide } from "../../components/swiper";
 const ProductImageGallery = ({ product }) => {
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
   const [index, setIndex] = useState(-1);
-  const slides = product?.image.map((img, i) => ({
-      src: process.env.PUBLIC_URL + img,
-      key: i,
-  }));
 
-  // swiper slider settings
+  const slides = [
+    { src: `${process.env.REACT_APP_BACKEND_URL}/${product.mainImage.replace(/\\/g, '/')}`, key: 'mainImage' },
+    ...product.additionalImages.map((img, i) => ({
+      src: `${process.env.REACT_APP_BACKEND_URL}/${img.replace(/\\/g, '/')}`,
+      key: i,
+    }))
+  ];
+
+  // Swiper slider settings
   const gallerySwiperParams = {
     spaceBetween: 10,
     loop: true,
@@ -53,18 +57,18 @@ const ProductImageGallery = ({ product }) => {
         ) : (
           ""
         )}
-        {product?.image?.length ? (
+        {slides.length > 0 ? (
           <Swiper options={gallerySwiperParams}>
-            {product.image.map((single, key) => (
+            {slides.map((slide, key) => (
               <SwiperSlide key={key}>
                 <button className="lightgallery-button" onClick={() => setIndex(key)}>
                   <i className="pe-7s-expand1"></i>
                 </button>
                 <div className="single-image">
                   <img
-                    src={process.env.PUBLIC_URL + single}
+                    src={slide.src}
                     className="img-fluid"
-                    alt=""
+                    alt={product.name}
                   />
                 </div>
               </SwiperSlide>
@@ -78,18 +82,17 @@ const ProductImageGallery = ({ product }) => {
             />
           </Swiper>
         ) : null}
-
       </div>
       <div className="product-small-image-wrapper mt-15">
-        {product?.image?.length ? (
+        {slides.length > 0 ? (
           <Swiper options={thumbnailSwiperParams}>
-            {product.image.map((single, key) => (
+            {slides.map((slide, key) => (
               <SwiperSlide key={key}>
                 <div className="single-image">
                   <img
-                    src={process.env.PUBLIC_URL + single}
+                    src={slide.src}
                     className="img-fluid"
-                    alt=""
+                    alt={product.name}
                   />
                 </div>
               </SwiperSlide>
@@ -102,7 +105,13 @@ const ProductImageGallery = ({ product }) => {
 };
 
 ProductImageGallery.propTypes = {
-  product: PropTypes.shape({})
+  product: PropTypes.shape({
+    mainImage: PropTypes.string.isRequired,
+    additionalImages: PropTypes.arrayOf(PropTypes.string).isRequired,
+    discount: PropTypes.number,
+    new: PropTypes.bool,
+    name: PropTypes.string.isRequired,
+  }).isRequired,
 };
 
 export default ProductImageGallery;

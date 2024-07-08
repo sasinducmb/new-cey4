@@ -28,7 +28,7 @@ const HomeHandmade = () => {
         <TabProductTen
           spaceBottomClass="pb-65"
           spaceTopClass="pt-70"
-          category="handmade"
+          category="clay"
         />
         {/* feature icon */}
         {/* <FeatureIconFour

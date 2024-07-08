@@ -1,13 +1,34 @@
-import React, { Fragment } from "react";
-import { Link, useLocation } from "react-router-dom"; 
+import React, { Fragment, useState } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom"; 
 import Tab from "react-bootstrap/Tab";
 import Nav from "react-bootstrap/Nav";
 import SEO from "../../components/seo";
 import LayoutOne from "../../layouts/LayoutOne";
 import Breadcrumb from "../../wrappers/breadcrumb/Breadcrumb";
+import axios from "axios";
 
 const LoginRegister = () => {
   let { pathname } = useLocation();
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const navigate = useNavigate();
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/user/login`, {
+        username,
+        password,
+      });
+    
+      // console.log(response.data);
+
+      window.location.href = process.env.REACT_APP_DASHBOARD_URL; // Adjust the route as needed
+    } catch (error) {
+      // Handle error
+      console.error('Login error:', error);
+      
+    }
+  };
 
   return (
     <Fragment>
@@ -45,16 +66,20 @@ const LoginRegister = () => {
                       <Tab.Pane eventKey="login">
                         <div className="login-form-container">
                           <div className="login-register-form">
-                            <form>
+                            <form onSubmit={handleLogin}>
                               <input
                                 type="text"
                                 name="user-name"
                                 placeholder="Username"
+                                value={username}
+                            onChange={(e) => setUsername(e.target.value)}
                               />
                               <input
                                 type="password"
                                 name="user-password"
                                 placeholder="Password"
+                                value={password}
+                            onChange={(e) => setPassword(e.target.value)}
                               />
                               <div className="button-box">
                                 <div className="login-toggle-btn">

@@ -1,22 +1,26 @@
-import { Fragment } from "react";
+import { Fragment, useEffect } from "react";
 import PropTypes from "prop-types";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { getProducts } from "../../helpers/product";
 import ProductGridSingle from "../../components/product/ProductGridSingle";
-
+import {fetchProducts} from "../../store/slices/product-slice"
 const ProductGrid = ({
   spaceBottomClass,
   category,
   type,
   limit
 }) => {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(fetchProducts());
+  }, [dispatch]);
   const { products } = useSelector((state) => state.product);
   const currency = useSelector((state) => state.currency);
   const { cartItems } = useSelector((state) => state.cart);
   const { wishlistItems } = useSelector((state) => state.wishlist);
   const { compareItems } = useSelector((state) => state.compare);
   const prods = getProducts(products, category, type, limit)
-  
+  console.log(products)
   return (
     <Fragment>
       {prods?.map(product => {

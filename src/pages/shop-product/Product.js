@@ -12,8 +12,13 @@ const Product = () => {
   let { pathname } = useLocation();
   let { id } = useParams();
   const { products } = useSelector((state) => state.product);
-  const product = products.find(product => product.id === id);
+  const product = products.find(product => product._id === id);
+
+  if (!product) {
+    return <div>Product not found</div>;
+  }
   
+  console.log(product)
 
   return (
     <Fragment>
@@ -25,10 +30,10 @@ const Product = () => {
       <LayoutOne headerTop="visible">
         {/* breadcrumb */}
         <Breadcrumb 
-          pages={[
-            {label: "Home", path: process.env.PUBLIC_URL + "/" },
-            {label: "Shop Product", path: process.env.PUBLIC_URL + pathname }
-          ]} 
+         pages={[
+          {label: "Home", path: "/" },
+          {label: "Shop Product", path: pathname }
+        ]} 
         />
 
         {/* product description with image */}
@@ -39,16 +44,16 @@ const Product = () => {
         />
 
         {/* product description tab */}
-        <ProductDescriptionTab
+        {/* <ProductDescriptionTab
           spaceBottomClass="pb-90"
-          productFullDesc={product.fullDescription}
-        />
+          productFullDesc={product.description}
+        /> */}
 
         {/* related product slider */}
-        <RelatedProductSlider
+        {/* <RelatedProductSlider
           spaceBottomClass="pb-95"
-          category={product.category[0]}
-        />
+          category={product.category}
+        /> */}
       </LayoutOne>
     </Fragment>
   );
