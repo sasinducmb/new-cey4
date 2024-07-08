@@ -35,14 +35,17 @@ const MenuCart = () => {
                 <li className="single-shopping-cart" key={item.cartItemId}>
                   <div className="shopping-cart-img">
                     <Link to={process.env.PUBLIC_URL + "/product/" + item.id}>
-                      <img
-                        className="default-img"
-                        src={`${process.env.REACT_APP_BACKEND_URL}/${item.mainImage.replace(
-                          /\\/g,
-                          "/"
-                        )}`}
-                        alt=""
-                      />
+                      {item.mainImage ? (
+                        <img
+                          className="default-img"
+                          src={`${
+                            process.env.REACT_APP_BACKEND_URL
+                          }/${item.mainImage.replace(/\\/g, "/")}`}
+                          alt=""
+                        />
+                      ) : (
+                        <span>No image available</span>
+                      )}
                     </Link>
                   </div>
                   <div className="shopping-cart-title">
