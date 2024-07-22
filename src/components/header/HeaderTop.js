@@ -16,7 +16,7 @@ const HeaderTop = ({ borderStyle }) => {
           </span>
         </p> */}
         <img
-          src="/assets/flag.gif"
+         src={`${process.env.PUBLIC_URL}/assets/flag.gif`}
           style={{width:'50px'}}
         ></img>
       </div>
