@@ -67,19 +67,15 @@ const Wishlist = () => {
                             return (
                               <tr key={key}>
                                 <td className="product-thumbnail">
-                                  <Link
-                                    to={
-                                      process.env.PUBLIC_URL +
-                                      "/product/" +
-                                      wishlistItem.id
-                                    }
-                                  >
+                                <Link to={`${process.env.REACT_APP_MAIN_URL}/product/${wishlistItem._id}`}>
                                     <img
                                       className="img-fluid"
-                                      src={
-                                        process.env.PUBLIC_URL +
-                                        wishlistItem.image[0]
-                                      }
+                                      src={`${
+                                        process.env.REACT_APP_BACKEND_URL
+                                      }/${wishlistItem.mainImage.replace(
+                                        /\\/g,
+                                        "/"
+                                      )}`}
                                       alt=""
                                     />
                                   </Link>
@@ -171,7 +167,7 @@ const Wishlist = () => {
                                 <td className="product-remove">
                                   <button
                                     onClick={() =>
-                                      dispatch(deleteFromWishlist(wishlistItem.id))
+                                      dispatch(deleteFromWishlist(wishlistItem._id))
                                     }
                                   >
                                     <i className="fa fa-times"></i>

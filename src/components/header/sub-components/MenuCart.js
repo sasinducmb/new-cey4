@@ -37,7 +37,7 @@ const MenuCart = () => {
                     <Link to={process.env.PUBLIC_URL + "/product/" + item.id}>
                       {item.mainImage ? (
                         <img
-                          className="default-img"
+                        className="img-fluid"
                           src={`${
                             process.env.REACT_APP_BACKEND_URL
                           }/${item.mainImage.replace(/\\/g, "/")}`}

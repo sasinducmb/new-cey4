@@ -10,10 +10,6 @@ const ProductGrid = ({
   type,
   limit
 }) => {
-  const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(fetchProducts());
-  }, [dispatch]);
   const { products } = useSelector((state) => state.product);
   const currency = useSelector((state) => state.currency);
   const { cartItems } = useSelector((state) => state.cart);
@@ -31,18 +27,18 @@ const ProductGrid = ({
               product={product}
               currency={currency}
               cartItem={
-                cartItems.find((cartItem) => cartItem.id === product.id)
+                cartItems.find((cartItem) => cartItem._id === product._id)
               }
               wishlistItem={
                 wishlistItems.find(
-                  (wishlistItem) => wishlistItem.id === product.id
+                  (wishlistItem) => wishlistItem._id === product._id
                 )
               }
-              compareItem={
-                compareItems.find(
-                  (compareItem) => compareItem.id === product.id
-                )
-              }
+              // compareItem={
+              //   compareItems.find(
+              //     (compareItem) => compareItem.id === product.id
+              //   )
+              // }
             />
           </div>
         );
