@@ -21,8 +21,6 @@ const Checkout = () => {
     0
   );
 
-  // Use the RTK Query mutation hook for creating orders
-  // Use the RTK Query mutation
   const [createOrder, { isLoading: isOrderLoading }] = useCreateOrderMutation();
   const [createPaymentSession, { isLoading: isPaymentLoading }] =
     useCreatePaymentSessionMutation();
@@ -52,7 +50,7 @@ const Checkout = () => {
 
     const orderData = {
       items: cartItems.map((item) => ({
-        product: item._id, // Ensure this matches your product identifier
+        product: item._id, 
         quantity: item.quantity,
       })),
       totalDeliveryCost,
@@ -63,17 +61,20 @@ const Checkout = () => {
     try {
       const response = await createOrder(orderData).unwrap();
       console.log(response);
+      
       if (response.message) {
-        const stripe = await loadStripe(
-         process.env.REACT_APP_STRIP_PK
-        );
-
+        const stripe = await loadStripe(process.env.REACT_APP_STRIP_PK);
+  
+       
         const paymentIdResponse = await createPaymentSession({
           overallTotal: orderData.overallTotal,
+          orderId: response.orderId,  
         }).unwrap();
-        console.log(paymentIdResponse)
+        
+        console.log(paymentIdResponse);
+        
         const session = paymentIdResponse.id;
-
+  
         if (session) {
           stripe.redirectToCheckout({
             sessionId: session,
