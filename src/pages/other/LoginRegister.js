@@ -37,7 +37,7 @@ const LoginRegister = () => {
       console.log(response);  
       if (response.message) {
         // Check the user's role in the response
-        response.user.role === "admin"  ? window.location.href = "http://localhost:3001/" : navigate("/");      
+        response.user.role === "admin"  ?  window.location.href = process.env.REACT_APP_DASHBOARD_URL : navigate("/");      
       }
       // Handle successful login, e.g., navigate to dashboard
     } catch (error) {
