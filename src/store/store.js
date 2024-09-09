@@ -2,12 +2,6 @@ import { configureStore, combineReducers } from '@reduxjs/toolkit';
 import {
     persistStore,
     persistReducer,
-    FLUSH,
-    REHYDRATE,
-    PAUSE,
-    PERSIST,
-    PURGE,
-    REGISTER,
 } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import productReducer from './slices/product-slice';
@@ -16,6 +10,7 @@ import cartReducer from "./slices/cart-slice";
 import compareReducer from "./slices/compare-slice";
 import wishlistReducer from "./slices/wishlist-slice";
 import { orderApi } from './slices/orderSlice'; // Import the orderApi
+import { userApi } from './slices/user-slice';
 
 const persistConfig = {
     key: "flone",
@@ -30,7 +25,8 @@ export const rootReducer = combineReducers({
     cart: cartReducer,
     compare: compareReducer,
     wishlist: wishlistReducer,
-    [orderApi.reducerPath]: orderApi.reducer, // Add the orderApi reducer
+    [orderApi.reducerPath]: orderApi.reducer, 
+    [userApi.reducerPath]: userApi.reducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
@@ -38,18 +34,7 @@ const persistedReducer = persistReducer(persistConfig, rootReducer);
 export const store = configureStore({
     reducer: persistedReducer,
     middleware: (getDefaultMiddleware) =>
-        getDefaultMiddleware({
-            serializableCheck: {
-                ignoredActions: [
-                    FLUSH,
-                    REHYDRATE,
-                    PAUSE,
-                    PERSIST,
-                    PURGE,
-                    REGISTER,
-                ],
-            },
-        }).concat(orderApi.middleware), // Add the orderApi middleware
+        getDefaultMiddleware().concat(orderApi.middleware, userApi.middleware), // Add the orderApi middleware
 });
 
 export const persistor = persistStore(store);
