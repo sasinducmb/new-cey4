@@ -31,14 +31,11 @@ const LoginRegister = () => {
     try {
       const response = await login({ email, password }).unwrap();
 
-      if (response.token) {
-        localStorage.setItem("token", response.token);
+      if (response.message) { 
+        cogoToast.success("Login successful", { position: "top-right" });
+        window.location.href = process.env.REACT_APP_DASHBOARD_URL ;
       }
-      console.log(response);  
-      if (response.message) {
-        // Check the user's role in the response
-        response.user.role === "admin"  ?  window.location.href = process.env.REACT_APP_DASHBOARD_URL : navigate("/");      
-      }
+   
       // Handle successful login, e.g., navigate to dashboard
     } catch (error) {
       if (error.status === 400 && error.data && error.data.message) {

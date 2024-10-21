@@ -31,7 +31,7 @@ const ProductGridList = ({
               }
               compareItem={
                 compareItems.find(
-                  compareItem => compareItem.id === product.id
+                  compareItem => compareItem._id === product._id
                 )
               }
             />
