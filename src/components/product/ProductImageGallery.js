@@ -1,6 +1,6 @@
 import React, { Fragment, useState } from "react";
 import PropTypes from "prop-types";
-import { EffectFade, Thumbs } from 'swiper';
+import { EffectFade, Thumbs } from "swiper";
 import AnotherLightbox from "yet-another-react-lightbox";
 import Thumbnails from "yet-another-react-lightbox/plugins/thumbnails";
 import Zoom from "yet-another-react-lightbox/plugins/zoom";
@@ -12,11 +12,17 @@ const ProductImageGallery = ({ product }) => {
   const [index, setIndex] = useState(-1);
 
   const slides = [
-    { src: `${process.env.REACT_APP_BACKEND_URL}/${product.mainImage.replace(/\\/g, '/')}`, key: 'mainImage' },
+    {
+      src: `${process.env.REACT_APP_BACKEND_URL}/${product.mainImage.replace(
+        /\\/g,
+        "/"
+      )}`,
+      key: "mainImage",
+    },
     ...product.additionalImages.map((img, i) => ({
-      src: `${process.env.REACT_APP_BACKEND_URL}/${img.replace(/\\/g, '/')}`,
+      src: `${process.env.REACT_APP_BACKEND_URL}/${img.replace(/\\/g, "/")}`,
       key: i,
-    }))
+    })),
   ];
 
   // Swiper slider settings
@@ -25,7 +31,7 @@ const ProductImageGallery = ({ product }) => {
     loop: true,
     effect: "fade",
     fadeEffect: {
-      crossFade: true
+      crossFade: true,
     },
     thumbs: { swiper: thumbsSwiper },
     modules: [EffectFade, Thumbs],
@@ -39,7 +45,7 @@ const ProductImageGallery = ({ product }) => {
     freeMode: true,
     loop: true,
     slideToClickedSlide: true,
-    navigation: true
+    navigation: true,
   };
 
   return (
@@ -61,7 +67,10 @@ const ProductImageGallery = ({ product }) => {
           <Swiper options={gallerySwiperParams}>
             {slides.map((slide, key) => (
               <SwiperSlide key={key}>
-                <button className="lightgallery-button" onClick={() => setIndex(key)}>
+                <button
+                  className="lightgallery-button"
+                  onClick={() => setIndex(key)}
+                >
                   <i className="pe-7s-expand1"></i>
                 </button>
                 <div className="single-image">
@@ -74,11 +83,11 @@ const ProductImageGallery = ({ product }) => {
               </SwiperSlide>
             ))}
             <AnotherLightbox
-                open={index >= 0}
-                index={index}
-                close={() => setIndex(-1)}
-                slides={slides}
-                plugins={[Thumbnails, Zoom, Fullscreen]}
+              open={index >= 0}
+              index={index}
+              close={() => setIndex(-1)}
+              slides={slides}
+              plugins={[Thumbnails, Zoom, Fullscreen]}
             />
           </Swiper>
         ) : null}
@@ -100,6 +109,8 @@ const ProductImageGallery = ({ product }) => {
           </Swiper>
         ) : null}
       </div>
+
+      <div></div>
     </Fragment>
   );
 };

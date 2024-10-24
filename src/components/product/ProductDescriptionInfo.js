@@ -63,7 +63,7 @@ const ProductDescriptionInfo = ({
       )}
       <div className="pro-details-list">
         <p
-          style={{ color: "black" }}
+         
           dangerouslySetInnerHTML={{ __html: product.shortDescription }}
         ></p>
       </div>

@@ -133,6 +133,7 @@ const ProductImageGalleryLeftThumb = ({ product, thumbPosition }) => {
           </div>
         </div>
       </div>
+         
     </Fragment>
   );
 };
