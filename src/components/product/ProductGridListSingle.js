@@ -19,8 +19,13 @@ const ProductGridListSingle = ({
   spaceBottomClass,
 }) => {
   const [modalShow, setModalShow] = useState(false);
-  const discountedPrice = getDiscountPrice(product.price, product.discount);
-  const finalProductPrice = +(product.price * currency.currencyRate).toFixed(2);
+  const discountedPrice = getDiscountPrice(
+    product.price.basePrice,
+    product.discount
+  );
+  const finalProductPrice = +(
+    product.price.basePrice * currency.currencyRate
+  ).toFixed(2);
   const finalDiscountedPrice = +(
     discountedPrice * currency.currencyRate
   ).toFixed(2);
@@ -30,24 +35,27 @@ const ProductGridListSingle = ({
     <Fragment>
       <div className={clsx("product-wrap", spaceBottomClass)}>
         <div className="product-img">
-        <Link to={`${process.env.REACT_APP_MAIN_URL}/product/${product._id}`}>
+          <Link to={`${process.env.REACT_APP_MAIN_URL}/product/${product._id}`}>
             <img
               className="default-img"
-              src={`${process.env.REACT_APP_BACKEND_URL}/${product.mainImage.replace(
-                /\\/g,
-                "/"
-              )}`}
-              alt=""
+              src={
+                product.mainImage
+                  ? `${
+                      process.env.REACT_APP_BACKEND_URL
+                    }/${product.mainImage.replace(/\\/g, "/")}`
+                  : "path/to/default-image.jpg" // Provide a fallback image if mainImage is null or undefined
+              }
+              alt={product.name || "Product Image"} // Add an alt text for better accessibility
             />
             {/* {product.additionalImages && product.additionalImages.length > 0 ? (
-              <img
-                className="hover-img"
-                src={process.env.PUBLIC_URL + "/" + product.additionalImages[0]}
-                alt=""
-              />
-            ) : (
-              ""
-            )} */}
+    <img
+      className="hover-img"
+      src={process.env.PUBLIC_URL + "/" + product.additionalImages[0]}
+      alt=""
+    />
+  ) : (
+    ""
+  )} */}
           </Link>
           {product.discount || product.new ? (
             <div className="product-img-badges">
@@ -88,7 +96,7 @@ const ProductGridListSingle = ({
                   Buy now{" "}
                 </a>
               ) : product.variation && product.variation.length >= 1 ? (
-                <Link to={`${process.env.PUBLIC_URL}/product/${product.id}`}>
+                <Link to={`${process.env.PUBLIC_URL}/product/${product._id}`}>
                   Select Option
                 </Link>
               ) : product.stock && product.stock > 0 ? (
@@ -125,7 +133,7 @@ const ProductGridListSingle = ({
         </div>
         <div className="product-content text-center">
           <h3>
-            <Link to={process.env.PUBLIC_URL + "/product/" + product.id}>
+            <Link to={process.env.PUBLIC_URL + "/product/" + product._id}>
               {product.name}
             </Link>
           </h3>
@@ -155,7 +163,7 @@ const ProductGridListSingle = ({
           <div className="col-xl-4 col-md-5 col-sm-6">
             <div className="product-list-image-wrap">
               <div className="product-img">
-                <Link to={process.env.PUBLIC_URL + "/product/" + product.id}>
+                <Link to={process.env.PUBLIC_URL + "/product/" + product._id}>
                   <img
                     className="default-img img-fluid"
                     src={process.env.PUBLIC_URL + "/" + product.mainImage}
@@ -194,7 +202,7 @@ const ProductGridListSingle = ({
           <div className="col-xl-8 col-md-7 col-sm-6">
             <div className="shop-list-content">
               <h3>
-                <Link to={process.env.PUBLIC_URL + "/product/" + product.id}>
+                <Link to={process.env.PUBLIC_URL + "/product/" + product._id}>
                   {product.name}
                 </Link>
               </h3>
@@ -240,7 +248,7 @@ const ProductGridListSingle = ({
                     </a>
                   ) : product.variation && product.variation.length >= 1 ? (
                     <Link
-                      to={`${process.env.PUBLIC_URL}/product/${product.id}`}
+                      to={`${process.env.PUBLIC_URL}/product/${product._id}`}
                     >
                       Select Option
                     </Link>

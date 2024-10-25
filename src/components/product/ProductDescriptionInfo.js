@@ -62,7 +62,10 @@ const ProductDescriptionInfo = ({
         ""
       )}
       <div className="pro-details-list">
-        <p>{product.shortDescription}</p>
+        <p
+         
+          dangerouslySetInnerHTML={{ __html: product.shortDescription }}
+        ></p>
       </div>
 
       {product.variation ? (
@@ -100,7 +103,7 @@ const ProductDescriptionInfo = ({
             <span>Size</span>
             <div className="pro-details-size-content">
               {product.variation &&
-                product.variation.map(single => {
+                product.variation.map((single) => {
                   return single.color === selectedProductColor
                     ? single.size.map((singleSize, key) => {
                         return (
@@ -180,12 +183,22 @@ const ProductDescriptionInfo = ({
             {productStock && productStock > 0 ? (
               <button
                 onClick={() =>
-                  dispatch(addToCart({
-                    ...product,
-                    quantity: quantityCount,
-                    selectedProductColor: selectedProductColor ? selectedProductColor : product.selectedProductColor ? product.selectedProductColor : null,
-                    selectedProductSize: selectedProductSize ? selectedProductSize : product.selectedProductSize ? product.selectedProductSize : null
-                  }))
+                  dispatch(
+                    addToCart({
+                      ...product,
+                      quantity: quantityCount,
+                      selectedProductColor: selectedProductColor
+                        ? selectedProductColor
+                        : product.selectedProductColor
+                        ? product.selectedProductColor
+                        : null,
+                      selectedProductSize: selectedProductSize
+                        ? selectedProductSize
+                        : product.selectedProductSize
+                        ? product.selectedProductSize
+                        : null,
+                    })
+                  )
                 }
                 disabled={productCartQty >= productStock}
               >
@@ -244,7 +257,7 @@ const ProductDescriptionInfo = ({
       ) : (
         ""
       )} */}
-      {product.tag ? (
+      {/* {product.tag ? (
         <div className="pro-details-meta">
           <span>Tags :</span>
           <ul>
@@ -261,9 +274,9 @@ const ProductDescriptionInfo = ({
         </div>
       ) : (
         ""
-      )}
+      )} */}
 
-      <div className="pro-details-social">
+      {/* <div className="pro-details-social">
         <ul>
           <li>
             <a href="//facebook.com">
@@ -291,7 +304,48 @@ const ProductDescriptionInfo = ({
             </a>
           </li>
         </ul>
-      </div>
+      </div> */}
+    <div className="container mt-4">
+  {/* Features Section */}
+  <div className="card mb-4">
+    <div className="card-header">
+      <h4>Features</h4>
+    </div>
+    <ul className="list-group list-group-flush">
+      {product.features && product.features.length > 0 ? (
+        product.features.map((feature, index) => (
+          <li
+        key={index}
+        className="list-group-item shadow-sm bg-light my-2 py-2 px-3"
+        style={{ borderRadius: "50px" }}
+      >
+            {feature}
+          </li>
+        ))
+      ) : (
+        <li className="list-group-item">No features available</li>
+      )}
+    </ul>
+  </div>
+
+  {/* Department Section */}
+  <div className="card">
+    <div className="card-header">
+      <h4>User Group</h4>
+    </div>
+    <ul className="list-group list-group-flush">
+      {product.department && product.department.length > 0 ? (
+        product.department.map((dept, index) => (
+          <li key={index} className="list-group-item">
+            {dept}
+          </li>
+        ))
+      ) : (
+        <li className="list-group-item">No department available</li>
+      )}
+    </ul>
+  </div>
+</div>
     </div>
   );
 };
@@ -304,7 +358,7 @@ ProductDescriptionInfo.propTypes = {
   finalDiscountedPrice: PropTypes.number,
   finalProductPrice: PropTypes.number,
   product: PropTypes.shape({}),
-  wishlistItem: PropTypes.shape({})
+  wishlistItem: PropTypes.shape({}),
 };
 
 export default ProductDescriptionInfo;
