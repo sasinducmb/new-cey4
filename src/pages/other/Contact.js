@@ -16,16 +16,16 @@ const Contact = () => {
       />
       <LayoutOne headerTop="visible">
         {/* breadcrumb */}
-        <Breadcrumb 
+        <Breadcrumb
           pages={[
-            {label: "Home", path: process.env.PUBLIC_URL + "/" },
-            {label: "Contact", path: process.env.PUBLIC_URL + pathname }
-          ]} 
+            { label: 'Home', path: process.env.PUBLIC_URL + '/' },
+            { label: 'Contact', path: process.env.PUBLIC_URL + pathname },
+          ]}
         />
         <div className="contact-area pt-100 pb-100">
           <div className="container">
             <div className="contact-map mb-10">
-              <GoogleMap lat={47.444} lng={-122.176} />
+              <GoogleMap lat={51.607018} lng={-0.275863} />
             </div>
             <div className="custom-row-2">
               <div className="col-12 col-lg-4 col-md-5">
@@ -35,8 +35,8 @@ const Contact = () => {
                       <i className="fa fa-phone" />
                     </div>
                     <div className="contact-info-dec">
-                      <p>+012 345 678 102</p>
-                      <p>+012 345 678 102</p>
+                      <p> +44 7941 332938</p>
+                      <p> +44 7941 332938</p>
                     </div>
                   </div>
                   <div className="single-contact-info">
@@ -45,13 +45,8 @@ const Contact = () => {
                     </div>
                     <div className="contact-info-dec">
                       <p>
-                        <a href="mailto:yourname@email.com">
-                          yourname@email.com
-                        </a>
-                      </p>
-                      <p>
-                        <a href="https://yourwebsitename.com">
-                          yourwebsitename.com
+                        <a href="mailto:support@cey4hub.com">
+                          support@cey4hub.com
                         </a>
                       </p>
                     </div>
@@ -61,19 +56,22 @@ const Contact = () => {
                       <i className="fa fa-map-marker" />
                     </div>
                     <div className="contact-info-dec">
-                      <p>Address goes here, </p>
-                      <p>street, Crossroad 123.</p>
+                      <p>Unit 2A,2nd Floor </p>
+                      <p>Cavendish House </p>
+                      <p>369 Burnt Oak Broadway</p>
+                      <p>Edgware HA8 5A</p>
+                      <p> United Kingdom</p>
                     </div>
                   </div>
                   <div className="contact-social text-center">
                     <h3>Follow Us</h3>
                     <ul>
                       <li>
-                        <a href="//facebook.com">
-                          <i className="fa fa-facebook" />
+                        <a href="https://www.facebook.com/profile.php?id=100090721765840">
+                          <i className="fa fa-facebook"/>
                         </a>
                       </li>
-                      <li>
+                      {/* <li>
                         <a href="//pinterest.com">
                           <i className="fa fa-pinterest-p" />
                         </a>
@@ -87,10 +85,15 @@ const Contact = () => {
                         <a href="//vimeo.com">
                           <i className="fa fa-vimeo" />
                         </a>
-                      </li>
+                      </li> */}
                       <li>
                         <a href="//twitter.com">
                           <i className="fa fa-twitter" />
+                        </a>
+                      </li>
+                      <li>
+                        <a href="//instragram.com">
+                          <i class="fa fa-instagram"></i>
                         </a>
                       </li>
                     </ul>
@@ -121,7 +124,7 @@ const Contact = () => {
                         <textarea
                           name="message"
                           placeholder="Your Message*"
-                          defaultValue={""}
+                          defaultValue={''}
                         />
                         <button className="submit" type="submit">
                           SEND

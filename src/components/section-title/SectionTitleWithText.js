@@ -3,16 +3,16 @@ import clsx from "clsx";
 
 const SectionTitleWithText = ({ spaceTopClass, spaceBottomClass }) => {
   return (
-    <div className={clsx("welcome-area", spaceTopClass, spaceBottomClass)}>
+    <div className={clsx('welcome-area', spaceTopClass, spaceBottomClass)}>
       <div className="container">
         <div className="welcome-content text-center">
           <h5>Who Are We</h5>
           <h1>Welcome To Cey4Hub</h1>
           <p>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-            eiusmod tempor incididunt labor et dolore magna aliqua. Ut enim ad
-            minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commo consequat irure{" "}
+            Welcome to Cey4hub – your trusted destination for eco-friendly and
+            sustainable products. We are driven by a passion to build a greener
+            future by offering high-quality goods that not only cater to your
+            needs but also contribute positively to the environment.
           </p>
         </div>
       </div>
