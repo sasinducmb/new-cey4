@@ -62,10 +62,7 @@ const ProductDescriptionInfo = ({
         ""
       )}
       <div className="pro-details-list">
-        <p
-         
-          dangerouslySetInnerHTML={{ __html: product.shortDescription }}
-        ></p>
+        <p dangerouslySetInnerHTML={{ __html: product.shortDescription }}></p>
       </div>
 
       {product.variation ? (
@@ -305,47 +302,7 @@ const ProductDescriptionInfo = ({
           </li>
         </ul>
       </div> */}
-    <div className="container mt-4">
-  {/* Features Section */}
-  <div className="card mb-4">
-    <div className="card-header">
-      <h4>Features</h4>
-    </div>
-    <ul className="list-group list-group-flush">
-      {product.features && product.features.length > 0 ? (
-        product.features.map((feature, index) => (
-          <li
-        key={index}
-        className="list-group-item shadow-sm bg-light my-2 py-2 px-3"
-        style={{ borderRadius: "50px" }}
-      >
-            {feature}
-          </li>
-        ))
-      ) : (
-        <li className="list-group-item">No features available</li>
-      )}
-    </ul>
-  </div>
 
-  {/* Department Section */}
-  <div className="card">
-    <div className="card-header">
-      <h4>User Group</h4>
-    </div>
-    <ul className="list-group list-group-flush">
-      {product.department && product.department.length > 0 ? (
-        product.department.map((dept, index) => (
-          <li key={index} className="list-group-item">
-            {dept}
-          </li>
-        ))
-      ) : (
-        <li className="list-group-item">No department available</li>
-      )}
-    </ul>
-  </div>
-</div>
     </div>
   );
 };

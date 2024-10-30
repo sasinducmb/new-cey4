@@ -7,7 +7,6 @@ import ProductImageGallery from "../../components/product/ProductImageGallery";
 import ProductDescriptionInfo from "../../components/product/ProductDescriptionInfo";
 import ProductImageGallerySideThumb from "../../components/product/ProductImageGallerySideThumb";
 import ProductImageFixed from "../../components/product/ProductImageFixed";
-
 const ProductImageDescription = ({
   spaceTopClass,
   spaceBottomClass,
@@ -35,24 +34,52 @@ const ProductImageDescription = ({
   // State to handle switching between Full Description and Specification
   const [activeSection, setActiveSection] = useState(null);
 
-  // Function to render the content based on active section
+  // Updated renderContent function with specifications and features
   const renderContent = () => {
     if (activeSection === "description") {
       return (
-      <div
-        dangerouslySetInnerHTML={{ __html: product.fullDescription }}
-      />
-    );
+        <div
+          dangerouslySetInnerHTML={{ __html: product.fullDescription }}
+        />
+      );
     } else if (activeSection === "specification") {
       return (
-        <ul>
-          <li>Height: {product.dimensions.dheight}</li>
-          <li>Width: {product.dimensions.dwidth}</li>
-          <li>Length: {product.dimensions.dlength}</li>
-        </ul>
+        <div>
+          <ul>
+            <li>Height: {product.dimensions.dheight}</li>
+            <li>Width: {product.dimensions.dwidth}</li>
+            <li>Length: {product.dimensions.dlength}</li>
+          </ul>
+        </div>
+      );
+
+    }
+
+    else if (activeSection === "features") {
+      return (
+        <div className="feature-list">
+          {product.features && product.features.length > 0 ? (
+            product.features.map((feature, index) => (
+              <div
+                key={index}
+                className="list-group-item shadow-sm bg-light my-2 py-2 px-3"
+                style={{
+                  borderRadius: "50px",
+                  margin: "5px 0", // Adds spacing between items
+                  display: "block",
+                  width: "100%", // Ensures each item takes full width
+                }}
+              >
+                {feature}
+              </div>
+            ))
+          ) : (
+            <div className="list-group-item">No features available</div>
+          )}
+        </div>
       );
     }
-    return null; // No content to show by default
+    return null;
   };
 
   return (
@@ -60,7 +87,6 @@ const ProductImageDescription = ({
       <div className="container">
         <div className="row">
           <div className="col-lg-4 col-md-6">
-            {/* Product image gallery based on the galleryType */}
             {galleryType === "leftThumb" ? (
               <ProductImageGallerySideThumb
                 product={product}
@@ -75,7 +101,6 @@ const ProductImageDescription = ({
             )}
           </div>
           <div className="col-lg-6 col-md-6">
-            {/* Product description info */}
             <ProductDescriptionInfo
               product={product}
               discountedPrice={discountedPrice}
@@ -89,11 +114,10 @@ const ProductImageDescription = ({
           </div>
         </div>
 
-        {/* Section to show Full Description or Specification */}
         <div className="row section-switcher">
           <div className="col-lg-2 col-md-6">
             <button
-              className={clsx("section-button", {
+              className={clsx("section-buttons", {
                 active: activeSection === "description",
               })}
               onClick={() => setActiveSection("description")}
@@ -103,7 +127,7 @@ const ProductImageDescription = ({
           </div>
           <div className="col-lg-2 col-md-6">
             <button
-              className={clsx("section-button", {
+              className={clsx("section-buttons", {
                 active: activeSection === "specification",
               })}
               onClick={() => setActiveSection("specification")}
@@ -111,10 +135,29 @@ const ProductImageDescription = ({
               Specification
             </button>
           </div>
+          <div className="col-lg-2 col-md-6">
+            <button
+              className={clsx("section-buttons", {
+                active: activeSection === "features",
+              })}
+              onClick={() => setActiveSection("features")}
+            >
+              Features
+            </button>
+          </div>
+          <div className="col-lg-2 col-md-6">
+            <button
+              className={clsx("section-buttons", {
+                active: activeSection === "Review",
+              })}
+              onClick={() => setActiveSection("Review")}
+            >
+              Review
+            </button>
+          </div>
         </div>
 
-        {/* Content based on the active section */}
-        <div className="product-content mt-4">{renderContent()}</div>
+        <div className="product-contents mt-4">{renderContent()}</div>
       </div>
     </div>
   );
