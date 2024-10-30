@@ -38,24 +38,19 @@ const ProductImageDescription = ({
   const renderContent = () => {
     if (activeSection === "description") {
       return (
-        <div
-          dangerouslySetInnerHTML={{ __html: product.fullDescription }}
-        />
+        <div dangerouslySetInnerHTML={{ __html: product.fullDescription }} />
       );
     } else if (activeSection === "specification") {
       return (
         <div>
           <ul>
-            <li>Height: {product.dimensions.dheight}</li>
-            <li>Width: {product.dimensions.dwidth}</li>
-            <li>Length: {product.dimensions.dlength}</li>
+            <li>Height: {product.dimensions.dheight} cm</li>
+            <li>Width: {product.dimensions.dwidth} cm</li>
+            <li>Length: {product.dimensions.dlength} cm</li>
           </ul>
         </div>
       );
-
-    }
-
-    else if (activeSection === "features") {
+    } else if (activeSection === "features") {
       return (
         <div className="feature-list">
           {product.features && product.features.length > 0 ? (
@@ -157,7 +152,11 @@ const ProductImageDescription = ({
           </div>
         </div>
 
-        <div className="product-contents mt-4">{renderContent()}</div>
+        {activeSection && (
+  <div className="product-contents mt-4">
+    {renderContent()}
+  </div>
+)}
       </div>
     </div>
   );
