@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 import React, { Fragment, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link,useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { getProductCartQuantity } from "../../helpers/product";
 import Rating from "./sub-components/ProductRating";
@@ -19,6 +19,7 @@ const ProductDescriptionInfo = ({
   compareItem,
 }) => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [selectedProductColor, setSelectedProductColor] = useState(
     product.variation ? product.variation[0].color : ""
   );
@@ -206,6 +207,13 @@ const ProductDescriptionInfo = ({
               <button disabled>Out of Stock</button>
             )}
           </div>
+          <div className="pro-details-cart btn-hover">
+            {productStock && productStock > 0 ? (
+              <button  onClick={() => navigate("/checkout")}>Buy Now</button>
+            ) : (
+              <button disabled>Out of Stock</button>
+            )}
+          </div>
           <div className="pro-details-wishlist">
             <button
               className={wishlistItem !== undefined ? "active" : ""}
@@ -220,7 +228,7 @@ const ProductDescriptionInfo = ({
               <i className="pe-7s-like" />
             </button>
           </div>
-          <div className="pro-details-compare">
+          {/* <div className="pro-details-compare">
             <button
               className={compareItem !== undefined ? "active" : ""}
               disabled={compareItem !== undefined}
@@ -233,7 +241,7 @@ const ProductDescriptionInfo = ({
             >
               <i className="pe-7s-shuffle" />
             </button>
-          </div>
+          </div> */}
         </div>
       )}
       {/* {product.category ? (
@@ -302,7 +310,6 @@ const ProductDescriptionInfo = ({
           </li>
         </ul>
       </div> */}
-
     </div>
   );
 };
