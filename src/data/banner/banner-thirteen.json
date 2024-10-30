@@ -1,7 +1,7 @@
 [
   {
     "id": 1,
-    "image": "/assets/img/banner/product10.png",
+    "image": "/assets/img/banner/product101.png",
     "title": "Featured Products",
     "subtitle": "Choose Your Products Here",
     "link": "/shop-grid-standard",
@@ -9,7 +9,7 @@
   },
   {
     "id": 2,
-    "image": "/assets/img/banner/banner9.png",
+    "image": "/assets/img/banner/banner92.png",
     "title": "New Products",
     "subtitle": "Choose Your Products Here",
     "link": "/shop-grid-standard",
