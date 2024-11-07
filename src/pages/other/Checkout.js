@@ -16,10 +16,10 @@ const Checkout = () => {
   let { pathname } = useLocation();
   const currency = useSelector((state) => state.currency);
   const { cartItems } = useSelector((state) => state.cart);
-  const totalDeliveryCost = cartItems.reduce(
-    (total, item) => total + item.totalDeliveryCost,
-    0
-  );
+  // const totalDeliveryCost = cartItems.reduce(
+  //   (total, item) => total + item.totalDeliveryCost,
+  //   0
+  // );
 
   const [createOrder, { isLoading: isOrderLoading }] = useCreateOrderMutation();
   const [createPaymentSession, { isLoading: isPaymentLoading }] =
@@ -53,8 +53,8 @@ const Checkout = () => {
         product: item._id, 
         quantity: item.quantity,
       })),
-      totalDeliveryCost,
-      overallTotal: cartTotalPrice + totalDeliveryCost,
+   
+      overallTotal: cartTotalPrice ,
       billingInfo: customerDetails,
     };
 
@@ -318,7 +318,7 @@ const Checkout = () => {
                             </ul>
                           </div>
                           <div className="your-order-bottom">
-                            <ul>
+                            {/* <ul>
                               <li className="your-order-shipping">Shipping</li>
                               <li>
                                 {totalDeliveryCost > 0
@@ -327,14 +327,14 @@ const Checkout = () => {
                                     }${totalDeliveryCost.toFixed(2)}`
                                   : "Free shipping"}
                               </li>
-                            </ul>
+                            </ul> */}
                           </div>
                           <div className="your-order-total">
                             <ul>
                               <li className="order-total">Total</li>
                               <li>
                                 {currency.currencySymbol +
-                                  (cartTotalPrice + totalDeliveryCost).toFixed(
+                                  cartTotalPrice .toFixed(
                                     2
                                   )}
                               </li>

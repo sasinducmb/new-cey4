@@ -60,11 +60,11 @@ const Cart = () => {
                         <tbody>
                           {cartItems.map((cartItem, key) => {
                             const discountedPrice = getDiscountPrice(
-                              cartItem.price,
+                              cartItem.price.basePrice,
                               cartItem.discount
                             );
                             const finalProductPrice = (
-                              cartItem.price * currency.currencyRate
+                              cartItem.price.basePrice * currency.currencyRate
                             ).toFixed(2);
                             const finalDiscountedPrice = (
                               discountedPrice * currency.currencyRate
