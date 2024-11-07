@@ -22,7 +22,7 @@ const HeaderTop = ({ borderStyle }) => {
         </p> */}
         <img
           alt
-          src="/assets/img/logo/flag.gif"
+          src="/assets/img/logo/flag.png"
           style={{ width: '50px' }}
         ></img>
       </div>
