@@ -6,7 +6,12 @@ import LanguageCurrencyChanger from "./sub-components/LanguageCurrencyChanger";
 const HeaderTop = ({ borderStyle }) => {
   const currency = useSelector((state) => state.currency);
   return (
-    <div className={clsx("header-top-wap", borderStyle === "fluid-border" && "border-bottom")}>
+    <div
+      className={clsx(
+        'header-top-wap',
+        borderStyle === 'fluid-border' && 'border-bottom'
+      )}
+    >
       <LanguageCurrencyChanger currency={currency} />
       <div className="header-offer">
         {/* <p>
@@ -16,8 +21,9 @@ const HeaderTop = ({ borderStyle }) => {
           </span>
         </p> */}
         <img
-          src="/assets/flag.gif"
-          style={{width:'50px'}}
+          alt
+          src="/assets/img/logo/flag.png"
+          style={{ width: '50px' }}
         ></img>
       </div>
     </div>
