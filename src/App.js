@@ -122,11 +122,11 @@ const App = () => {
           <Routes>
             <Route
               path={process.env.PUBLIC_URL + "/"}
-              element={<HomeFashion />}
+              element={<HomeHandmade />}
             />
 
             {/* Homepages */}
-            <Route
+            {/* <Route
               path={process.env.PUBLIC_URL + "/home-fashion"}
               element={<HomeFashion />}
             />
@@ -250,10 +250,10 @@ const App = () => {
               path={process.env.PUBLIC_URL + "/home-cake-shop"}
               element={<HomeCakeShop />}
             />
-            <Route
-              path={process.env.PUBLIC_URL + "/home-handmade"}
-              element={<HomeHandmade />}
-            />
+            // <Route
+            //   path={process.env.PUBLIC_URL + "/home-handmade"}
+            //   element={<HomeHandmade />}
+            // />
             <Route
               path={process.env.PUBLIC_URL + "/home-pet-food"}
               element={<HomePetFood />}
@@ -277,7 +277,7 @@ const App = () => {
             <Route
               path={process.env.PUBLIC_URL + "/home-valentines-day"}
               element={<HomeValentinesDay />}
-            />
+            /> */}
 
             {/* Shop pages */}
             <Route

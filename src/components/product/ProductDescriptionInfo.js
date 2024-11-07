@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 import React, { Fragment, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link,useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { getProductCartQuantity } from "../../helpers/product";
 import Rating from "./sub-components/ProductRating";
@@ -19,6 +19,7 @@ const ProductDescriptionInfo = ({
   compareItem,
 }) => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [selectedProductColor, setSelectedProductColor] = useState(
     product.variation ? product.variation[0].color : ""
   );
@@ -62,10 +63,7 @@ const ProductDescriptionInfo = ({
         ""
       )}
       <div className="pro-details-list">
-        <p
-         
-          dangerouslySetInnerHTML={{ __html: product.shortDescription }}
-        ></p>
+        <p dangerouslySetInnerHTML={{ __html: product.shortDescription }}></p>
       </div>
 
       {product.variation ? (
@@ -209,6 +207,13 @@ const ProductDescriptionInfo = ({
               <button disabled>Out of Stock</button>
             )}
           </div>
+          <div className="pro-details-cart btn-hover">
+            {productStock && productStock > 0 ? (
+              <button  onClick={() => navigate("/checkout")}>Buy Now</button>
+            ) : (
+              <button disabled>Out of Stock</button>
+            )}
+          </div>
           <div className="pro-details-wishlist">
             <button
               className={wishlistItem !== undefined ? "active" : ""}
@@ -223,7 +228,7 @@ const ProductDescriptionInfo = ({
               <i className="pe-7s-like" />
             </button>
           </div>
-          <div className="pro-details-compare">
+          {/* <div className="pro-details-compare">
             <button
               className={compareItem !== undefined ? "active" : ""}
               disabled={compareItem !== undefined}
@@ -236,7 +241,7 @@ const ProductDescriptionInfo = ({
             >
               <i className="pe-7s-shuffle" />
             </button>
-          </div>
+          </div> */}
         </div>
       )}
       {/* {product.category ? (
@@ -305,47 +310,6 @@ const ProductDescriptionInfo = ({
           </li>
         </ul>
       </div> */}
-    <div className="container mt-4">
-  {/* Features Section */}
-  <div className="card mb-4">
-    <div className="card-header">
-      <h4>Features</h4>
-    </div>
-    <ul className="list-group list-group-flush">
-      {product.features && product.features.length > 0 ? (
-        product.features.map((feature, index) => (
-          <li
-        key={index}
-        className="list-group-item shadow-sm bg-light my-2 py-2 px-3"
-        style={{ borderRadius: "50px" }}
-      >
-            {feature}
-          </li>
-        ))
-      ) : (
-        <li className="list-group-item">No features available</li>
-      )}
-    </ul>
-  </div>
-
-  {/* Department Section */}
-  <div className="card">
-    <div className="card-header">
-      <h4>User Group</h4>
-    </div>
-    <ul className="list-group list-group-flush">
-      {product.department && product.department.length > 0 ? (
-        product.department.map((dept, index) => (
-          <li key={index} className="list-group-item">
-            {dept}
-          </li>
-        ))
-      ) : (
-        <li className="list-group-item">No department available</li>
-      )}
-    </ul>
-  </div>
-</div>
     </div>
   );
 };
