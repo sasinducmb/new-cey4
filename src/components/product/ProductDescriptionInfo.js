@@ -63,7 +63,7 @@ const ProductDescriptionInfo = ({
         ""
       )}
       <div className="pro-details-list">
-        <p dangerouslySetInnerHTML={{ __html: product.shortDescription }}></p>
+        <p style={{textAlign:"justify"}} dangerouslySetInnerHTML={{ __html: product.shortDescription }}></p>
       </div>
 
       {product.variation ? (

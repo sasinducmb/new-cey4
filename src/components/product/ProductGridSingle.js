@@ -19,7 +19,7 @@ const ProductGridSingle = ({
 }) => {
   const [modalShow, setModalShow] = useState(false);
   const discountedPrice = getDiscountPrice(product.price, product.discount);
-  const finalProductPrice = +(product.price * currency.currencyRate).toFixed(2);
+  const finalProductPrice = +(product.price.basePrice * currency.currencyRate).toFixed(2);
   const finalDiscountedPrice = +(
     discountedPrice * currency.currencyRate
   ).toFixed(2);
@@ -45,7 +45,7 @@ const ProductGridSingle = ({
             ''
           )}
           </Link>
-          {product.discount || product.new ? (
+          {product.discount? (
             <div className="product-img-badges">
               {product.discount ? (
                 <span className="pink">-{product.discount}%</span>
@@ -138,7 +138,7 @@ const ProductGridSingle = ({
         </div>
         <div className="product-content text-center">
           <h3>
-            <Link to={process.env.PUBLIC_URL + '/product/' + product.id}>
+            <Link to={process.env.PUBLIC_URL + '/product/' + product._id}>
               {product.name}
             </Link>
           </h3>

@@ -38,24 +38,136 @@ const ProductImageDescription = ({
   const renderContent = () => {
     if (activeSection === "description") {
       return (
-        <div
-          dangerouslySetInnerHTML={{ __html: product.fullDescription }}
-        />
+        <div dangerouslySetInnerHTML={{ __html: product.fullDescription }} />
       );
     } else if (activeSection === "specification") {
       return (
         <div>
-          <ul>
-            <li>Height: {product.dimensions.dheight}</li>
-            <li>Width: {product.dimensions.dwidth}</li>
-            <li>Length: {product.dimensions.dlength}</li>
-          </ul>
+          {/* Dimensions Section */}
+          <div
+            style={{
+              backgroundColor: "#f0f0f0",
+              padding: "15px",
+              marginBottom: "10px",
+              borderRadius: "8px",
+            }}
+          >
+            <h3>Dimensions</h3>
+            <ul>
+              <li><strong> Height: </strong> {product.dimensions.dheight} cm</li>
+              <li><strong> Width: </strong> {product.dimensions.dwidth} cm</li>
+              <li><strong>  Length: </strong> {product.dimensions.dlength} cm</li>
+           <li> <strong> Weight:</strong> {product.weight} {product.weightMeasure}</li>
+            </ul>
+          </div>
+
+          {/* Features Section */}
+          <div
+            style={{
+              backgroundColor: "#f0f0f0",
+              padding: "15px",
+              marginBottom: "10px",
+              borderRadius: "8px",
+            }}
+          >
+            <h3>Features</h3>
+            <div className="feature-list">
+              {product.features && product.features.length > 0 ? (
+                <ul style={{ padding: 0, listStyleType: "none" }}>
+                  <strong>Features List:</strong>
+                  {product.features[0].split(",").map((feature, index) => (
+                    <li
+                      key={index}
+                      className="list-group-item shadow-sm bg-light my-2 mx-2 py-2 px-5"
+                      style={{
+                        borderRadius: "50px",
+                        margin: "5px 0",
+                        display: "inline-block",
+                        width: "auto",
+                        backgroundColor: "#ffffff",
+                      }}
+                    >
+                      {feature.trim()}
+                    </li>
+                  ))}
+                </ul>
+              ) : (
+                <div className="list-group-item">No features available</div>
+              )}
+            </div>
+          </div>
+
+          {/* Specifications Section */}
+          <div
+            style={{
+              backgroundColor: "#f0f0f0",
+              padding: "15px",
+              borderRadius: "8px",
+            }}
+          >
+            {/* <h3>Specifications</h3> */}
+            <ul style={{ listStyleType: "none", paddingLeft: 0 }}>
+              <li>
+                <strong>Brand:</strong> EGI
+              </li>
+              <li>
+                <strong>Condition:</strong> Brand New
+              </li>
+              <li>
+                <strong>Material:</strong> {product.material}
+              </li>
+              <li>
+                <strong>Colour:</strong> {product.colour}
+              </li>
+              <li>
+                <strong>Type:</strong> {product.itemType}
+              </li>
+              <li>
+                <strong>Category:</strong> {product.category}
+              </li>
+              {/* <li>
+                <strong>Department:</strong> {product.department}
+              </li> */}
+              <li>
+                <strong>Shape:</strong> {product.shape}
+              </li>
+              <li>
+                <strong>Indoor/Outdoor:</strong> {product.indoorOutdoor}
+              </li>
+              <li>
+                <strong>Original/Reproduction:</strong>{" "}
+                {product.originalReproduction}
+              </li>
+              <li>
+                <strong>Handmade:</strong> {product.handmade}
+              </li>
+              <li>
+                <strong>Country:</strong> Sri Lanka
+              </li>
+              {/* <li>
+                <strong>Weight:</strong> {product.weight} kg
+              </li> */}
+              <li>
+                <strong>Style:</strong> {product.style}
+              </li>
+              <li>
+                <strong>Occasion:</strong> {product.occasion}
+              </li>
+              <li>
+                <strong>Additional Part Size:</strong>{" "}
+                {product.itemRelatedParts &&
+                product.itemRelatedParts.partName ? (
+                  <div>{product.itemRelatedParts.partName}</div>
+                ) : (
+                  <div>No related parts available</div>
+                )}
+              </li>
+             
+            </ul>
+          </div>
         </div>
       );
-
-    }
-
-    else if (activeSection === "features") {
+    } else if (activeSection === "features") {
       return (
         <div className="feature-list">
           {product.features && product.features.length > 0 ? (
@@ -135,7 +247,7 @@ const ProductImageDescription = ({
               Specification
             </button>
           </div>
-          <div className="col-lg-2 col-md-6">
+          {/* <div className="col-lg-2 col-md-6">
             <button
               className={clsx("section-buttons", {
                 active: activeSection === "features",
@@ -144,7 +256,7 @@ const ProductImageDescription = ({
             >
               Features
             </button>
-          </div>
+          </div> */}
           <div className="col-lg-2 col-md-6">
             <button
               className={clsx("section-buttons", {
@@ -157,7 +269,9 @@ const ProductImageDescription = ({
           </div>
         </div>
 
-        <div className="product-contents mt-4">{renderContent()}</div>
+        {activeSection && (
+          <div className="product-contents mt-4">{renderContent()}</div>
+        )}
       </div>
     </div>
   );
