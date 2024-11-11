@@ -17,11 +17,11 @@ const MenuCart = () => {
           <ul>
             {cartItems.map((item) => {
               const discountedPrice = getDiscountPrice(
-                item.price,
+                item.price.basePrice,
                 item.discount
               );
               const finalProductPrice = (
-                item.price * currency.currencyRate
+                item.price.basePrice * currency.currencyRate
               ).toFixed(2);
               const finalDiscountedPrice = (
                 discountedPrice * currency.currencyRate

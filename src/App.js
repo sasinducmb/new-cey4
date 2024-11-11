@@ -392,6 +392,10 @@ const App = () => {
               path={process.env.PUBLIC_URL + "/checkout"}
               element={<Checkout />}
             />
+             <Route
+              path={process.env.PUBLIC_URL + "/checkout/:id"}
+              element={<Checkout />}
+            />
             <Route
               path={process.env.PUBLIC_URL + "/email-verification"}
               element={<EmailVerification />}

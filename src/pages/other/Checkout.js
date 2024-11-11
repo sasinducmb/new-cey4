@@ -10,12 +10,16 @@ import {
   useCreateOrderMutation,
   useCreatePaymentSessionMutation,
 } from "../../store/slices/orderSlice";
-
+import { useParams } from "react-router-dom";
 const Checkout = () => {
   let cartTotalPrice = 0;
+  const { id } = useParams();
+  const { products } = useSelector((state) => state.product);
+  const product = products.find((product) => product._id === id);
   let { pathname } = useLocation();
   const currency = useSelector((state) => state.currency);
   const { cartItems } = useSelector((state) => state.cart);
+
   // const totalDeliveryCost = cartItems.reduce(
   //   (total, item) => total + item.totalDeliveryCost,
   //   0
@@ -50,31 +54,30 @@ const Checkout = () => {
 
     const orderData = {
       items: cartItems.map((item) => ({
-        product: item._id, 
+        product: item._id,
         quantity: item.quantity,
       })),
-   
-      overallTotal: cartTotalPrice ,
+
+      overallTotal: cartTotalPrice,
       billingInfo: customerDetails,
     };
 
     try {
       const response = await createOrder(orderData).unwrap();
-      console.log(response);
-      
+      // console.log(response);
+
       if (response.message) {
         const stripe = await loadStripe(process.env.REACT_APP_STRIP_PK);
-  
-       
+
         const paymentIdResponse = await createPaymentSession({
           overallTotal: orderData.overallTotal,
-          orderId: response.orderId,  
+          orderId: response.orderId,
         }).unwrap();
-        
-        console.log(paymentIdResponse);
-        
+
+        // console.log(paymentIdResponse);
+
         const session = paymentIdResponse.id;
-  
+
         if (session) {
           stripe.redirectToCheckout({
             sessionId: session,
@@ -106,7 +109,7 @@ const Checkout = () => {
         />
         <div className="checkout-area pt-95 pb-100">
           <div className="container">
-            {cartItems && cartItems.length >= 1 ? (
+            {id || (cartItems && cartItems.length >= 1) ? (
               <form onSubmit={handleSubmit}>
                 <div className="row">
                   <div className="col-lg-7">
@@ -277,44 +280,101 @@ const Checkout = () => {
                           </div>
                           <div className="your-order-middle">
                             <ul>
-                              {cartItems.map((cartItem, key) => {
-                                const discountedPrice = getDiscountPrice(
-                                  cartItem.price,
-                                  cartItem.discount
-                                );
-                                const finalProductPrice = (
-                                  cartItem.price * currency.currencyRate
-                                ).toFixed(2);
-                                const finalDiscountedPrice = (
-                                  discountedPrice * currency.currencyRate
-                                ).toFixed(2);
+                              {id && product ? (
+                                // Render the single product if 'id' exists
+                                <li key={product._id}>
+                                  {/* Set default quantity to 1 if not present */}
+                                  {(() => {
+                                    const quantity = product.quantity || 1; // Default quantity is 1
 
-                                discountedPrice != null
-                                  ? (cartTotalPrice +=
-                                      finalDiscountedPrice * cartItem.quantity)
-                                  : (cartTotalPrice +=
-                                      finalProductPrice * cartItem.quantity);
-                                return (
-                                  <li key={key}>
-                                    <span className="order-middle-left">
-                                      {cartItem.name} X {cartItem.quantity}
-                                    </span>{" "}
-                                    <span className="order-price">
-                                      {discountedPrice !== null
-                                        ? currency.currencySymbol +
-                                          (
-                                            finalDiscountedPrice *
-                                            cartItem.quantity
-                                          ).toFixed(2)
-                                        : currency.currencySymbol +
-                                          (
-                                            finalProductPrice *
-                                            cartItem.quantity
-                                          ).toFixed(2)}
-                                    </span>
-                                  </li>
-                                );
-                              })}
+                                    // Calculate the discounted price for the single product
+                                    const discountedPrice = getDiscountPrice(
+                                      product.price.basePrice,
+                                      product.discount
+                                    );
+                                    const finalProductPrice = (
+                                      product.price.basePrice *
+                                      currency.currencyRate
+                                    ).toFixed(2);
+                                    const finalDiscountedPrice = (
+                                      discountedPrice * currency.currencyRate
+                                    ).toFixed(2);
+
+                                    // Calculate the total price for the single product
+                                    if (discountedPrice != null) {
+                                      cartTotalPrice +=
+                                        finalDiscountedPrice * quantity;
+                                    } else {
+                                      cartTotalPrice +=
+                                        finalProductPrice * quantity;
+                                    }
+
+                                    return (
+                                      <span>
+                                        <span className="order-middle-left">
+                                          {product.name} X {quantity}
+                                        </span>{" "}
+                                        <span className="order-price">
+                                          {discountedPrice !== null
+                                            ? currency.currencySymbol +
+                                              (
+                                                finalDiscountedPrice * quantity
+                                              ).toFixed(2)
+                                            : currency.currencySymbol +
+                                              (
+                                                finalProductPrice * quantity
+                                              ).toFixed(2)}
+                                        </span>
+                                      </span>
+                                    );
+                                  })()}
+                                </li>
+                              ) : (
+                                // Render the cart items if 'id' does not exist
+                                cartItems.map((cartItem, key) => {
+                                  const discountedPrice = getDiscountPrice(
+                                    cartItem.price.basePrice,
+                                    cartItem.discount
+                                  );
+                                  const finalProductPrice = (
+                                    cartItem.price.basePrice *
+                                    currency.currencyRate
+                                  ).toFixed(2);
+                                  const finalDiscountedPrice = (
+                                    discountedPrice * currency.currencyRate
+                                  ).toFixed(2);
+
+                                  // Calculate cart total price based on the presence of a discount
+                                  if (discountedPrice != null) {
+                                    cartTotalPrice +=
+                                      finalDiscountedPrice * cartItem.quantity;
+                                  } else {
+                                    cartTotalPrice +=
+                                      finalProductPrice * cartItem.quantity;
+                                  }
+
+                                  return (
+                                    <li key={key}>
+                                      <span className="order-middle-left">
+                                        {cartItem.name} X {cartItem.quantity}
+                                      </span>{" "}
+                                      <span className="order-price">
+                                        {discountedPrice !== null
+                                          ? currency.currencySymbol +
+                                            (
+                                              finalDiscountedPrice *
+                                              cartItem.quantity
+                                            ).toFixed(2)
+                                          : currency.currencySymbol +
+                                            (
+                                              finalProductPrice *
+                                              cartItem.quantity
+                                            ).toFixed(2)}
+                                      </span>
+                                    </li>
+                                  );
+                                })
+                              )}
                             </ul>
                           </div>
                           <div className="your-order-bottom">
@@ -334,9 +394,7 @@ const Checkout = () => {
                               <li className="order-total">Total</li>
                               <li>
                                 {currency.currencySymbol +
-                                  cartTotalPrice .toFixed(
-                                    2
-                                  )}
+                                  cartTotalPrice.toFixed(2)}
                               </li>
                             </ul>
                           </div>
