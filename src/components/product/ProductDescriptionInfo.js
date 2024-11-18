@@ -8,7 +8,8 @@ import { addToCart } from "../../store/slices/cart-slice";
 import { addToWishlist } from "../../store/slices/wishlist-slice";
 import { addToCompare } from "../../store/slices/compare-slice";
 
-const ProductDescriptionInfo = ({
+const 
+ProductDescriptionInfo = ({
   product,
   discountedPrice,
   currency,
@@ -143,7 +144,7 @@ const ProductDescriptionInfo = ({
               rel="noopener noreferrer"
               target="_blank"
             >
-              Buy Now
+              u
             </a>
           </div>
         </div>
@@ -209,7 +210,7 @@ const ProductDescriptionInfo = ({
           </div>
           <div className="pro-details-cart btn-hover">
             {productStock && productStock > 0 ? (
-              <button  onClick={() => navigate("/checkout")}>Buy Now</button>
+              <button  onClick={() => navigate(`/checkout/${product._id}`)}>Buy Now</button>
             ) : (
               <button disabled>Out of Stock</button>
             )}

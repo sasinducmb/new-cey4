@@ -32,8 +32,8 @@ const Contact = () => {
                       <i className="fa fa-phone" />
                     </div>
                     <div className="contact-info-dec">
-                      <p> +44 7941 332938</p>
-                      <p> +44 7941 332938</p>
+                      <p>(+44)2033711782</p>
+                      <p>(+44)7386391286</p>
                     </div>
                   </div>
                   <div className="single-contact-info">
@@ -56,7 +56,7 @@ const Contact = () => {
                       <p>Unit 2A,2nd Floor </p>
                       <p>Cavendish House </p>
                       <p>369 Burnt Oak Broadway</p>
-                      <p>Edgware HA8 5A</p>
+                      <p>Edgware HA8 5AB</p>
                       <p> United Kingdom</p>
                     </div>
                   </div>
