@@ -24,9 +24,6 @@ const Contact = () => {
         />
         <div className="contact-area pt-100 pb-100">
           <div className="container">
-            <div className="contact-map mb-10">
-              <GoogleMap lat={51.607018} lng={-0.275863} />
-            </div>
             <div className="custom-row-2">
               <div className="col-12 col-lg-4 col-md-5">
                 <div className="contact-info-wrap">
@@ -68,7 +65,7 @@ const Contact = () => {
                     <ul>
                       <li>
                         <a href="https://www.facebook.com/profile.php?id=100090721765840">
-                          <i className="fa fa-facebook"/>
+                          <i className="fa fa-facebook" />
                         </a>
                       </li>
                       {/* <li>
@@ -135,6 +132,9 @@ const Contact = () => {
                   <p className="form-message" />
                 </div>
               </div>
+            </div>
+            <div className="contact-map mb-10">
+              <GoogleMap lat={51.607018} lng={-0.275863} />
             </div>
           </div>
         </div>

@@ -9,7 +9,7 @@ const TextGridOne = ({ spaceBottomClass }) => {
       <div className="container">
         <div className="row">
           {textGridData?.map((single, key) => (
-              <div className="col-lg-4 col-md-4" key={key}>
+              <div className="col-lg-6 col-md-6" key={key}>
                 <TextGridOneSingle
                   data={single}
                   spaceBottomClass="mb-30"

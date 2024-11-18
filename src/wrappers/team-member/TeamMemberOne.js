@@ -11,9 +11,9 @@ const TeamMemberOne = ({ spaceTopClass, spaceBottomClass }) => {
         {/* section title */}
         <SectionTitleTwo
           titleText="Working With Us"
-          subTitleText="Teams of Collabarate with Our Vision"
+          subTitleText="Companies of Collabarate with Our Vision"
           positionClass="text-center"
-          spaceClass="mb-60"
+          spaceClass="mb-30"
         />
 
         <div className="row">
