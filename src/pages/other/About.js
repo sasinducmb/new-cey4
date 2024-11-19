@@ -45,10 +45,10 @@ const About = () => {
         /> */}
 
         {/* team member */}
-        <TeamMemberOne spaceTopClass="pt-10" spaceBottomClass="pb-20" />
+        {/* <TeamMemberOne spaceTopClass="pt-10" spaceBottomClass="pb-20" /> */}
 
         {/* brand logo slider */}
-        <BrandLogoSliderOne spaceBottomClass="pb-70" />
+        {/* <BrandLogoSliderOne spaceBottomClass="pb-70" /> */}
       </LayoutOne>
     </Fragment>
   );

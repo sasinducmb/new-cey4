@@ -20,11 +20,11 @@ const HeaderTop = ({ borderStyle }) => {
             {currency.currencySymbol + (200 * currency.currencyRate).toFixed(2)}
           </span>
         </p> */}
-        <img
+        {/* <img
           alt
           src="/assets/img/logo/flag.png"
           style={{ width: '50px' }}
-        ></img>
+        ></img> */}
       </div>
     </div>
   );
