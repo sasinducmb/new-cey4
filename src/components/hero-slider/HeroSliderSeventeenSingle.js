@@ -17,12 +17,12 @@ const HeroSliderSeventeenSingle = ({ data }) => {
                 dangerouslySetInnerHTML={{ __html: data.subtitle }}
               />
               <div className="slider-btn slider-btn--style2 btn-hover">
-                <Link
+                {/* <Link
                   className="animated rounden-btn"
                   to={process.env.PUBLIC_URL + data.url}
                 >
                   SHOP NOW
-                </Link>
+                </Link> */}
               </div>
             </div>
           </div>
