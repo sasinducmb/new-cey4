@@ -2,15 +2,22 @@
   {
     "id": "1",
     "image": "/assets/img/testimonial/testi-1.png",
-    "content": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
-    "customerName": "Grace Alvarado",
-    "title": "customer"
+    "content": "Cey4hub has completely transformed the way I shop! As someone who prioritizes sustainability, I was thrilled to find a platform that offers a wide variety of eco-friendly products. The quality is excellent, and their fast shipping makes it so convenient. I feel great knowing my purchases support a greener planet",
+    "customerName": "Sarah L.",
+    "title": "London, UK"
   },
   {
     "id": "2",
     "image": "/assets/img/testimonial/testi-1.png",
-    "content": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
-    "customerName": "John Doe",
-    "title": "customer"
+    "content": "I’ve been searching for a reliable eco-friendly store, and Cey4hub exceeded my expectations. Their products are not only sustainable but also stylish and practical. The website is user-friendly, and their customer support team is always ready to help. Highly recommend it to anyone looking to make greener choices.",
+    "customerName": "James T.",
+    "title": "Birmingham, UK"
+  },
+  {
+    "id": "3",
+    "image": "/assets/img/testimonial/testi-1.png",
+    "content": "I love Cey4hub! Their commitment to sustainability is inspiring, and it reflects in every product they offer. The eco-friendly packaging was a pleasant surprise, and their rewards program encourages me to keep coming back. Shopping here makes me feel like I’m making a real difference.",
+    "customerName": "John DoEmma P.",
+    "title": "Manchester, UK"
   }
 ]
