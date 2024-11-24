@@ -393,7 +393,7 @@ const App = () => {
               element={<Checkout />}
             />
              <Route
-              path={process.env.PUBLIC_URL + "/checkout/:id"}
+              path={process.env.PUBLIC_URL + "/checkout/:id/:itemQuantity"}
               element={<Checkout />}
             />
             <Route

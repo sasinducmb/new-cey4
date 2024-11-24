@@ -13,7 +13,7 @@ import {
 import { useParams } from "react-router-dom";
 const Checkout = () => {
   let cartTotalPrice = 0;
-  const { id } = useParams();
+  const { id, itemQuantity } = useParams();
   const { products } = useSelector((state) => state.product);
   const product = products.find((product) => product._id === id);
   let { pathname } = useLocation();
@@ -55,7 +55,7 @@ const Checkout = () => {
     const orderData = {
       items: cartItems.map((item) => ({
         product: item._id,
-        quantity: item.quantity,
+        quantity:id ? itemQuantity : item.quantity,
       })),
 
       overallTotal: cartTotalPrice,
@@ -275,7 +275,7 @@ const Checkout = () => {
                           <div className="your-order-top">
                             <ul>
                               <li>Product</li>
-                              <li>Total</li>
+                             
                             </ul>
                           </div>
                           <div className="your-order-middle">
@@ -303,19 +303,22 @@ const Checkout = () => {
                                     // Calculate the total price for the single product
                                     if (discountedPrice != null) {
                                       cartTotalPrice +=
-                                        finalDiscountedPrice * quantity;
+                                        finalDiscountedPrice * itemQuantity;
                                     } else {
                                       cartTotalPrice +=
-                                        finalProductPrice * quantity;
+                                        finalProductPrice * itemQuantity;
                                     }
 
                                     return (
                                       <span>
-                                        <span className="order-middle-left">
-                                          {product.name} X {quantity}
-                                        </span>{" "}
-                                        <span className="order-price">
-                                          {discountedPrice !== null
+                                        <div className="order-middle-left">
+                                          {product.name}
+                                        </div>
+                                        <div className="order-middle-left">
+                                          {itemQuantity} X 
+                                        
+                                        <span className="order-price order-middle-right">
+                                           {discountedPrice !== null
                                             ? currency.currencySymbol +
                                               (
                                                 finalDiscountedPrice * quantity
@@ -325,6 +328,7 @@ const Checkout = () => {
                                                 finalProductPrice * quantity
                                               ).toFixed(2)}
                                         </span>
+                                              </div>
                                       </span>
                                     );
                                   })()}
