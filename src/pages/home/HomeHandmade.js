@@ -21,9 +21,9 @@ const HomeHandmade = () => {
         {/* hero slider */}
         <HeroSliderSeventeen />
         {/* category */}
-        <CategoryFourSlider spaceTopClass="pt-100" spaceBottomClass="pb-95" />
+        {/* <CategoryFourSlider spaceTopClass="pt-100" spaceBottomClass="pb-95" /> */}
         {/* banner */}
-        <BannerThirteen />
+        {/* <BannerThirteen /> */}
         {/* tab product */}
         <TabProductTen
           spaceBottomClass="pb-65"
