@@ -18,7 +18,7 @@ const ProductGridSingle = ({
   spaceBottomClass
 }) => {
   const [modalShow, setModalShow] = useState(false);
-  const discountedPrice = getDiscountPrice(product.price, product.discount);
+  const discountedPrice = getDiscountPrice(product.price.basePrice, product.discount);
   const finalProductPrice = +(product.price.basePrice * currency.currencyRate).toFixed(2);
   const finalDiscountedPrice = +(
     discountedPrice * currency.currencyRate
