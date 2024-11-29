@@ -5,7 +5,7 @@ import SEO from "../../components/seo";
 import LayoutOne from "../../layouts/LayoutOne";
 import Breadcrumb from "../../wrappers/breadcrumb/Breadcrumb";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-
+import ClipLoader from "react-spinners/ClipLoader";
 import { Form, Button, Row, Col } from "react-bootstrap";
 import cogoToast from "cogo-toast";
 import { useVerifyEmailMutation } from "../../store/slices/user-slice";
@@ -14,6 +14,7 @@ const EmailVerification = () => {
   let { pathname } = useLocation();
   const navigate = useNavigate();
   const [digits, setDigits] = useState(new Array(6).fill(""));
+  const [loading, setLoading] = useState(false);
   const [verifyEmail, { isLoading }] = useVerifyEmailMutation();
   const handleChange = (e, index) => {
     const value = e.target.value;
@@ -35,15 +36,18 @@ const EmailVerification = () => {
       cogoToast.error("Please enter a 6-digit code", { position: "top-right" });
       return;
     }
+    setLoading(true);
 
     try {
       const response = await verifyEmail({ code }).unwrap();
       if (response.message) {
+        setLoading(false);
         navigate("/");
       }
       // Handle successful verification, such as redirecting to another page
     } catch (error) {
       if (error.data && error.data.message) {
+        setLoading(false);
         cogoToast.error(`Verification failed: ${error.data.message}`, {
           position: "top-right",
         });
@@ -56,6 +60,41 @@ const EmailVerification = () => {
   };
   return (
     <Fragment>
+      {loading && (
+        <div
+          style={{
+            position: "fixed",
+            top: 0,
+            left: 0,
+            width: "100%",
+            height: "100%",
+            backgroundColor: "rgba(255, 255, 255, 0.8)",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            zIndex: 9999,
+          }}
+        >
+          <div
+            style={{
+              fontSize: "36px",
+              fontWeight: "bold",
+              color: "#4CAF50",
+              animation: "blink 1.5s infinite", // Add blinking animation
+            }}
+          >
+            Cey4Hub
+          </div>
+          <style>
+            {`
+        @keyframes blink {
+          0%, 100% { opacity: 1; }
+          50% { opacity: 0; }
+        }
+      `}
+          </style>
+        </div>
+      )}
       <SEO
         titleTemplate="Login"
         description="Login page of flone react minimalist eCommerce template."
