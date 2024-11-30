@@ -3,14 +3,21 @@
     "id": 1,
     "title": "",
     "subtitle": "",
-    "image": "/assets/img/slider/banner9.jpg",
+    "image": "/assets/img/slider/banner9.png",
     "url": "/shop-grid-standard"
   },
   {
     "id": 2,
     "title": "",
     "subtitle": "",
-    "image": "/assets/img/slider/banner10.jpg",
+    "image": "/assets/img/slider/banner10.png",
+    "url": "/shop-grid-standard"
+  },
+  {
+    "id": 3,
+    "title": "",
+    "subtitle": "",
+    "image": "/assets/img/slider/banner11.png",
     "url": "/shop-grid-standard"
   }
 ]
