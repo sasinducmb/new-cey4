@@ -23,7 +23,7 @@ const HomeHandmade = () => {
         {/* category */}
         {/* <CategoryFourSlider spaceTopClass="pt-100" spaceBottomClass="pb-95" /> */}
         {/* banner */}
-        {/* <BannerThirteen /> */}
+        <BannerThirteen />
         {/* tab product */}
         <TabProductTen
           spaceBottomClass="pb-65"

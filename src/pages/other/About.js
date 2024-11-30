@@ -18,16 +18,17 @@ const About = () => {
       <SEO
         titleTemplate="About us"
         description="About page of flone react minimalist eCommerce template."
-      /> 
+      />
       <LayoutOne headerTop="visible">
         {/* breadcrumb */}
-        <Breadcrumb 
-          pages={[
-            {label: "Home", path: process.env.PUBLIC_URL + "/" },
-            {label: "About us", path: process.env.PUBLIC_URL + pathname }
-          ]} 
-        />
 
+        <Breadcrumb
+          pages={[
+            { label: 'Home', path: process.env.PUBLIC_URL + '/' },
+            { label: 'About us', path: process.env.PUBLIC_URL + pathname },
+          ]}
+        />
+        <div className="about-banner"></div>
         {/* section title with text */}
         <SectionTitleWithText spaceTopClass="pt-100" spaceBottomClass="pb-95" />
 
