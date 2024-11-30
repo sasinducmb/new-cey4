@@ -20,7 +20,7 @@ const ShopSidebar = ({ products, getSortParams, sideSpaceClass }) => {
   const uniqueCategories = ["clothing", "clay", "accessories", "design", "wood", "choir"];
 
   return (
-    <div className={clsx("sidebar-style", sideSpaceClass)}>
+    <div className={clsx('sidebar-style', sideSpaceClass)}>
       {/* shop search */}
       <ShopSearch />
 
@@ -29,15 +29,15 @@ const ShopSidebar = ({ products, getSortParams, sideSpaceClass }) => {
         categories={uniqueCategories}
         getSortParams={getSortParams}
       />
-
+      <div className="shop-side-banner"></div>
       {/* filter by color */}
-      <ShopColor/>
+      {/* <ShopColor/> */}
 
       {/* filter by size */}
-      <ShopSize/>
+      {/* <ShopSize/> */}
 
       {/* filter by tag */}
-      <ShopTag  />
+      {/* <ShopTag  /> */}
     </div>
   );
 };
