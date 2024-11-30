@@ -33,7 +33,8 @@ const LoginRegister = () => {
 
       if (response.message) {
         cogoToast.success("Login successful", { position: "top-right" });
-        window.location.href = process.env.REACT_APP_DASHBOARD_URL;
+        localStorage.setItem("token", response.token);
+        navigate("/");
       }
 
       // Handle successful login, e.g., navigate to dashboard
@@ -192,9 +193,9 @@ const LoginRegister = () => {
                                 <div className="login-toggle-btn">
                                   <input type="checkbox" />
                                   <label className="ml-10">Remember me</label>
-                                  <Link to={process.env.PUBLIC_URL + "/"}>
+                                  {/* <Link to={process.env.PUBLIC_URL + "/"}>
                                     Forgot Password?
-                                  </Link>
+                                  </Link> */}
                                 </div>
                                 <button type="submit">
                                   <span>Login</span>
