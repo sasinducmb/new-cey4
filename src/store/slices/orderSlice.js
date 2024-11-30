@@ -18,7 +18,12 @@ export const orderApi = createApi({
         body: data, // Send the entire data object
       }),
     }),
+    getCategory: builder.query({
+      query: () => "sales/getCategories",
+      
+    }),
+
   }),
 });
 
-export const { useCreateOrderMutation ,useCreatePaymentSessionMutation} = orderApi;
+export const { useCreateOrderMutation ,useCreatePaymentSessionMutation,useGetCategoryQuery} = orderApi;

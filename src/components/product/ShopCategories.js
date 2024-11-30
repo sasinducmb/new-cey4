@@ -32,7 +32,8 @@ const ShopCategories = ({ categories, getSortParams }) => {
                       }}
                     >
                       {" "}
-                      <span className="checkmark" /> {category}{" "}
+                      <span className="checkmark" /> 
+                      {category}{" "}
                     </button>
                   </div>
                 </li>

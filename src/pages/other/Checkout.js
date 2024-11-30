@@ -1,6 +1,6 @@
 import { Fragment, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { getDiscountPrice } from "../../helpers/product";
 import SEO from "../../components/seo";
 import LayoutOne from "../../layouts/LayoutOne";
@@ -11,8 +11,10 @@ import {
   useCreatePaymentSessionMutation,
 } from "../../store/slices/orderSlice";
 import { useParams } from "react-router-dom";
+import { deleteAllFromCart } from "../../store/slices/cart-slice";
 const Checkout = () => {
   let cartTotalPrice = 0;
+  const dispatch = useDispatch();
   const { id, itemQuantity } = useParams();
   const { products } = useSelector((state) => state.product);
   const product = products.find((product) => product._id === id);
@@ -55,7 +57,7 @@ const Checkout = () => {
     const orderData = {
       items: cartItems.map((item) => ({
         product: item._id,
-        quantity:id ? itemQuantity : item.quantity,
+        quantity: id ? itemQuantity : item.quantity,
       })),
 
       overallTotal: cartTotalPrice,
@@ -79,9 +81,18 @@ const Checkout = () => {
         const session = paymentIdResponse.id;
 
         if (session) {
+          dispatch(deleteAllFromCart());
           stripe.redirectToCheckout({
             sessionId: session,
           });
+
+          // if (result.error) {
+          //   console.error("Stripe checkout error:", result.error.message);
+          // } else {
+          //   // After successful payment, clear the cart
+          //   dispatch(deleteAllFromCart());
+          //   console.log("Payment completed, cart cleared!");
+          // }
         } else {
           console.error("Payment session creation failed");
         }
@@ -141,32 +152,24 @@ const Checkout = () => {
                           </div>
                         </div>
                         <div className="col-lg-12">
-                          <div className="billing-info mb-20">
-                            <label>Company Name</label>
-                            <input
-                              type="text"
-                              name="companyName"
-                              value={customerDetails.companyName}
-                              onChange={handleInputChange}
-                            />
-                          </div>
+                          <label>Email Address</label>
+                          <input
+                            type="text"
+                            name="email"
+                            value={customerDetails.email}
+                            onChange={handleInputChange}
+                            required
+                          />
                         </div>
                         <div className="col-lg-12">
                           <div className="billing-select mb-20">
                             <label>Country</label>
-                            <select
+                            <input
+                              type="text"
                               name="country"
                               value={customerDetails.country}
                               onChange={handleInputChange}
-                              required
-                            >
-                              <option>Select a country</option>
-                              <option>Azerbaijan</option>
-                              <option>Bahamas</option>
-                              <option>Bahrain</option>
-                              <option>Bangladesh</option>
-                              <option>Barbados</option>
-                            </select>
+                            />
                           </div>
                         </div>
                         <div className="col-lg-12">
@@ -204,7 +207,7 @@ const Checkout = () => {
                         </div>
                         <div className="col-lg-6 col-md-6">
                           <div className="billing-info mb-20">
-                            <label>State / County</label>
+                            <label>State</label>
                             <input
                               type="text"
                               name="state"
@@ -240,14 +243,15 @@ const Checkout = () => {
                         </div>
                         <div className="col-lg-6 col-md-6">
                           <div className="billing-info mb-20">
-                            <label>Email Address</label>
-                            <input
-                              type="text"
-                              name="email"
-                              value={customerDetails.email}
-                              onChange={handleInputChange}
-                              required
-                            />
+                            <div className="billing-info mb-20">
+                              <label>Company Name (optional)</label>
+                              <input
+                                type="text"
+                                name="companyName"
+                                value={customerDetails.companyName}
+                                onChange={handleInputChange}
+                              />
+                            </div>
                           </div>
                         </div>
                       </div>
@@ -275,7 +279,6 @@ const Checkout = () => {
                           <div className="your-order-top">
                             <ul>
                               <li>Product</li>
-                             
                             </ul>
                           </div>
                           <div className="your-order-middle">
@@ -315,20 +318,20 @@ const Checkout = () => {
                                           {product.name}
                                         </div>
                                         <div className="order-middle-left">
-                                          {itemQuantity} X 
-                                        
-                                        <span className="order-price order-middle-right">
-                                           {discountedPrice !== null
-                                            ? currency.currencySymbol +
-                                              (
-                                                finalDiscountedPrice * quantity
-                                              ).toFixed(2)
-                                            : currency.currencySymbol +
-                                              (
-                                                finalProductPrice * quantity
-                                              ).toFixed(2)}
-                                        </span>
-                                              </div>
+                                          {itemQuantity} X
+                                          <span className="order-price order-middle-right">
+                                            {discountedPrice !== null
+                                              ? currency.currencySymbol +
+                                                (
+                                                  finalDiscountedPrice *
+                                                  quantity
+                                                ).toFixed(2)
+                                              : currency.currencySymbol +
+                                                (
+                                                  finalProductPrice * quantity
+                                                ).toFixed(2)}
+                                          </span>
+                                        </div>
                                       </span>
                                     );
                                   })()}

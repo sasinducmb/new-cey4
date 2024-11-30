@@ -11,18 +11,23 @@ import ShopCategories from "../../components/product/ShopCategories";
 import ShopColor from "../../components/product/ShopColor";
 import ShopSize from "../../components/product/ShopSize";
 import ShopTag from "../../components/product/ShopTag";
+import { useGetCategoryQuery } from "../../store/slices/orderSlice";
 
 const ShopSidebar = ({ products, getSortParams, sideSpaceClass }) => {
   // const uniqueCategories = getIndividualCategories(products);
   // const uniqueColors = getIndividualColors(products);
   // const uniqueSizes = getProductsIndividualSizes(products);
   // const uniqueTags = getIndividualTags(products);
-  const uniqueCategories = ["clothing", "clay", "accessories", "design", "wood", "choir"];
-
+  const { data: categories, isLoading, isError } = useGetCategoryQuery();
+  const uniqueCategories = !isLoading && !isError && categories
+    ? categories.map((category) => category.name)
+    : [];
+  
+ console.log(categories)
   return (
     <div className={clsx("sidebar-style", sideSpaceClass)}>
       {/* shop search */}
-      <ShopSearch />
+      {/* <ShopSearch /> */}
 
       {/* filter by categories */}
       <ShopCategories

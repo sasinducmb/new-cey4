@@ -103,7 +103,7 @@ const cartSlice = createSlice({
     },
     deleteAllFromCart(state) {
       state.cartItems = [];
-      cogoToast.error("Cart Cleared", { position: "bottom-left" });
+      // cogoToast.error("Cart Cleared", { position: "bottom-left" });
     },
   },
 });

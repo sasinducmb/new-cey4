@@ -54,10 +54,10 @@ const ProductImageDescription = ({
           >
             <h3>Dimensions</h3>
             <ul>
-              <li><strong> Height: </strong> {product.dimensions.dheight} cm</li>
-              <li><strong> Width: </strong> {product.dimensions.dwidth} cm</li>
-              <li><strong>  Length: </strong> {product.dimensions.dlength} cm</li>
-           <li> <strong> Weight:</strong> {product.weight} {product.weightMeasure}</li>
+              <li><strong> Height: </strong> {product.dimensions.dheight} cm (Approximately)</li>
+              <li><strong> Width: </strong> {product.dimensions.dwidth} cm (Approximately)</li>
+              <li><strong>  Length: </strong> {product.dimensions.dlength} cm (Approximately)</li>
+           <li> <strong> Weight:</strong> {product.weight} {product.weightMeasure}g (Approximately)</li>
             </ul>
           </div>
 
