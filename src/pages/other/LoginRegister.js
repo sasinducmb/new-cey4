@@ -11,7 +11,7 @@ import {
   useRegisterUserMutation,
   useLoginMutation,
 } from "../../store/slices/user-slice";
-
+import ClipLoader from "react-spinners/ClipLoader";
 const LoginRegister = () => {
   let { pathname } = useLocation();
   const [name, setName] = useState("");
@@ -24,18 +24,18 @@ const LoginRegister = () => {
   const [phoneNumber, setPhoneNumber] = useState("");
   const [registerUser] = useRegisterUserMutation();
   const [login, { isLoading }] = useLoginMutation();
-
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
       const response = await login({ email, password }).unwrap();
 
-      if (response.message) { 
+      if (response.message) {
         cogoToast.success("Login successful", { position: "top-right" });
-        window.location.href = process.env.REACT_APP_DASHBOARD_URL ;
+        window.location.href = process.env.REACT_APP_DASHBOARD_URL;
       }
-   
+
       // Handle successful login, e.g., navigate to dashboard
     } catch (error) {
       if (error.status === 400 && error.data && error.data.message) {
@@ -58,7 +58,7 @@ const LoginRegister = () => {
       cogoToast.error("Passwords do not match", { position: "top-right" });
       return;
     }
-
+    setLoading(true);
     try {
       const response = await registerUser({
         name,
@@ -71,6 +71,7 @@ const LoginRegister = () => {
       }).unwrap();
 
       if (response.message) {
+        setLoading(false);
         navigate("/email-verification");
       }
     } catch (error) {
@@ -100,6 +101,41 @@ const LoginRegister = () => {
 
   return (
     <Fragment>
+      {loading && (
+        <div
+          style={{
+            position: "fixed",
+            top: 0,
+            left: 0,
+            width: "100%",
+            height: "100%",
+            backgroundColor: "rgba(255, 255, 255, 0.8)",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            zIndex: 9999,
+          }}
+        >
+          <div
+            style={{
+              fontSize: "36px",
+              fontWeight: "bold",
+              color: "#4CAF50",
+              animation: "blink 1.5s infinite", // Add blinking animation
+            }}
+          >
+            Cey4Hub
+          </div>
+          <style>
+            {`
+        @keyframes blink {
+          0%, 100% { opacity: 1; }
+          50% { opacity: 0; }
+        }
+      `}
+          </style>
+        </div>
+      )}
       <SEO
         titleTemplate="Login"
         description="Login page of flone react minimalist eCommerce template."
