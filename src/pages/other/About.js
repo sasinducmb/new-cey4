@@ -22,12 +22,12 @@ const About = () => {
       <LayoutOne headerTop="visible">
         {/* breadcrumb */}
 
-        <Breadcrumb
+        {/* <Breadcrumb
           pages={[
             { label: 'Home', path: process.env.PUBLIC_URL + '/' },
             { label: 'About us', path: process.env.PUBLIC_URL + pathname },
           ]}
-        />
+        /> */}
         <div className="about-banner"></div>
         {/* section title with text */}
         <SectionTitleWithText spaceTopClass="pt-100" spaceBottomClass="pb-95" />

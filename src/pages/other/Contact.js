@@ -16,12 +16,13 @@ const Contact = () => {
       />
       <LayoutOne headerTop="visible">
         {/* breadcrumb */}
-        <Breadcrumb
+        {/* <Breadcrumb
           pages={[
             { label: 'Home', path: process.env.PUBLIC_URL + '/' },
             { label: 'Contact', path: process.env.PUBLIC_URL + pathname },
           ]}
-        />
+        /> */}
+        <div className="contact-banner"></div>
         <div className="contact-area pt-100 pb-100">
           <div className="container">
             <div className="custom-row-2">
