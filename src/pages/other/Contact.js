@@ -33,8 +33,8 @@ const Contact = () => {
                       <i className="fa fa-phone" />
                     </div>
                     <div className="contact-info-dec">
-                      <p>(+44)2033711782</p>
-                      <p>(+44)7386391286</p>
+                      <p>+44 (0) 7386 391 286</p>
+                      <p>+44 (0) 20 3371 1782</p>
                     </div>
                   </div>
                   <div className="single-contact-info">
