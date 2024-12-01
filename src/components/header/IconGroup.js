@@ -51,11 +51,11 @@ const IconGroup = ({ iconWhiteClass }) => {
                 Register
               </Link>
             </li>
-            <li>
-              {/* <Link to={process.env.PUBLIC_URL + '/my-account'}>
+            {/* <li>
+              <Link to={process.env.PUBLIC_URL + '/my-account'}>
                 my account
-              </Link> */}
-            </li>
+              </Link>
+            </li> */}
           </ul>
         </div>
       </div>
