@@ -115,6 +115,14 @@ const EmailVerification = () => {
                           <p className="text-center">
                             Enter the 6-digit code sent to your email
                           </p>
+                          <div
+                            className="alert alert-warning text-center"
+                            role="alert"
+                          >
+                            Please check your spam or junk folder if you don't
+                            see the email in your inbox.
+                          </div>
+
                           <Row className="mb-3">
                             {digits.map((digit, index) => (
                               <Col key={index} xs="2">

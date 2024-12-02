@@ -1,13 +1,30 @@
-import { Fragment } from "react"; 
-import { useLocation } from "react-router-dom"; 
+import { Fragment, useEffect } from "react"; 
+import { useLocation,useNavigate  } from "react-router-dom"; 
 import Accordion from "react-bootstrap/Accordion";
 import SEO from "../../components/seo";
 import LayoutOne from "../../layouts/LayoutOne";
 import Breadcrumb from "../../wrappers/breadcrumb/Breadcrumb";
+import { useGetUserProfileQuery } from "../../store/slices/user-slice";
 
 const MyAccount = () => {
   let { pathname } = useLocation();
-
+  const navigate = useNavigate();
+  const { data, error, isLoading } = useGetUserProfileQuery();
+  useEffect(() => {
+    // Check if the token exists in localStorage
+    const token = localStorage.getItem("token");
+  
+    // If there's no token, redirect to the login page
+    if (!token) {
+      navigate("/login-register");
+    } else if (error?.status === 401 || error?.status === 403) {
+      // If the token exists but the error status is 401 or 403, also redirect to login
+      navigate("/login-register");
+    }
+  }, [error, navigate]);
+  if (isLoading) return <div>Loading...</div>;
+  if (error) return <div>An error has occurred</div>;
+  console.log(data)
   return (
     <Fragment>
       <SEO
@@ -31,57 +48,68 @@ const MyAccount = () => {
                   <Accordion defaultActiveKey="0">
                     <Accordion.Item eventKey="0" className="single-my-account mb-20">
                       <Accordion.Header className="panel-heading">
-                        <span>1 .</span> Edit your account information{" "}
+                        <span>1 .</span>Account information{" "}
                       </Accordion.Header>
                       <Accordion.Body>
                           <div className="myaccount-info-wrapper">
                             <div className="account-info-wrapper">
-                              <h4>My Account Information</h4>
-                              <h5>Your Personal Details</h5>
+                             
                             </div>
                             <div className="row">
-                              <div className="col-lg-6 col-md-6">
+                              <div className="col-lg-12 col-md-6">
                                 <div className="billing-info">
-                                  <label>First Name</label>
-                                  <input type="text" />
+                                  <label>Full Name</label>
+                                  <input type="text" value={data?.user?.name} readOnly />
                                 </div>
                               </div>
-                              <div className="col-lg-6 col-md-6">
+                              {/* <div className="col-lg-6 col-md-6">
                                 <div className="billing-info">
                                   <label>Last Name</label>
                                   <input type="text" />
                                 </div>
-                              </div>
+                              </div> */}
                               <div className="col-lg-12 col-md-12">
                                 <div className="billing-info">
                                   <label>Email Address</label>
-                                  <input type="email" />
+                                  <input type="email" value={data?.user?.email} readOnly />
                                 </div>
                               </div>
                               <div className="col-lg-6 col-md-6">
                                 <div className="billing-info">
-                                  <label>Telephone</label>
-                                  <input type="text" />
+                                  <label>phoneNumber</label>
+                                  <input type="text" value={data?.user?.phoneNumber} readOnly />
                                 </div>
                               </div>
                               <div className="col-lg-6 col-md-6">
                                 <div className="billing-info">
-                                  <label>Fax</label>
-                                  <input type="text" />
+                                  <label>state</label>
+                                  <input type="text" value={data?.user?.state} readOnly />
+                                </div>
+                              </div>
+                              <div className="col-lg-6 col-md-6">
+                                <div className="billing-info">
+                                  <label>city</label>
+                                  <input type="text" value={data?.user?.city} readOnly />
+                                </div>
+                              </div>
+                              <div className="col-lg-6 col-md-6">
+                                <div className="billing-info">
+                                  <label>country</label>
+                                  <input type="text" value={data?.user?.country} readOnly />
                                 </div>
                               </div>
                             </div>
                             <div className="billing-back-btn">
-                              <div className="billing-btn">
+                              {/* <div className="billing-btn">
                                 <button type="submit">Continue</button>
-                              </div>
+                              </div> */}
                             </div>
                           </div>
                       </Accordion.Body>
                     </Accordion.Item>
 
 
-                    <Accordion.Item eventKey="1" className="single-my-account mb-20">
+                    {/* <Accordion.Item eventKey="1" className="single-my-account mb-20">
                       <Accordion.Header className="panel-heading">
                           <span>2 .</span> Change your password
                       </Accordion.Header>
@@ -112,9 +140,9 @@ const MyAccount = () => {
                             </div>
                           </div>
                       </Accordion.Body>
-                    </Accordion.Item>
+                    </Accordion.Item> */}
 
-                    <Accordion.Item eventKey="2" className="single-my-account mb-20">
+                    {/* <Accordion.Item eventKey="2" className="single-my-account mb-20">
                       <Accordion.Header className="panel-heading">
                           <span>3 .</span> Modify your address book entries
                       </Accordion.Header>
@@ -149,7 +177,7 @@ const MyAccount = () => {
                             </div>
                           </div>
                       </Accordion.Body>
-                    </Accordion.Item>
+                    </Accordion.Item> */}
                   </Accordion>
                 </div>
               </div>
