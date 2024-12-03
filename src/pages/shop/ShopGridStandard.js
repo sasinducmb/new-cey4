@@ -23,7 +23,7 @@ const ShopGridStandard = () => {
   const [sortedProducts, setSortedProducts] = useState([]);
   const { products } = useSelector((state) => state.product);
   const dispatch = useDispatch();
-  console.log(products);
+  // console.log(products);
   const pageLimit = 15;
   let { pathname } = useLocation();
 
