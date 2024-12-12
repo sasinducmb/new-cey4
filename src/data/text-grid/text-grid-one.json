@@ -5,8 +5,20 @@
     "text": "We envision a future where sustainable consumerism is the standard, and every purchase contributes to a healthier planet. Our retail arm Cey4Hub aims to be the go-to destination for individuals seeking high-quality, eco-friendly goods, fostering a community that celebrates responsible living and champions innovation in sustainable practices."
   },
   {
-    "id": "2",
+    "id": 2,
+    "title": "",
+    "subtitle": "",
+    "image": "/assets/img/slider/banner10.png",
+    "url": "/shop-grid-standard"
+  },
+  {
+    "id": "3",
     "title": "Our Mission",
-    "text": "Our mission is to empower consumers to make informed choices by providing an ethically sourced selection of eco-friendly products that prioritise sustainability, ethical sourcing, and minimal environmental impact. We are dedicated to fostering a conscious consumer culture that values the health of our planet and communities."
+    "text": "sasindu is to empower consumers to make informed choices by providing an ethically sourced selection of eco-friendly products that prioritise sustainability, ethical sourcing, and minimal environmental impact. We are dedicated to fostering a conscious consumer culture that values the health of our planet and communities."
+  } ,
+  {
+    "id": "4",
+    "title": "Our Mission",
+    "text": "Mission is to empower consumers to make informed choices by providing an ethically sourced selection of eco-friendly products that prioritise sustainability, ethical sourcing, and minimal environmental impact. We are dedicated to fostering a conscious consumer culture that values the health of our planet and communities."
   } 
 ]

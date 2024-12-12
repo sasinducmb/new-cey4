@@ -5,17 +5,58 @@ import TextGridOneSingle from "../../components/text-grid/TextGridOneSingle.js";
 
 const TextGridOne = ({ spaceBottomClass }) => {
   return (
-    <div className={clsx("about-mission-area", spaceBottomClass)}>
+    <div className={clsx('about-mission-area', spaceBottomClass)}>
       <div className="container">
-        <div className="row">
-          {textGridData?.map((single, key) => (
-              <div className="col-lg-6 col-md-6" key={key}>
-                <TextGridOneSingle
-                  data={single}
-                  spaceBottomClass="mb-30"
-                />
-              </div>
-          ))}
+        {/* Vision Section */}
+        <div className="row align-items-center">
+          <div className="col-lg-6 col-md-6">
+            <div className="vision-content">
+              <h2>Our Vision</h2>
+              <p>
+                We envision a future where sustainable consumerism is the
+                standard, and every purchase contributes to a healthier planet.
+                Our retail arm Cey4Hub aims to be the go-to destination for
+                individuals seeking high-quality, eco-friendly goods, fostering
+                a community that celebrates responsible living and champions
+                innovation in sustainable practices.
+              </p>
+            </div>
+          </div>
+          <div className="col-lg-6 col-md-6">
+            <div className="vision-image">
+              <img
+                src="/assets/img/banner/banner-42.png"
+                alt="Vision"
+                className="img-fluid"
+              />
+            </div>
+          </div>
+        </div>
+
+        {/* Mission Section */}
+        <div className="row align-items-center mt-4">
+          <div className="col-lg-6 col-md-6">
+            <div className="mission-image">
+              <img
+                src="/assets/img/banner/banner-42.png"
+                alt="Mission"
+                className="img-fluid"
+              />
+            </div>
+          </div>
+          <div className="col-lg-6 col-md-6">
+            <div className="mission-content">
+              <h2>Our Mission</h2>
+              <p>
+                Our mission is to empower consumers to make informed choices by
+                providing an ethically sourced selection of eco-friendly
+                products that prioritise sustainability, ethical sourcing, and
+                minimal environmental impact. We are dedicated to fostering a
+                conscious consumer culture that values the health of our planet
+                and communities.
+              </p>
+            </div>
+          </div>
         </div>
       </div>
     </div>
