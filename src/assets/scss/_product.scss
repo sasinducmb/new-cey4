@@ -3912,3 +3912,65 @@ ul {
 li {
   margin-bottom: 8px;
 }
+
+
+// OrderConfirmation.scss
+
+// .order-confirmation-wrapper {
+//   background-color: #f8f9fa;
+//   padding: 20px;
+//   border-radius: 10px;
+//   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.6);
+// }
+
+.order-form {
+  width: 100%;
+  max-width: 600px;
+  padding: 10px;
+  height: auto;
+  background-color: #fff;
+  border: 1px solid #e0e0e0;
+  border-radius: 10px;
+  
+}
+
+.text-success {
+  color: #28a745;
+}
+
+.summary-wrapper,
+.billing-wrapper,
+.items-wrapper {
+  border-radius: 5px;
+  background-color: #f1fdf3;
+  border: 1px solid #c3e6cb;
+}
+
+.summary-wrapper {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+}
+
+.billing-wrapper {
+  padding: 10px;
+}
+
+.items-wrapper {
+  div {
+    background-color: #e6f9ec;
+    font-weight: 600;
+    padding: 6px;
+  }
+}
+
+.back-button {
+  background-color: #28a745;
+  border-color: #28a745;
+  
+
+  &:hover {
+    background-color: #218838;
+    border-color: #1e7e34;
+  }
+}
