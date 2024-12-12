@@ -3974,3 +3974,10 @@ li {
     border-color: #1e7e34;
   }
 }
+
+
+input[type="radio"] {
+  transform: scale(0.6);  /* Increase size */
+  margin-right: 10px;  /* Optional: Adjust space between radio and label */
+}
+

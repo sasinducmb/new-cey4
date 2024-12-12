@@ -21,11 +21,16 @@ const Checkout = () => {
   let { pathname } = useLocation();
   const currency = useSelector((state) => state.currency);
   const { cartItems } = useSelector((state) => state.cart);
+  const [isDeliverySameAsBilling, setIsDeliverySameAsBilling] = useState(true);
 
   // const totalDeliveryCost = cartItems.reduce(
   //   (total, item) => total + item.totalDeliveryCost,
   //   0
   // );
+
+  const handleRadioChange = (e) => {
+    setIsDeliverySameAsBilling(e.target.value === "yes");
+  };
 
   const [createOrder, { isLoading: isOrderLoading }] = useCreateOrderMutation();
   const [createPaymentSession, { isLoading: isPaymentLoading }] =
@@ -46,9 +51,23 @@ const Checkout = () => {
     orderNotes: "",
   });
 
+  const [deliveryDetails, setDeliveryDetails] = useState({
+    DeliveryApartment: "",
+    DeliveryCity: "",
+    DeliveryState: "",
+    DeliveryPostalCode: "",
+    DeliveryPhone: "",
+    DeliveryEmail: "",
+    DeliveryOrderNotes: "",
+  });
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setCustomerDetails({ ...customerDetails, [name]: value });
+  };
+
+  const handleInputChangeDeliver = (e) => {
+    const { name, value } = e.target;
+    setDeliveryDetails({ ...deliveryDetails, [name]: value });
   };
 
   const handleSubmit = async (e) => {
@@ -62,6 +81,7 @@ const Checkout = () => {
 
       overallTotal: cartTotalPrice,
       billingInfo: customerDetails,
+      deliveryInfo: deliveryDetails,
     };
 
     try {
@@ -85,7 +105,7 @@ const Checkout = () => {
           localStorage.setItem("orderId", response.orderId);
 
           dispatch(deleteAllFromCart());
-          
+
           stripe.redirectToCheckout({
             sessionId: session,
           });
@@ -258,6 +278,91 @@ const Checkout = () => {
                             </div>
                           </div>
                         </div>
+                        <div>
+                          <h4 className="alert alert-warning">
+                            Do you want the delivery details to be the same as
+                            billing?
+                          </h4>
+                          <div className="radio-group mb-4 alert alert-warning">
+                            <label>
+                              <input
+                                type="radio"
+                                name="deliverySame"
+                                value="yes"
+                                required
+                                checked={isDeliverySameAsBilling}
+                                onChange={handleRadioChange}
+                              />
+                              Yes
+                            </label>
+                            <label>
+                              <input
+                                type="radio"
+                                name="deliverySame"
+                                value="no"
+                                required
+                                checked={!isDeliverySameAsBilling}
+                                onChange={handleRadioChange}
+                              />
+                              No
+                            </label>
+                          </div>
+                        </div>
+
+                        {!isDeliverySameAsBilling && (
+                          <div className="delivery-info">
+                            <h3>Delivery Information</h3>
+                            <label>Street Address</label>
+                            <input
+                              type="text"
+                              name="DeliveryStreetAddress"
+                              value={deliveryDetails.DeliveryStreetAddress}
+                              onChange={handleInputChangeDeliver}
+                            />
+                            <label>Apartment</label>
+                            <input
+                              type="text"
+                              name="DeliveryApartment"
+                              value={deliveryDetails.DeliveryApartment}
+                              onChange={handleInputChangeDeliver}
+                            />
+                            <label>City</label>
+                            <input
+                              type="text"
+                              name="DeliveryCity"
+                              value={deliveryDetails.DeliveryCity}
+                              onChange={handleInputChangeDeliver}
+                            />
+                            <label>State</label>
+                            <input
+                              type="text"
+                              name="DeliveryState"
+                              value={deliveryDetails.DeliveryState}
+                              onChange={handleInputChangeDeliver}
+                            />
+                            <label>Postal Code</label>
+                            <input
+                              type="text"
+                              name="DeliveryPostalCode"
+                              value={deliveryDetails.DeliveryPostalCode}
+                              onChange={handleInputChangeDeliver}
+                            />
+                            <label>Phone</label>
+                            <input
+                              type="text"
+                              name="DeliveryPhone"
+                              value={deliveryDetails.DeliveryPhone}
+                              onChange={handleInputChangeDeliver}
+                            />
+                            <label>Email</label>
+                            <input
+                              type="text"
+                              name="DeliveryEmail"
+                              value={deliveryDetails.DeliveryEmail}
+                              onChange={handleInputChangeDeliver}
+                            />
+                          </div>
+                        )}
                       </div>
 
                       <div className="additional-info-wrap">

@@ -30,6 +30,7 @@
     "react-router-dom": "^6.4.3",
     "react-scripts": "^5.0.1",
     "react-spinners": "^0.14.1",
+    "react-to-print": "^3.0.2",
     "react-visibility-sensor": "^5.1.1",
     "redux": "^4.2.0",
     "redux-persist": "^6.0.0",
