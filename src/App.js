@@ -102,9 +102,9 @@ const Wishlist = lazy(() => import("./pages/other/Wishlist"));
 const Compare = lazy(() => import("./pages/other/Compare"));
 const Checkout = lazy(() => import("./pages/other/Checkout"));
 const EmailVerification = lazy(() => import("./pages/other/EmailVerification"));
-
+  
 const NotFound = lazy(() => import("./pages/other/NotFound"));
-
+const OrderConfirm = lazy(() => import("./pages/other/OrderConfirm"));  
 const App = () => {
   return (
     <Router>
@@ -399,6 +399,10 @@ const App = () => {
             <Route
               path={process.env.PUBLIC_URL + "/email-verification"}
               element={<EmailVerification />}
+            />
+             <Route
+              path={process.env.PUBLIC_URL + "/order-confirm"}
+              element={<OrderConfirm />}
             />
 
             <Route path="*" element={<NotFound />} />

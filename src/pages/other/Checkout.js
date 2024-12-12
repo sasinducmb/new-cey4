@@ -81,7 +81,11 @@ const Checkout = () => {
         const session = paymentIdResponse.id;
 
         if (session) {
+          // Store orderId in local storage
+          localStorage.setItem("orderId", response.orderId);
+
           dispatch(deleteAllFromCart());
+          
           stripe.redirectToCheckout({
             sessionId: session,
           });

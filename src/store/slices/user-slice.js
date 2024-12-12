@@ -25,7 +25,17 @@ export const userApi = createApi({
           body: verificationData,
         }),
       }),
+      getUserProfile: builder.query({
+        query: () => {
+          const token = localStorage.getItem('token');
+          return {
+            url: `/user/getUserProfile?token=${token}`,
+            method: 'GET',
+          };
+        },
+      }),
+  
   }),
 });
 
-export const { useRegisterUserMutation,useLoginMutation,useVerifyEmailMutation} = userApi;
+export const { useRegisterUserMutation,useLoginMutation,useVerifyEmailMutation, useGetUserProfileQuery} = userApi;

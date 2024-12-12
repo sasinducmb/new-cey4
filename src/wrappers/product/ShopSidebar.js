@@ -23,7 +23,7 @@ const ShopSidebar = ({ products, getSortParams, sideSpaceClass }) => {
     ? categories.map((category) => category.name)
     : [];
   
- console.log(categories)
+//  console.log(categories)
   return (
     <div className={clsx('sidebar-style', sideSpaceClass)}>
       {/* shop search */}
