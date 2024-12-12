@@ -72,9 +72,9 @@ function OrderConfirm() {
                         </div>
 
                         {[
-                          { item: "Wireless Mouse", quantity: 1, price: "20" },
-                          { item: "Keyboard", quantity: 2, price: "50" },
-                          { item: "Monitor Stand", quantity: 1, price: "35" },
+                          { item: 'Wireless Mouse', quantity: 1, price: '20' },
+                          { item: 'Keyboard', quantity: 2, price: '50' },
+                          { item: 'Monitor Stand', quantity: 1, price: '35' },
                         ].map((product, index) => (
                           <div
                             className="items-wrapper d-flex text-center mb-2"
@@ -95,23 +95,22 @@ function OrderConfirm() {
                         {/* Footer Section */}
                         <div className="footer-wrapper text-center border">
                           <img
-                            src="/path/to/your-logo.png"
+                            src="/assets/img/logo/logo.png"
                             alt="Company Logo"
-                            className="company-logo mb-3"
-                            style={{ width: "150px" }}
+                            className="company-logo mb-3 mt-2"
+                            style={{ width: '150px' }}
                           />
                           <p className="mb-1">
-                            <strong>Your Company Name</strong>
+                            <strong>Cey4hub</strong>
                           </p>
-                          <p className="mb-1">123 Main Street, City, Country</p>
-                          <p className="mb-1">Phone: +1 234 567 890</p>
-                          <p>Email: support@yourcompany.com</p>
+                          <p className="mb-1">Phone: +44 (0) 7386 391 286</p>
+                          <p>Email: support@cey4hub.com</p>
                         </div>
 
                         <div className="d-grid">
                           <Button
                             variant="success"
-                            onClick={() => navigate("/")}
+                            onClick={() => navigate('/')}
                             className="back-button"
                           >
                             Back to Homepage
