@@ -53,12 +53,14 @@ const Checkout = () => {
 
   const [deliveryDetails, setDeliveryDetails] = useState({
     DeliveryApartment: "",
+    DeliveryStreetAddress: "",
     DeliveryCity: "",
     DeliveryState: "",
     DeliveryPostalCode: "",
     DeliveryPhone: "",
     DeliveryEmail: "",
     DeliveryOrderNotes: "",
+    DeliveryFullName: "",
   });
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -312,6 +314,13 @@ const Checkout = () => {
                         {!isDeliverySameAsBilling && (
                           <div className="delivery-info">
                             <h3>Delivery Information</h3>
+                            <label>Full Name</label>
+                            <input
+                              type="text"
+                              name="DeliveryFullName"
+                              value={deliveryDetails.DeliveryFullName}
+                              onChange={handleInputChangeDeliver}
+                            />
                             <label>Street Address</label>
                             <input
                               type="text"
