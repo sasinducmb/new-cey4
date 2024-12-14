@@ -82,7 +82,7 @@ function ProductModal({
           <div className="col-md-5 col-sm-12 col-xs-12">
             <div className="product-large-image-wrapper">
               <Swiper options={gallerySwiperParams}>
-                {product.additionalImages &&
+                {/* {product.additionalImages &&
                   product.additionalImages.map((img, i) => (
                     <SwiperSlide key={i}>
                       <div className="single-image">
@@ -93,12 +93,23 @@ function ProductModal({
                         />
                       </div>
                     </SwiperSlide>
-                  ))}
+                  ))} */}
+                <img
+                  className="img-fluid"
+                  src={
+                    product.mainImage
+                      ? `${
+                          process.env.REACT_APP_BACKEND_URL
+                        }/${product.mainImage.replace(/\\/g, "/")}`
+                      : "path/to/default-image.jpg" // Provide a fallback image if mainImage is null or undefined
+                  }
+                  alt={product.name || "Product Image"} // Add an alt text for better accessibility
+                />
               </Swiper>
             </div>
             <div className="product-small-image-wrapper mt-15">
               <Swiper options={thumbnailSwiperParams}>
-                {product.image &&
+                {/* {product.image &&
                   product.image.map((img, i) => {
                     return (
                       <SwiperSlide key={i}>
@@ -111,7 +122,18 @@ function ProductModal({
                         </div>
                       </SwiperSlide>
                     );
-                  })}
+                  })} */}
+                    {/* <img
+                  className="img-fluid"
+                  src={
+                    product.mainImage
+                      ? `${
+                          process.env.REACT_APP_BACKEND_URL
+                        }/${product.mainImage.replace(/\\/g, "/")}`
+                      : "path/to/default-image.jpg" // Provide a fallback image if mainImage is null or undefined
+                  }
+                  alt={product.name || "Product Image"} // Add an alt text for better accessibility
+                /> */}
               </Swiper>
             </div>
           </div>
@@ -142,7 +164,10 @@ function ProductModal({
                 ""
               )}
               <div className="pro-details-list">
-              <p style={{textAlign:"justify"}} dangerouslySetInnerHTML={{ __html: product.shortDescription }}></p>
+                <p
+                  style={{ textAlign: "justify" }}
+                  dangerouslySetInnerHTML={{ __html: product.shortDescription }}
+                ></p>
               </div>
 
               {product.variation ? (
