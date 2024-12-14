@@ -25,7 +25,7 @@ const TextGridOne = ({ spaceBottomClass }) => {
           <div className="col-lg-6 col-md-6">
             <div className="vision-image">
               <img
-                src="/assets/img/banner/banner-42.png"
+                src="/assets/img/banner/vision.jpg"
                 alt="Vision"
                 className="img-fluid"
               />
@@ -38,7 +38,7 @@ const TextGridOne = ({ spaceBottomClass }) => {
           <div className="col-lg-6 col-md-6">
             <div className="mission-image">
               <img
-                src="/assets/img/banner/banner-42.png"
+                src="/assets/img/banner/mission.jpg"
                 alt="Mission"
                 className="img-fluid"
               />
