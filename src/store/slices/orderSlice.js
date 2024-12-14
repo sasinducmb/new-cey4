@@ -22,8 +22,10 @@ export const orderApi = createApi({
       query: () => "sales/getCategories",
       
     }),
-
+    getOrderById: builder.query({
+      query: (orderId) => `/order/getoneorder/${orderId}`, 
+    }),
   }),
 });
 
-export const { useCreateOrderMutation ,useCreatePaymentSessionMutation,useGetCategoryQuery} = orderApi;
+export const { useCreateOrderMutation ,useCreatePaymentSessionMutation,useGetCategoryQuery,useGetOrderByIdQuery} = orderApi;
