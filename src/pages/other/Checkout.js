@@ -14,6 +14,7 @@ import { useParams } from "react-router-dom";
 import { deleteAllFromCart } from "../../store/slices/cart-slice";
 const Checkout = () => {
   let cartTotalPrice = 0;
+  let premiumCost = 0;
   const dispatch = useDispatch();
   const { id, itemQuantity } = useParams();
   const { products } = useSelector((state) => state.product);
@@ -62,6 +63,8 @@ const Checkout = () => {
     DeliveryOrderNotes: "",
     DeliveryFullName: "",
   });
+
+  const [selectedOption, setSelectedOption] = useState("");
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setCustomerDetails({ ...customerDetails, [name]: value });
@@ -70,6 +73,9 @@ const Checkout = () => {
   const handleInputChangeDeliver = (e) => {
     const { name, value } = e.target;
     setDeliveryDetails({ ...deliveryDetails, [name]: value });
+  };
+  const handleSelectChange = (e) => {
+    setSelectedOption(e.target.value);
   };
 
   const handleSubmit = async (e) => {
@@ -392,6 +398,44 @@ const Checkout = () => {
                   <div className="col-lg-5">
                     <div className="your-order-area">
                       <h3>Your order</h3>
+
+                      <div className="container mt-4 mb-3 ">
+                        <label
+                          htmlFor="premiumSelect"
+                          className="form-label text-danger"
+                        >
+                          Select Premium Delivery Options
+                        </label>
+                        <select
+                          id="premiumSelect"
+                          className="form-select"
+                          value={selectedOption}
+                          onChange={handleSelectChange}
+                        >
+                          <option value="" disabled>
+                            -- Choose an option --
+                          </option>
+                          <option value="normal-delivery">
+                            Normal Delivery
+                          </option>
+                          <option value="one-day-premium">
+                            One Day Premium
+                          </option>
+                          <option value="two-day-premium">
+                            Two Day Premium
+                          </option>
+                        </select>
+
+                        {selectedOption && (
+                          <div className="mt-3">
+                            <strong>You selected:</strong>{" "}
+                            {selectedOption === "one-day-premium"
+                              ? "One Day Premium"
+                              : "Two Day Premium"}
+                          </div>
+                        )}
+                      </div>
+
                       <div className="your-order-wrap gray-bg-4">
                         <div className="your-order-product-info">
                           <div className="your-order-top">
@@ -471,11 +515,98 @@ const Checkout = () => {
 
                                   // Calculate cart total price based on the presence of a discount
                                   if (discountedPrice != null) {
-                                    cartTotalPrice +=
-                                      finalDiscountedPrice * cartItem.quantity;
+                                    if (selectedOption === "one-day-premium") {
+                                      if (cartItem.quantity === 1) {
+                                        premiumCost +=
+                                          cartItem.price.oneDayPremium;
+                                        cartTotalPrice +=
+                                          finalDiscountedPrice *
+                                            cartItem.quantity +
+                                          cartItem.price.oneDayPremium;
+                                      } else {
+                                        premiumCost +=
+                                          cartItem.price
+                                            .oneDayPremiumSecondItem *
+                                          cartItem.quantity;
+                                        cartTotalPrice +=
+                                          cartItem.price
+                                            .oneDayPremiumSecondItem *
+                                            cartItem.quantity +
+                                          finalDiscountedPrice *
+                                            cartItem.quantity;
+                                      }
+                                    } else if (
+                                      selectedOption === "two-day-premium"
+                                    ) {
+                                      if (cartItem.quantity === 1) {
+                                        premiumCost +=
+                                          cartItem.price.twoDayPremium;
+                                        cartTotalPrice +=
+                                          finalDiscountedPrice *
+                                            cartItem.quantity +
+                                          cartItem.price.twoDayPremium;
+                                      } else {
+                                        premiumCost +=
+                                          cartItem.price
+                                            .twoDayPremiumSecondItem *
+                                          cartItem.quantity;
+                                        cartTotalPrice +=
+                                          cartItem.price
+                                            .twoDayPremiumSecondItem *
+                                            cartItem.quantity +
+                                          finalDiscountedPrice *
+                                            cartItem.quantity;
+                                      }
+                                    } else {
+                                      cartTotalPrice +=
+                                        finalDiscountedPrice *
+                                        cartItem.quantity;
+                                    }
                                   } else {
-                                    cartTotalPrice +=
-                                      finalProductPrice * cartItem.quantity;
+                                    if (selectedOption === "one-day-premium") {
+                                      if (cartItem.quantity === 1) {
+                                        premiumCost +=
+                                          cartItem.price.oneDayPremium;
+                                        cartTotalPrice +=
+                                          finalProductPrice *
+                                            cartItem.quantity +
+                                          cartItem.price.oneDayPremium;
+                                      } else {
+                                        premiumCost +=
+                                          cartItem.price
+                                            .oneDayPremiumSecondItem *
+                                          cartItem.quantity;
+                                        cartTotalPrice +=
+                                          cartItem.price
+                                            .oneDayPremiumSecondItem *
+                                            cartItem.quantity +
+                                          finalProductPrice * cartItem.quantity;
+                                      }
+                                    } else if (
+                                      selectedOption === "two-day-premium"
+                                    ) {
+                                      if (cartItem.quantity === 1) {
+                                        premiumCost +=
+                                          cartItem.price.twoDayPremium;
+                                        cartTotalPrice +=
+                                          finalProductPrice *
+                                            cartItem.quantity +
+                                          cartItem.price.twoDayPremium;
+                                      } else {
+                                        premiumCost +=
+                                          cartItem.price
+                                            .twoDayPremiumSecondItem *
+                                          cartItem.quantity;
+                                        cartTotalPrice +=
+                                          cartItem.price
+                                            .twoDayPremiumSecondItem *
+                                            cartItem.quantity +
+                                          finalProductPrice * cartItem.quantity;
+                                      }
+                                    } else {
+                                      cartTotalPrice +=
+                                        finalProductPrice * cartItem.quantity;
+                                    }
                                   }
 
                                   return (
@@ -515,6 +646,20 @@ const Checkout = () => {
                             </ul> */}
                           </div>
                           <div className="your-order-total">
+                            <ul>
+                              <li className="order-total">Item Total</li>
+                              <li>
+                                {currency.currencySymbol +
+                                  (cartTotalPrice - premiumCost).toFixed(2)}
+                              </li>
+                            </ul>
+                            <ul>
+                              <li className="order-total">Delivery cost</li>
+                              <li>
+                                {currency.currencySymbol +
+                                  premiumCost.toFixed(2)}
+                              </li>
+                            </ul>
                             <ul>
                               <li className="order-total">Total</li>
                               <li>
