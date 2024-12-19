@@ -45,20 +45,18 @@ const FooterOne = ({
                     <Link to={process.env.PUBLIC_URL + "/about"}>About us</Link>
                   </li>
                   <li>
-                    <Link to={process.env.PUBLIC_URL + "#/"}>
-                      Store location
-                    </Link>
+                    <Link to={process.env.PUBLIC_URL + "/shop-grid-standard"}>Store</Link>
                   </li>
                   <li>
                     <Link to={process.env.PUBLIC_URL + "/contact"}>
                       Contact
                     </Link>
                   </li>
-                  <li>
+                  {/* <li>
                     <Link to={process.env.PUBLIC_URL + "#/"}>
                       Orders tracking
                     </Link>
-                  </li>
+                  </li> */}
                 </ul>
               </div>
             </div>
@@ -117,7 +115,7 @@ const FooterOne = ({
                 <ul>
                   <li>
                     <a
-                      href="//www.facebook.com"
+                      href="https://web.facebook.com/profile.php?id=61569993566020"
                       target="_blank"
                       rel="noopener noreferrer"
                     >
@@ -126,23 +124,23 @@ const FooterOne = ({
                   </li>
                   <li>
                     <a
-                      href="//www.twitter.com"
+                      href="https://www.tiktok.com/@cey4hub"
                       target="_blank"
                       rel="noopener noreferrer"
                     >
-                      Twitter
+                      Tiktok
                     </a>
                   </li>
                   <li>
                     <a
-                      href="//www.instagram.com"
+                      href="https://www.instagram.com/cey4hub/?hl=en"
                       target="_blank"
                       rel="noopener noreferrer"
                     >
                       Instagram
                     </a>
                   </li>
-                  <li>
+                  {/* <li>
                     <a
                       href="//www.youtube.com"
                       target="_blank"
@@ -150,7 +148,7 @@ const FooterOne = ({
                     >
                       Youtube
                     </a>
-                  </li>
+                  </li> */}
                 </ul>
               </div>
             </div>
