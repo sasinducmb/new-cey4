@@ -54,10 +54,23 @@ const ProductImageDescription = ({
           >
             <h3>Dimensions</h3>
             <ul>
-              <li><strong> Height: </strong> {product.dimensions.dheight} cm (Approximately)</li>
-              <li><strong> Width: </strong> {product.dimensions.dwidth} cm (Approximately)</li>
-              <li><strong>  Length: </strong> {product.dimensions.dlength} cm (Approximately)</li>
-           <li> <strong> Weight:</strong> {product.weight} {product.weightMeasure}g (Approximately)</li>
+              <li>
+                <strong> Height: </strong> {product.dimensions.dheight} cm
+                (Approximately)
+              </li>
+              <li>
+                <strong> Width: </strong> {product.dimensions.dwidth} cm
+                (Approximately)
+              </li>
+              <li>
+                <strong> Length: </strong> {product.dimensions.dlength} cm
+                (Approximately)
+              </li>
+              <li>
+                {" "}
+                <strong> Weight:</strong> {product.weight}{" "}
+                {product.weightMeasure}g (Approximately)
+              </li>
             </ul>
           </div>
 
@@ -125,9 +138,9 @@ const ProductImageDescription = ({
               <li>
                 <strong>Category:</strong> {product.category}
               </li>
-              {/* <li>
-                <strong>Department:</strong> {product.department}
-              </li> */}
+              <li>
+                <strong>Suitable for use:</strong> {product.department}
+              </li>
               <li>
                 <strong>Shape:</strong> {product.shape}
               </li>
@@ -157,12 +170,33 @@ const ProductImageDescription = ({
                 <strong>Additional Part Size:</strong>{" "}
                 {product.itemRelatedParts &&
                 product.itemRelatedParts.partName ? (
-                  <div>{product.itemRelatedParts.partName}</div>
+                  <div>
+                    {product.itemRelatedParts.partName && (
+                      <>
+                        {product.itemRelatedParts.partName}
+                        <br />
+                      </>
+                    )}
+                    {product.itemRelatedParts.width && (
+                      <>
+                        Width: {product.itemRelatedParts.width} cm
+                        <br />
+                      </>
+                    )}
+                    {product.itemRelatedParts.height && (
+                      <>
+                        Height: {product.itemRelatedParts.height} cm
+                        <br />
+                      </>
+                    )}
+                    {product.itemRelatedParts.length && (
+                      <>Length: {product.itemRelatedParts.length} cm</>
+                    )}
+                  </div>
                 ) : (
                   <div>No related parts available</div>
                 )}
               </li>
-             
             </ul>
           </div>
         </div>
