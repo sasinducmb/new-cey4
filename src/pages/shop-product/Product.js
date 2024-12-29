@@ -7,18 +7,22 @@ import Breadcrumb from "../../wrappers/breadcrumb/Breadcrumb";
 import RelatedProductSlider from "../../wrappers/product/RelatedProductSlider";
 import ProductDescriptionTab from "../../wrappers/product/ProductDescriptionTab";
 import ProductImageDescription from "../../wrappers/product/ProductImageDescription";
-
+import { useGetVariationQuery } from "../../store/slices/user-slice";
 const Product = () => {
   let { pathname } = useLocation();
   let { id } = useParams();
   const { products } = useSelector((state) => state.product);
   const product = products.find(product => product._id === id);
-
+  const { data, isLoading } = useGetVariationQuery();
+  console.log(data);
+ const filteredData = Array.isArray(data)
+    ? data.filter(item => item.productId?._id === id)
+    : [];
+  // console.log(filteredData);
   if (!product) {
     return <div>Product not found</div>;
   }
   
-  console.log(product)
 
   return (
     <Fragment>
@@ -41,6 +45,7 @@ const Product = () => {
           spaceTopClass="pt-100"
           spaceBottomClass="pb-100"
           product={product}
+          productVariation={filteredData}
         />
 
         {/* product description tab */}

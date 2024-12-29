@@ -30,7 +30,21 @@ const TabProductTen = ({
           <ProductGrid
             // category={category} // Uncomment and define `category` if needed
             // type="new"          // Uncomment if a specific type is required
-            limit={8}
+            
+            start={0}
+            end={8}
+            spaceBottomClass="mb-25"
+          />
+        </div>
+        {/* <div>
+          <h2>banner</h2>
+        </div> */}
+        <div className="row">
+          <ProductGrid
+            // category={category} // Uncomment and define `category` if needed
+            // type="new"          // Uncomment if a specific type is required
+            start={9}
+            end={17}
             spaceBottomClass="mb-25"
           />
         </div>

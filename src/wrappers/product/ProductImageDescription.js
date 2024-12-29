@@ -12,6 +12,7 @@ const ProductImageDescription = ({
   spaceBottomClass,
   galleryType,
   product,
+  productVariation
 }) => {
   const currency = useSelector((state) => state.currency);
   const { cartItems } = useSelector((state) => state.cart);
@@ -19,7 +20,6 @@ const ProductImageDescription = ({
   const { compareItems } = useSelector((state) => state.compare);
   const wishlistItem = wishlistItems.find((item) => item.id === product.id);
   const compareItem = compareItems.find((item) => item.id === product.id);
-
   const discountedPrice = getDiscountPrice(
     product.price.basePrice,
     product.discount
@@ -256,6 +256,7 @@ const ProductImageDescription = ({
               cartItems={cartItems}
               wishlistItem={wishlistItem}
               compareItem={compareItem}
+              productVariation={productVariation}
             />
           </div>
         </div>

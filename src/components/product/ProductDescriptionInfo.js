@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 import React, { Fragment, useState } from "react";
-import { Link,useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { getProductCartQuantity } from "../../helpers/product";
 import Rating from "./sub-components/ProductRating";
@@ -8,8 +8,7 @@ import { addToCart } from "../../store/slices/cart-slice";
 import { addToWishlist } from "../../store/slices/wishlist-slice";
 import { addToCompare } from "../../store/slices/compare-slice";
 
-const 
-ProductDescriptionInfo = ({
+const ProductDescriptionInfo = ({
   product,
   discountedPrice,
   currency,
@@ -18,9 +17,18 @@ ProductDescriptionInfo = ({
   cartItems,
   wishlistItem,
   compareItem,
+  productVariation,
 }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [selectedVariationId, setSelectedVariationId] = useState(null);
+  const handleVariationChange = (variationId) => {
+    setSelectedVariationId(variationId);
+  };
+  const handleResetSelection = () => {
+    setSelectedVariationId(null); // Reset selection
+  };
+
   const [selectedProductColor, setSelectedProductColor] = useState(
     product.variation ? product.variation[0].color : ""
   );
@@ -38,7 +46,13 @@ ProductDescriptionInfo = ({
     selectedProductColor,
     selectedProductSize
   );
+  console.log(productVariation);
+  const selectedVariation = productVariation?.find(
+    (variation) => variation._id === selectedVariationId
+  );
 
+  // Update the price based on the selected variation
+;
   return (
     <div className="product-details-content ml-70">
       <h2>{product.name}</h2>
@@ -64,78 +78,61 @@ ProductDescriptionInfo = ({
         ""
       )}
       <div className="pro-details-list">
-        <p style={{textAlign:"justify"}} dangerouslySetInnerHTML={{ __html: product.shortDescription }}></p>
+        <p
+          style={{ textAlign: "justify" }}
+          dangerouslySetInnerHTML={{ __html: product.shortDescription }}
+        ></p>
       </div>
-
-      {product.variation ? (
-        <div className="pro-details-size-color">
-          <div className="pro-details-color-wrap">
-            <span>Color</span>
-            <div className="pro-details-color-content">
-              {product.variation.map((single, key) => {
-                return (
-                  <label
-                    className={`pro-details-color-content--single ${single.color}`}
-                    key={key}
-                  >
-                    <input
-                      type="radio"
-                      value={single.color}
-                      name="product-color"
-                      checked={
-                        single.color === selectedProductColor ? "checked" : ""
-                      }
-                      onChange={() => {
-                        setSelectedProductColor(single.color);
-                        setSelectedProductSize(single.size[0].name);
-                        setProductStock(single.size[0].stock);
-                        setQuantityCount(1);
-                      }}
-                    />
-                    <span className="checkmark"></span>
-                  </label>
-                );
-              })}
-            </div>
+      <div className="d-flex flex-column">
+      <h5>Product Variation</h5>
+      {selectedVariation && (
+          <div className="mt-3">
+            <h6>Selected Variation Price:</h6>
+            <p>
+              {currency.currencySymbol + selectedVariation.price.basePrice}
+            </p>
           </div>
-          <div className="pro-details-size">
-            <span>Size</span>
-            <div className="pro-details-size-content">
-              {product.variation &&
-                product.variation.map((single) => {
-                  return single.color === selectedProductColor
-                    ? single.size.map((singleSize, key) => {
-                        return (
-                          <label
-                            className={`pro-details-size-content--single`}
-                            key={key}
-                          >
-                            <input
-                              type="radio"
-                              value={singleSize.name}
-                              checked={
-                                singleSize.name === selectedProductSize
-                                  ? "checked"
-                                  : ""
-                              }
-                              onChange={() => {
-                                setSelectedProductSize(singleSize.name);
-                                setProductStock(singleSize.stock);
-                                setQuantityCount(1);
-                              }}
-                            />
-                            <span className="size-name">{singleSize.name}</span>
-                          </label>
-                        );
-                      })
-                    : "";
-                })}
+        )}
+      {productVariation && productVariation.length > 0 ? (
+        <div className="d-flex flex-wrap gap-3">
+          {productVariation.map((variation, index) => (
+            <div key={index} className="d-flex align-items-center gap-2">
+              <input
+                type="radio"
+                id={`variation-${index}`}
+                name="productVariation"
+                value={variation.itemQty}
+                checked={selectedVariationId === variation._id} // Bind to state
+                onChange={() => handleVariationChange(variation._id)}
+                style={{ transform: "scale(1.5)", cursor: "pointer" }}
+              />
+              <label htmlFor={`variation-${index}`}>{variation.name}</label>
             </div>
-          </div>
+          ))}
         </div>
       ) : (
-        ""
+        <p>No variations available.</p>
       )}
+
+      {/* Reset Button */}
+      {selectedVariationId && (
+        <div className="mt-3">
+          <button
+            onClick={handleResetSelection}
+            style={{
+              backgroundColor: "#f44336",
+              color: "#fff",
+              border: "none",
+              padding: "0.5rem 1rem",
+              borderRadius: "5px",
+              cursor: "pointer",
+            }}
+          >
+            Reset Selection
+          </button>
+        </div>
+      )}
+    </div>
       {product.affiliateLink ? (
         <div className="pro-details-quality">
           <div className="pro-details-cart btn-hover ml-0">
@@ -186,16 +183,7 @@ ProductDescriptionInfo = ({
                     addToCart({
                       ...product,
                       quantity: quantityCount,
-                      selectedProductColor: selectedProductColor
-                        ? selectedProductColor
-                        : product.selectedProductColor
-                        ? product.selectedProductColor
-                        : null,
-                      selectedProductSize: selectedProductSize
-                        ? selectedProductSize
-                        : product.selectedProductSize
-                        ? product.selectedProductSize
-                        : null,
+                      selectedVariation: selectedVariation || null,
                     })
                   )
                 }
@@ -210,7 +198,13 @@ ProductDescriptionInfo = ({
           </div>
           <div className="pro-details-cart btn-hover">
             {productStock && productStock > 0 ? (
-              <button  onClick={() => navigate(`/checkout/${product._id}/${quantityCount}`)}>Buy Now</button>
+              <button
+                onClick={() =>
+                  navigate(`/checkout/${product._id}/${quantityCount}`)
+                }
+              >
+                Buy Now
+              </button>
             ) : (
               <button disabled>Out of Stock</button>
             )}

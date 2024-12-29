@@ -12,15 +12,11 @@ const cartSlice = createSlice({
       const product = action.payload;
     
       let cartItem;
-      if (product.variation) {
+      if (product.selectedVariation) {
         cartItem = state.cartItems.find(
           (item) =>
             item._id === product._id &&
-            product.selectedProductColor &&
-            product.selectedProductColor === item.selectedProductColor &&
-            product.selectedProductSize &&
-            product.selectedProductSize === item.selectedProductSize
-        );
+            item.selectedVariation._id === product.selectedVariation._id);
       } else {
         cartItem = state.cartItems.find((item) => item._id === product._id);
       }

@@ -7,7 +7,8 @@ import {fetchProducts} from "../../store/slices/product-slice"
 const ProductGrid = ({
   spaceBottomClass,
  
-  limit
+  start, 
+  end
 }) => {
   const { products } = useSelector((state) => state.product);
   const currency = useSelector((state) => state.currency);
@@ -18,7 +19,7 @@ const ProductGrid = ({
   // console.log(products)
   return (
     <Fragment>
-      {products.map(product => {
+      {products.slice(start, end).map(product => {
         return (
           <div className="col-xl-3 col-md-6 col-lg-4 col-sm-6" key={product._id}>
             <ProductGridSingle

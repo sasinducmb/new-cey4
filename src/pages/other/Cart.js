@@ -22,7 +22,7 @@ const Cart = () => {
 
   const currency = useSelector((state) => state.currency);
   const { cartItems } = useSelector((state) => state.cart);
-
+  console.log(cartItems);
   return (
     <Fragment>
       <SEO
@@ -59,17 +59,30 @@ const Cart = () => {
                         </thead>
                         <tbody>
                           {cartItems.map((cartItem, key) => {
-                            const discountedPrice = getDiscountPrice(
-                              cartItem.price.basePrice,
-                              cartItem.discount
-                            );
-                            const finalProductPrice = (
-                              cartItem.price.basePrice * currency.currencyRate
-                            ).toFixed(2);
-                            const finalDiscountedPrice = (
-                              discountedPrice * currency.currencyRate
-                            ).toFixed(2);
-
+                            let discountedPrice = null;
+                            let finalProductPrice = 0;
+                            let finalDiscountedPrice = 0;
+                            if (cartItem.selectedVariation) {
+                              finalProductPrice = (
+                                cartItem.selectedVariation.price.basePrice *
+                                currency.currencyRate
+                              ).toFixed(2);
+                              finalDiscountedPrice = (
+                                cartItem.selectedVariation.price.basePrice *
+                                currency.currencyRate
+                              ).toFixed(2);
+                            } else {
+                              discountedPrice = getDiscountPrice(
+                                cartItem.price.basePrice,
+                                cartItem.discount
+                              );
+                              finalProductPrice = (
+                                cartItem.price.basePrice * currency.currencyRate
+                              ).toFixed(2);
+                              finalDiscountedPrice = (
+                                discountedPrice * currency.currencyRate
+                              ).toFixed(2);
+                            }
                             discountedPrice != null
                               ? (cartTotalPrice +=
                                   finalDiscountedPrice * cartItem.quantity)
@@ -78,7 +91,9 @@ const Cart = () => {
                             return (
                               <tr key={key}>
                                 <td className="product-thumbnail">
-                                <Link to={`${process.env.REACT_APP_MAIN_URL}/product/${cartItem._id}`}>
+                                  <Link
+                                    to={`${process.env.REACT_APP_MAIN_URL}/product/${cartItem._id}`}
+                                  >
                                     <img
                                       className="img-fluid"
                                       src={`${
@@ -101,6 +116,13 @@ const Cart = () => {
                                     }
                                   >
                                     {cartItem.name}
+                                    {cartItem.selectedVariation &&
+                                      cartItem.selectedVariation.name && (
+                                        <span>
+                                          {" "}
+                                          ({cartItem.selectedVariation.name})
+                                        </span>
+                                      )}
                                   </Link>
                                   {cartItem.selectedProductColor &&
                                   cartItem.selectedProductSize ? (
@@ -163,7 +185,6 @@ const Cart = () => {
                                           })
                                         )
                                       }
-                                    
                                     >
                                       +
                                     </button>
