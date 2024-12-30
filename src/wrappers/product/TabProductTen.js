@@ -36,9 +36,9 @@ const TabProductTen = ({
             spaceBottomClass="mb-25"
           />
         </div>
-        {/* <div>
-          <h2>banner</h2>
-        </div> */}
+        <div >
+          <img src="/assets/img/banner/banner-1.jpg" width={'100%'} className="img-fluid" style={{height:'450px'}}/>
+        </div>
         <div className="row">
           <ProductGrid
             // category={category} // Uncomment and define `category` if needed
