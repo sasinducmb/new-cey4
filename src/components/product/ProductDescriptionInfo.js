@@ -52,12 +52,18 @@ const ProductDescriptionInfo = ({
   );
 
   // Update the price based on the selected variation
-;
   return (
     <div className="product-details-content ml-70">
       <h2>{product.name}</h2>
       <div className="product-details-price">
-        {discountedPrice !== null ? (
+        {selectedVariation ? (
+           <Fragment>
+          <div className="mt-1">
+            <p className="text-danger" style={{fontSize:"22px"}}>{currency.currencySymbol + selectedVariation.price.basePrice}</p>
+          </div>
+          </Fragment>
+        ) : // Show main product price
+        discountedPrice !== null ? (
           <Fragment>
             <span>{currency.currencySymbol + finalDiscountedPrice}</span>{" "}
             <span className="old">
@@ -65,7 +71,50 @@ const ProductDescriptionInfo = ({
             </span>
           </Fragment>
         ) : (
-          <span>{currency.currencySymbol + finalProductPrice} </span>
+          <span>{currency.currencySymbol + finalProductPrice}</span>
+        )}
+      </div>
+      <div className="d-flex flex-column">
+        <h5>Product Variation</h5>
+
+        {productVariation && productVariation.length > 0 ? (
+          <div className="d-flex flex-wrap gap-3">
+            {productVariation.map((variation, index) => (
+              <div key={index} className="d-flex align-items-center gap-2">
+                <input
+                  type="radio"
+                  id={`variation-${index}`}
+                  name="productVariation"
+                  value={variation.itemQty}
+                  checked={selectedVariationId === variation._id} // Bind to state
+                  onChange={() => handleVariationChange(variation._id)}
+                  style={{ transform: "scale(1.5)", cursor: "pointer" }}
+                />
+                <label htmlFor={`variation-${index}`}>{variation.name}</label>
+              </div>
+            ))}
+          </div>
+        ) : (
+          <p>No variations available.</p>
+        )}
+
+        {/* Reset Button */}
+        {selectedVariationId && (
+          <div className="mt-2 mb-3">
+            <button
+              onClick={handleResetSelection}
+              style={{
+                backgroundColor: "#f44336",
+                color: "#fff",
+                border: "none",
+                padding: "0.5rem 1rem",
+                borderRadius: "5px",
+                cursor: "pointer",
+              }}
+            >
+              Reset Selection
+            </button>
+          </div>
         )}
       </div>
       {product.rating && product.rating > 0 ? (
@@ -83,56 +132,7 @@ const ProductDescriptionInfo = ({
           dangerouslySetInnerHTML={{ __html: product.shortDescription }}
         ></p>
       </div>
-      <div className="d-flex flex-column">
-      <h5>Product Variation</h5>
-      {selectedVariation && (
-          <div className="mt-3">
-            <h6>Selected Variation Price:</h6>
-            <p>
-              {currency.currencySymbol + selectedVariation.price.basePrice}
-            </p>
-          </div>
-        )}
-      {productVariation && productVariation.length > 0 ? (
-        <div className="d-flex flex-wrap gap-3">
-          {productVariation.map((variation, index) => (
-            <div key={index} className="d-flex align-items-center gap-2">
-              <input
-                type="radio"
-                id={`variation-${index}`}
-                name="productVariation"
-                value={variation.itemQty}
-                checked={selectedVariationId === variation._id} // Bind to state
-                onChange={() => handleVariationChange(variation._id)}
-                style={{ transform: "scale(1.5)", cursor: "pointer" }}
-              />
-              <label htmlFor={`variation-${index}`}>{variation.name}</label>
-            </div>
-          ))}
-        </div>
-      ) : (
-        <p>No variations available.</p>
-      )}
 
-      {/* Reset Button */}
-      {selectedVariationId && (
-        <div className="mt-3">
-          <button
-            onClick={handleResetSelection}
-            style={{
-              backgroundColor: "#f44336",
-              color: "#fff",
-              border: "none",
-              padding: "0.5rem 1rem",
-              borderRadius: "5px",
-              cursor: "pointer",
-            }}
-          >
-            Reset Selection
-          </button>
-        </div>
-      )}
-    </div>
       {product.affiliateLink ? (
         <div className="pro-details-quality">
           <div className="pro-details-cart btn-hover ml-0">

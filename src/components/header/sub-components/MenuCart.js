@@ -15,22 +15,36 @@ const MenuCart = () => {
       {cartItems && cartItems.length > 0 ? (
         <Fragment>
           <ul>
-            {cartItems.map((item) => {
-              const discountedPrice = getDiscountPrice(
-                item.price.basePrice,
-                item.discount
-              );
-              const finalProductPrice = (
-                item.price.basePrice * currency.currencyRate
-              ).toFixed(2);
-              const finalDiscountedPrice = (
-                discountedPrice * currency.currencyRate
-              ).toFixed(2);
-
-              discountedPrice != null
-                ? (cartTotalPrice += finalDiscountedPrice * item.quantity)
-                : (cartTotalPrice += finalProductPrice * item.quantity);
-
+          {cartItems.map((item, key) => {
+                            let discountedPrice = null;
+                            let finalProductPrice = 0;
+                            let finalDiscountedPrice = 0;
+                            if (item.selectedVariation) {
+                              finalProductPrice = (
+                                item.selectedVariation.price.basePrice *
+                                currency.currencyRate
+                              ).toFixed(2);
+                              finalDiscountedPrice = (
+                                item.selectedVariation.price.basePrice *
+                                currency.currencyRate
+                              ).toFixed(2);
+                            } else {
+                              discountedPrice = getDiscountPrice(
+                                item.price.basePrice,
+                                item.discount
+                              );
+                              finalProductPrice = (
+                                item.price.basePrice * currency.currencyRate
+                              ).toFixed(2);
+                              finalDiscountedPrice = (
+                                discountedPrice * currency.currencyRate
+                              ).toFixed(2);
+                            }
+                            discountedPrice != null
+                              ? (cartTotalPrice +=
+                                  finalDiscountedPrice * item.quantity)
+                              : (cartTotalPrice +=
+                                  finalProductPrice * item.quantity);
               return (
                 <li className="single-shopping-cart" key={item.cartItemId}>
                   <div className="shopping-cart-img">
@@ -52,7 +66,14 @@ const MenuCart = () => {
                     <h4>
                       <Link to={process.env.PUBLIC_URL + "/product/" + item.id}>
                         {" "}
-                        {item.name}{" "}
+                        {item.name}
+                                    {item.selectedVariation &&
+                                      item.selectedVariation.name && (
+                                        <span>
+                                          {" "}
+                                          ({item.selectedVariation.name})
+                                        </span>
+                                      )}{" "}
                       </Link>
                     </h4>
                     <h6>Qty: {item.quantity}</h6>

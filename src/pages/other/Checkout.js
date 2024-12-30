@@ -415,18 +415,14 @@ const Checkout = () => {
                           <option value="" disabled>
                             -- Choose an option --
                           </option>
-                          <option value="normal-delivery">
-                          Free Delivery
-                          </option>
+                          <option value="normal-delivery">Free Delivery</option>
                           <option value="one-day-premium">
-                          Premium One Day Service
+                            Premium One Day Service
                           </option>
                           <option value="two-day-premium">
-                          Express Two Days Service
+                            Express Two Days Service
                           </option>
                         </select>
-
-                      
                       </div>
 
                       <div className="your-order-wrap gray-bg-4">
@@ -436,6 +432,7 @@ const Checkout = () => {
                               <li>Product</li>
                             </ul>
                           </div>
+                          {/* id order */}
                           <div className="your-order-middle">
                             <ul>
                               {id && product ? (
@@ -514,16 +511,15 @@ const Checkout = () => {
                                           premiumCost +=
                                             itemQuantity.price.oneDayPremium;
                                           cartTotalPrice +=
-                                            finalProductPrice *
-                                            itemQuantity +
+                                            finalProductPrice * itemQuantity +
                                             product.price.oneDayPremium;
                                         } else {
                                           premiumCost +=
-                                          product.price
+                                            product.price
                                               .oneDayPremiumSecondItem *
                                             itemQuantity;
                                           cartTotalPrice +=
-                                          product.price
+                                            product.price
                                               .oneDayPremiumSecondItem *
                                               itemQuantity +
                                             finalProductPrice * itemQuantity;
@@ -533,17 +529,17 @@ const Checkout = () => {
                                       ) {
                                         if (itemQuantity === 1) {
                                           premiumCost +=
-                                          product.price.twoDayPremium;
+                                            product.price.twoDayPremium;
                                           cartTotalPrice +=
                                             finalProductPrice * itemQuantity +
                                             product.price.twoDayPremium;
                                         } else {
                                           premiumCost +=
-                                          product.price
+                                            product.price
                                               .twoDayPremiumSecondItem *
                                             itemQuantity;
                                           cartTotalPrice +=
-                                          product.price
+                                            product.price
                                               .twoDayPremiumSecondItem *
                                               itemQuantity +
                                             finalProductPrice * itemQuantity;
@@ -581,109 +577,237 @@ const Checkout = () => {
                               ) : (
                                 // Render the cart items if 'id' does not exist
                                 cartItems.map((cartItem, key) => {
-                                  const discountedPrice = getDiscountPrice(
-                                    cartItem.price.basePrice,
-                                    cartItem.discount
-                                  );
-                                  const finalProductPrice = (
-                                    cartItem.price.basePrice *
-                                    currency.currencyRate
-                                  ).toFixed(2);
-                                  const finalDiscountedPrice = (
-                                    discountedPrice * currency.currencyRate
-                                  ).toFixed(2);
+                                  let discountedPrice = null;
+                                  let finalProductPrice = 0;
+                                  let finalDiscountedPrice = 0;
+                                  if (cartItem.selectedVariation) {
+                                    finalProductPrice = (
+                                      cartItem.selectedVariation.price
+                                        .basePrice * currency.currencyRate
+                                    ).toFixed(2);
+                                    finalDiscountedPrice = (
+                                      cartItem.selectedVariation.price
+                                        .basePrice * currency.currencyRate
+                                    ).toFixed(2);
+                                  } else {
+                                    discountedPrice = getDiscountPrice(
+                                      cartItem.price.basePrice,
+                                      cartItem.discount
+                                    );
+                                    finalProductPrice = (
+                                      cartItem.price.basePrice *
+                                      currency.currencyRate
+                                    ).toFixed(2);
+                                    finalDiscountedPrice = (
+                                      discountedPrice * currency.currencyRate
+                                    ).toFixed(2);
+                                  }
+                                  // discountedPrice != null
+                                  //   ? (cartTotalPrice +=
+                                  //       finalDiscountedPrice *
+                                  //       cartItem.quantity)
+                                  //   : (cartTotalPrice +=
+                                  //       finalProductPrice * cartItem.quantity);
 
                                   // Calculate cart total price based on the presence of a discount
                                   if (discountedPrice != null) {
                                     if (selectedOption === "one-day-premium") {
-                                      if (cartItem.quantity === 1) {
-                                        premiumCost +=
-                                          cartItem.price.oneDayPremium;
-                                        cartTotalPrice +=
-                                          finalDiscountedPrice *
-                                            cartItem.quantity +
-                                          cartItem.price.oneDayPremium;
-                                      } else {
-                                        premiumCost +=
-                                          cartItem.price
-                                            .oneDayPremiumSecondItem *
-                                          cartItem.quantity;
-                                        cartTotalPrice +=
-                                          cartItem.price
-                                            .oneDayPremiumSecondItem *
-                                            cartItem.quantity +
-                                          finalDiscountedPrice *
+                                      if (cartItem.selectedVariation) {
+                                        // Use variation-specific premium costs
+                                        if (cartItem.quantity === 1) {
+                                          premiumCost +=
+                                            cartItem.selectedVariation.price
+                                              .oneDayPremium;
+                                          cartTotalPrice +=
+                                            cartItem.selectedVariation.price
+                                              .oneDayPremium +
+                                            finalProductPrice *
+                                              cartItem.quantity;
+                                        } else {
+                                          premiumCost +=
+                                            cartItem.selectedVariation.price
+                                              .oneDayPremiumSecondItem *
                                             cartItem.quantity;
+                                          cartTotalPrice +=
+                                            cartItem.selectedVariation.price
+                                              .oneDayPremiumSecondItem *
+                                              cartItem.quantity +
+                                            finalProductPrice *
+                                              cartItem.quantity;
+                                        }
+                                      } else {
+                                        // Use main product-specific premium costs
+                                        if (cartItem.quantity === 1) {
+                                          premiumCost +=
+                                            cartItem.price.oneDayPremium;
+                                          cartTotalPrice +=
+                                            finalDiscountedPrice *
+                                              cartItem.quantity +
+                                            cartItem.price.oneDayPremium;
+                                        } else {
+                                          premiumCost +=
+                                            cartItem.price
+                                              .oneDayPremiumSecondItem *
+                                            cartItem.quantity;
+                                          cartTotalPrice +=
+                                            cartItem.price
+                                              .oneDayPremiumSecondItem *
+                                              cartItem.quantity +
+                                            finalDiscountedPrice *
+                                              cartItem.quantity;
+                                        }
                                       }
                                     } else if (
                                       selectedOption === "two-day-premium"
                                     ) {
-                                      if (cartItem.quantity === 1) {
-                                        premiumCost +=
-                                          cartItem.price.twoDayPremium;
-                                        cartTotalPrice +=
-                                          finalDiscountedPrice *
-                                            cartItem.quantity +
-                                          cartItem.price.twoDayPremium;
-                                      } else {
-                                        premiumCost +=
-                                          cartItem.price
-                                            .twoDayPremiumSecondItem *
-                                          cartItem.quantity;
-                                        cartTotalPrice +=
-                                          cartItem.price
-                                            .twoDayPremiumSecondItem *
-                                            cartItem.quantity +
-                                          finalDiscountedPrice *
+                                      if (cartItem.selectedVariation) {
+                                        // Use variation-specific two-day premium costs
+                                        if (cartItem.quantity === 1) {
+                                          premiumCost +=
+                                            cartItem.selectedVariation.price
+                                              .twoDayPremium;
+                                          cartTotalPrice +=
+                                            cartItem.selectedVariation.price
+                                              .twoDayPremium +
+                                            finalProductPrice *
+                                              cartItem.quantity;
+                                        } else {
+                                          premiumCost +=
+                                            cartItem.selectedVariation.price
+                                              .twoDayPremiumSecondItem *
                                             cartItem.quantity;
+                                          cartTotalPrice +=
+                                            cartItem.selectedVariation.price
+                                              .twoDayPremiumSecondItem *
+                                              cartItem.quantity +
+                                            finalProductPrice *
+                                              cartItem.quantity;
+                                        }
+                                      } else {
+                                        // Use main product-specific two-day premium costs
+                                        if (cartItem.quantity === 1) {
+                                          premiumCost +=
+                                            cartItem.price.twoDayPremium;
+                                          cartTotalPrice +=
+                                            cartItem.price.twoDayPremium +
+                                            finalDiscountedPrice *
+                                              cartItem.quantity;
+                                        } else {
+                                          premiumCost +=
+                                            cartItem.price
+                                              .twoDayPremiumSecondItem *
+                                            cartItem.quantity;
+                                          cartTotalPrice +=
+                                            cartItem.price
+                                              .twoDayPremiumSecondItem *
+                                              cartItem.quantity +
+                                            finalDiscountedPrice *
+                                              cartItem.quantity;
+                                        }
                                       }
                                     } else {
+                                      // Default case: add product price to total
                                       cartTotalPrice +=
                                         finalDiscountedPrice *
                                         cartItem.quantity;
                                     }
                                   } else {
                                     if (selectedOption === "one-day-premium") {
-                                      if (cartItem.quantity === 1) {
-                                        premiumCost +=
-                                          cartItem.price.oneDayPremium;
-                                        cartTotalPrice +=
-                                          finalProductPrice *
-                                            cartItem.quantity +
-                                          cartItem.price.oneDayPremium;
+                                      if (cartItem.selectedVariation) {
+                                        // Use variation-specific one-day premium costs
+                                        if (cartItem.quantity === 1) {
+                                          premiumCost +=
+                                            cartItem.selectedVariation.price
+                                              .oneDayPremium;
+                                          cartTotalPrice +=
+                                            finalProductPrice *
+                                              cartItem.quantity +
+                                            cartItem.selectedVariation.price
+                                              .oneDayPremium;
+                                        } else {
+                                          premiumCost +=
+                                            cartItem.selectedVariation.price
+                                              .oneDayPremiumSecondItem *
+                                            cartItem.quantity;
+                                          cartTotalPrice +=
+                                            finalProductPrice *
+                                              cartItem.quantity +
+                                            cartItem.selectedVariation.price
+                                              .oneDayPremiumSecondItem *
+                                              cartItem.quantity;
+                                        }
                                       } else {
-                                        premiumCost +=
-                                          cartItem.price
-                                            .oneDayPremiumSecondItem *
-                                          cartItem.quantity;
-                                        cartTotalPrice +=
-                                          cartItem.price
-                                            .oneDayPremiumSecondItem *
-                                            cartItem.quantity +
-                                          finalProductPrice * cartItem.quantity;
+                                        // Use main product-specific one-day premium costs
+                                        if (cartItem.quantity === 1) {
+                                          premiumCost +=
+                                            cartItem.price.oneDayPremium;
+                                          cartTotalPrice +=
+                                            finalProductPrice *
+                                              cartItem.quantity +
+                                            cartItem.price.oneDayPremium;
+                                        } else {
+                                          premiumCost +=
+                                            cartItem.price
+                                              .oneDayPremiumSecondItem *
+                                            cartItem.quantity;
+                                          cartTotalPrice +=
+                                            finalProductPrice *
+                                              cartItem.quantity +
+                                            cartItem.price
+                                              .oneDayPremiumSecondItem *
+                                              cartItem.quantity;
+                                        }
                                       }
                                     } else if (
                                       selectedOption === "two-day-premium"
                                     ) {
-                                      if (cartItem.quantity === 1) {
-                                        premiumCost +=
-                                          cartItem.price.twoDayPremium;
-                                        cartTotalPrice +=
-                                          finalProductPrice *
-                                            cartItem.quantity +
-                                          cartItem.price.twoDayPremium;
+                                      if (cartItem.selectedVariation) {
+                                        // Use variation-specific two-day premium costs
+                                        if (cartItem.quantity === 1) {
+                                          premiumCost +=
+                                            cartItem.selectedVariation.price
+                                              .twoDayPremium;
+                                          cartTotalPrice +=
+                                            finalProductPrice *
+                                              cartItem.quantity +
+                                            cartItem.selectedVariation.price
+                                              .twoDayPremium;
+                                        } else {
+                                          premiumCost +=
+                                            cartItem.selectedVariation.price
+                                              .twoDayPremiumSecondItem *
+                                            cartItem.quantity;
+                                          cartTotalPrice +=
+                                            finalProductPrice *
+                                              cartItem.quantity +
+                                            cartItem.selectedVariation.price
+                                              .twoDayPremiumSecondItem *
+                                              cartItem.quantity;
+                                        }
                                       } else {
-                                        premiumCost +=
-                                          cartItem.price
-                                            .twoDayPremiumSecondItem *
-                                          cartItem.quantity;
-                                        cartTotalPrice +=
-                                          cartItem.price
-                                            .twoDayPremiumSecondItem *
-                                            cartItem.quantity +
-                                          finalProductPrice * cartItem.quantity;
+                                        // Use main product-specific two-day premium costs
+                                        if (cartItem.quantity === 1) {
+                                          premiumCost +=
+                                            cartItem.price.twoDayPremium;
+                                          cartTotalPrice +=
+                                            finalProductPrice *
+                                              cartItem.quantity +
+                                            cartItem.price.twoDayPremium;
+                                        } else {
+                                          premiumCost +=
+                                            cartItem.price
+                                              .twoDayPremiumSecondItem *
+                                            cartItem.quantity;
+                                          cartTotalPrice +=
+                                            finalProductPrice *
+                                              cartItem.quantity +
+                                            cartItem.price
+                                              .twoDayPremiumSecondItem *
+                                              cartItem.quantity;
+                                        }
                                       }
                                     } else {
+                                      // Default case: Add product price to total
                                       cartTotalPrice +=
                                         finalProductPrice * cartItem.quantity;
                                     }
@@ -692,7 +816,16 @@ const Checkout = () => {
                                   return (
                                     <li key={key}>
                                       <span className="order-middle-left">
-                                        {cartItem.name} X {cartItem.quantity}
+                                        {cartItem.name}
+                                        {cartItem.selectedVariation &&
+                                          cartItem.selectedVariation.name && (
+                                            <span>
+                                              {" "}
+                                              ({cartItem.selectedVariation.name}
+                                              )
+                                            </span>
+                                          )}{" "}
+                                        X {cartItem.quantity}
                                       </span>{" "}
                                       <span className="order-price">
                                         {discountedPrice !== null
