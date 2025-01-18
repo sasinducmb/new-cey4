@@ -1,6 +1,7 @@
 import { Suspense, lazy } from "react";
 import ScrollToTop from "./helpers/scroll-top";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import OrderStatus from "./pages/other/OrderStatus";
 
 // home pages
 const HomeFashion = lazy(() => import("./pages/home/HomeHandmade"));
@@ -404,6 +405,7 @@ const App = () => {
               path={process.env.PUBLIC_URL + "/order-confirm"}
               element={<OrderConfirm />}
             />
+            <Route path={process.env.PUBLIC_URL + "/order-status"} element={<OrderStatus/>} />
 
             <Route path="*" element={<NotFound />} />
           </Routes>

@@ -3981,3 +3981,23 @@ input[type="radio"] {
   margin-right: 10px;  /* Optional: Adjust space between radio and label */
 }
 
+.order-status {
+  background-color: green; /* Green background */
+  color: white; /* White text */
+  padding: 10px 20px; /* Button padding */
+  font-size: 16px; /* Font size */
+  border: none; /* Remove border */
+  border-radius: 5px; /* Rounded corners */
+  cursor: pointer; /* Pointer cursor on hover */
+  transition: background-color 0.3s ease; /* Smooth hover effect */
+}
+
+.order-status:hover {
+  background-color: #45a049; /* Darker green on hover */
+}
+
+.order-status-section {
+  height: 100vh; /* Full viewport height */
+  min-height: 600px; /* Ensure a minimum height */
+  padding: 20px; /* Optional padding */
+}

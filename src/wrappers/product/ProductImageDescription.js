@@ -12,7 +12,7 @@ const ProductImageDescription = ({
   spaceBottomClass,
   galleryType,
   product,
-  productVariation
+  productVariation,
 }) => {
   const currency = useSelector((state) => state.currency);
   const { cartItems } = useSelector((state) => state.cart);
@@ -145,7 +145,11 @@ const ProductImageDescription = ({
                 <strong>Shape:</strong> {product.shape}
               </li>
               <li>
-                <strong>Indoor/Outdoor:</strong> {product.indoorOutdoor}
+                <strong>Indoor/Outdoor:</strong>{" "}
+                {product.indoorOutdoor
+                  ? product.indoorOutdoor.charAt(0).toUpperCase() +
+                    product.indoorOutdoor.slice(1)
+                  : ""}
               </li>
               <li>
                 <strong>Original/Reproduction:</strong>{" "}
