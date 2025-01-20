@@ -30,21 +30,29 @@ const TabProductTen = ({
           <ProductGrid
             // category={category} // Uncomment and define `category` if needed
             // type="new"          // Uncomment if a specific type is required
-            
+
             start={0}
-            end={8}
+            end={16}
             spaceBottomClass="mb-25"
           />
         </div>
-        <div >
-          <img src="/assets/img/banner/banner-1.jpg" width={'100%'} className="img-fluid" style={{height:'450px'}}/>
+        <div>
+          <a href="/contact">
+            <img
+              src="/assets/img/banner/contact.jpg"
+              alt="Contact Banner"
+              width="100%"
+              className="img-fluid"
+              style={{ height: "450px" }}
+            />
+          </a>
         </div>
         <div className="row">
           <ProductGrid
             // category={category} // Uncomment and define `category` if needed
             // type="new"          // Uncomment if a specific type is required
-            start={9}
-            end={17}
+            start={17}
+            end={33}
             spaceBottomClass="mb-25"
           />
         </div>
