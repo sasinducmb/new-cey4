@@ -36,7 +36,7 @@ const TabProductTen = ({
             spaceBottomClass="mb-25"
           />
         </div>
-        <div>
+        {/* <div>
           <a href="/contact">
             <img
               src="/assets/img/banner/contact.jpg"
@@ -46,7 +46,7 @@ const TabProductTen = ({
               style={{ height: "450px" }}
             />
           </a>
-        </div>
+        </div> */}
         <div className="row">
           <ProductGrid
             // category={category} // Uncomment and define `category` if needed

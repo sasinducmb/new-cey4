@@ -183,18 +183,18 @@ const ProductImageDescription = ({
                     )}
                     {product.itemRelatedParts.width && (
                       <>
-                        Width: {product.itemRelatedParts.width} cm
+                        Width: {product.itemRelatedParts.width} cm (Approximately)
                         <br />
                       </>
                     )}
                     {product.itemRelatedParts.height && (
                       <>
-                        Height: {product.itemRelatedParts.height} cm
+                        Height: {product.itemRelatedParts.height} cm (Approximately)
                         <br />
                       </>
                     )}
                     {product.itemRelatedParts.length && (
-                      <>Length: {product.itemRelatedParts.length} cm</>
+                      <>Length: {product.itemRelatedParts.length} cm (Approximately)</>
                     )}
                   </div>
                 ) : (
