@@ -17,6 +17,7 @@ const ShopGridStandard = () => {
   const [sortValue, setSortValue] = useState("");
   const [filterSortType, setFilterSortType] = useState("");
   const [filterSortValue, setFilterSortValue] = useState("");
+  const [searchTerm, setSearchTerm] = useState("");
   const [offset, setOffset] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
   const [currentData, setCurrentData] = useState([]);
@@ -46,14 +47,47 @@ const ShopGridStandard = () => {
   }, [dispatch]);
 
   useEffect(() => {
-    // You can apply sorting and filtering logic here
-    // let sortedProducts = getSortedProducts(products, sortType, sortValue);
-    // const filterSortedProducts = getSortedProducts(sortedProducts, filterSortType, filterSortValue);
-    // sortedProducts = filterSortedProducts;
-    setSortedProducts(products);
-    setCurrentData(sortedProducts.slice(offset, offset + pageLimit));
-  }, [offset, products, sortType, sortValue, filterSortType, filterSortValue]);
+    // Filter products based on the search term
+    const filteredProducts = products.filter((product) =>
+      product.name.toLowerCase().includes(searchTerm.toLowerCase())
+    );
 
+    // Apply category filtering
+    const categoryFilteredProducts =
+      filterSortType === "category" && filterSortValue
+        ? filteredProducts.filter(
+            (product) => product.category === filterSortValue
+          )
+        : filteredProducts;
+
+    // Apply sorting logic
+    let sortedProducts = getSortedProducts(
+      categoryFilteredProducts,
+      sortType,
+      sortValue
+    );
+    const filterSortedProducts = getSortedProducts(
+      sortedProducts,
+      filterSortType,
+      filterSortValue
+    );
+    sortedProducts = filterSortedProducts;
+
+    setSortedProducts(sortedProducts);
+    setCurrentData(sortedProducts.slice(offset, offset + pageLimit));
+  }, [
+    offset,
+    products,
+    sortType,
+    sortValue,
+    filterSortType,
+    filterSortValue,
+    searchTerm,
+  ]);
+
+  const handleSearchChange = (e) => {
+    setSearchTerm(e.target.value);
+  };
   return (
     <Fragment>
       <SEO
@@ -75,7 +109,27 @@ const ShopGridStandard = () => {
             <div className="row">
               <div className="col-lg-3 order-2 order-lg-1">
                 {/* shop sidebar */}
-                <ShopSidebar products={products} getSortParams={getSortParams} sideSpaceClass="mr-30"/>
+                <div className="sidebar-widget">
+                  <h4 className="pro-sidebar-title">Search </h4>
+                  <div className="pro-sidebar-search mb-50 mt-25">
+                    <form className="pro-sidebar-search-form" action="#">
+                      <input
+                        type="text"
+                        placeholder="Search here..."
+                        value={searchTerm}
+                        onChange={handleSearchChange} // Handle input change
+                      />
+                      <button>
+                        <i className="pe-7s-search" />
+                      </button>
+                    </form>
+                  </div>
+                  <ShopSidebar
+                    products={products}
+                    getSortParams={getSortParams}
+                    sideSpaceClass="mr-30"
+                  />
+                </div>
               </div>
               <div className="col-lg-9 order-1 order-lg-2">
                 {/* shop topbar default */}
