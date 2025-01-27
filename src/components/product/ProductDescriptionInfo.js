@@ -75,7 +75,7 @@ const ProductDescriptionInfo = ({
         )}
       </div>
       <div className="d-flex flex-column">
-        <h5>Product Variation</h5>
+        <h5>Product Variation(Item quantity)</h5>
 
         {productVariation && productVariation.length > 0 ? (
           <div className="d-flex flex-wrap gap-3">
