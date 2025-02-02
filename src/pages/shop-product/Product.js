@@ -23,7 +23,7 @@ const Product = () => {
     return <div>Product not found</div>;
   }
   
-
+console.log(filteredData);
   return (
     <Fragment>
       <SEO

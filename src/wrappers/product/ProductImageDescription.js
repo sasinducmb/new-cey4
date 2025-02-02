@@ -33,8 +33,13 @@ const ProductImageDescription = ({
 
   // State to handle switching between Full Description and Specification
   const [activeSection, setActiveSection] = useState(null);
-
+  const [selectedVariation, setSelectedVariation] = useState(null); // Default to the first variation
   // Updated renderContent function with specifications and features
+
+  const handleVariationClick = (variation) => {
+    setSelectedVariation(variation);
+  };
+// console.log(selectedVariation);
   const renderContent = () => {
     if (activeSection === "description") {
       return (
@@ -123,6 +128,13 @@ const ProductImageDescription = ({
               <li>
                 <strong>Brand:</strong> EGI
               </li>
+              {
+                product.capacity && product.capacityMeasure && product.capacityMeasure !== "N/A" &&
+                <li>
+                  <strong>Capacity:</strong> {product.capacity} {product.capacityMeasure}
+                </li>
+              }
+              
               <li>
                 <strong>Condition:</strong> Brand New
               </li>
@@ -247,7 +259,7 @@ const ProductImageDescription = ({
             ) : galleryType === "fixedImage" ? (
               <ProductImageFixed product={product} />
             ) : (
-              <ProductImageGallery product={product} />
+              <ProductImageGallery product={product} variationImage={selectedVariation}/>
             )}
           </div>
           <div className="col-lg-6 col-md-6">
@@ -261,6 +273,7 @@ const ProductImageDescription = ({
               wishlistItem={wishlistItem}
               compareItem={compareItem}
               productVariation={productVariation}
+              onVariationClick={handleVariationClick} 
             />
           </div>
         </div>

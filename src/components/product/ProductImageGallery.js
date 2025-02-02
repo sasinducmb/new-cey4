@@ -7,24 +7,35 @@ import Zoom from "yet-another-react-lightbox/plugins/zoom";
 import Fullscreen from "yet-another-react-lightbox/plugins/fullscreen";
 import Swiper, { SwiperSlide } from "../../components/swiper";
 
-const ProductImageGallery = ({ product }) => {
+const ProductImageGallery = ({ product, variationImage }) => {
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
   const [index, setIndex] = useState(-1);
-
-  const slides = [
-    {
-      src: `${process.env.REACT_APP_BACKEND_URL}/${product.mainImage.replace(
-        /\\/g,
-        "/"
-      )}`,
-      key: "mainImage",
-    },
-    ...product.additionalImages.map((img, i) => ({
-      src: `${process.env.REACT_APP_BACKEND_URL}/${img.replace(/\\/g, "/")}`,
-      key: i,
-    })),
-  ];
-
+  console.log(variationImage);
+  const slides = variationImage
+    ? [
+        {
+          src: `${process.env.REACT_APP_BACKEND_URL}/${variationImage.replace(
+            /\\/g,
+            "/"
+          )}`,
+          key: "variationImage",
+        },
+      ]
+    : [
+        {
+          src: `${
+            process.env.REACT_APP_BACKEND_URL
+          }/${product.mainImage.replace(/\\/g, "/")}`,
+          key: "mainImage",
+        },
+        ...product.additionalImages.map((img, i) => ({
+          src: `${process.env.REACT_APP_BACKEND_URL}/${img.replace(
+            /\\/g,
+            "/"
+          )}`,
+          key: `additional-${i}`,
+        })),
+      ];
   // Swiper slider settings
   const gallerySwiperParams = {
     spaceBetween: 10,
@@ -92,25 +103,25 @@ const ProductImageGallery = ({ product }) => {
           </Swiper>
         ) : null}
       </div>
-      <div className="product-small-image-wrapper mt-15">
-        {slides.length > 0 ? (
-          <Swiper options={thumbnailSwiperParams}>
-            {slides.map((slide, key) => (
-              <SwiperSlide key={key}>
-                <div className="single-image">
-                  <img
-                    src={slide.src}
-                    className="img-fluid"
-                    alt={product.name}
-                  />
-                </div>
-              </SwiperSlide>
-            ))}
-          </Swiper>
-        ) : null}
-      </div>
-
-      <div></div>
+      {!variationImage && (
+        <div className="product-small-image-wrapper mt-15">
+          {slides.length > 0 ? (
+            <Swiper options={thumbnailSwiperParams}>
+              {slides.map((slide, key) => (
+                <SwiperSlide key={key}>
+                  <div className="single-image">
+                    <img
+                      src={slide.src}
+                      className="img-fluid"
+                      alt={product.name}
+                    />
+                  </div>
+                </SwiperSlide>
+              ))}
+            </Swiper>
+          ) : null}
+        </div>
+      )}
     </Fragment>
   );
 };

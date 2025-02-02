@@ -54,109 +54,183 @@ function OrderStatus() {
                 </div>
               </form>
             </div>
-
-            {/* Order status details */}
-            {isLoading && <div>Loading...</div>}
-            {isError && (
-              <div className="text-danger">
-                Error: {error?.data?.message || "Unable to fetch order data."}
-              </div>
-            )}
-            {!isLoading && !isError && order && (
-              <Card className="mb-4 shadow rounded-lg">
-                <Card.Header className="bg-success text-center">
-                  <h5 className="text-white ">Order Summary</h5>
-                </Card.Header>
-                <Card.Body>
-                  {/* Status and Tracking */}
-                  <div className="mb-4">
-                    <Row className="text-center">
-                      <Col>
-                        <Badge bg="success" className="p-2 w-100">
-                          <strong>Status:</strong> {order.status}
-                        </Badge>
-                      </Col>
-                      <Col>
-                        <Badge bg="info" className="p-2 w-100">
-                          <strong>Shipping:</strong> {order.shippingMethod}
-                        </Badge>
-                      </Col>
-                      <Col>
-                        {order.status !== "Delivered" &&
-                          order.status !== "Processing" && (
-                            <Badge
-                              bg="warning"
-                              text="dark"
-                              className="p-2 w-100"
-                            >
-                              <strong>Track ID:</strong> {order.trackId}
-                            </Badge>
-                          )}
-                      </Col>
-                    </Row>
-                  </div>
-
-                  {/* Order ID */}
-                  <div className="mb-4 text-center">
-                    <h6 className="text-uppercase text-primary">Order ID:</h6>
-                    <h5 className="text-dark">{order._id}</h5>
-                  </div>
-
-                  {/* Billing Information */}
-                  <div className="mb-4">
-                    <h6 className="text-uppercase text-muted">
-                      Billing Information
-                    </h6>
-                    <hr />
-                    <p className="mb-1">
-                      <strong>Name:</strong> {order.billingInfo?.firstName}{" "}
-                      {order.billingInfo?.lastName}
-                    </p>
-                    <p className="mb-1">
-                      <strong>Address:</strong>{" "}
-                      {order.billingInfo?.streetAddress}
-                    </p>
-                    <p className="mb-1">
-                      {order.billingInfo?.city}, {order.billingInfo?.state}{" "}
-                      {order.billingInfo?.postalCode}
-                    </p>
-                    <p className="mb-1">
-                      <strong>Phone:</strong> {order.billingInfo?.phone}
-                    </p>
-                    <p>
-                      <strong>Email:</strong> {order.billingInfo?.email}
-                    </p>
-                  </div>
-
-                  {/* Order Items */}
-                  <div>
-                    <h6 className="text-uppercase text-muted">Order Items</h6>
-                    <hr />
-                    <ListGroup className="border-0">
-                      {order.items?.map((item) => (
-                        <ListGroup.Item
-                          key={item._id}
-                          className="d-flex justify-content-between align-items-center border-0 px-0"
-                        >
-                          <div>
-                            <strong>{item.product?.name}</strong>
-                            <br />
-                            <small>Quantity: {item.quantity}</small>
-                          </div>
-                          <Badge pill bg="primary" className="p-2">
-                            {item.totalPrice?.toFixed(2)}
-                          </Badge>
-                        </ListGroup.Item>
-                      ))}
-                    </ListGroup>
-                  </div>
-                </Card.Body>
-                <Card.Footer className="bg-light text-center">
-                  <strong>Total:</strong>£ {order.overallTotal?.toFixed(2)}
-                </Card.Footer>
-              </Card>
-            )}
           </div>
+          {isLoading && <div>Loading...</div>}
+          {isError && (
+            <div className="text-danger">
+              Error: {error?.data?.message || "Unable to fetch order data."}
+            </div>
+          )}
+
+          {!isLoading && !isError && order && (
+            <div className="container py-5">
+              <div
+                className="card shadow-sm"
+                style={{ maxWidth: "680px", margin: "auto" }}
+              >
+                <div className="card-header bg-success text-white">
+                  <h5 className="mb-0 text-center">Order Summary</h5>
+                </div>
+                <div className="card-body">
+                  <div className="progress-tracker">
+                    <div className="progress-line"></div>
+                    <div className="progress-line-active"></div>
+
+                    <div
+                      className={`progress-step ${
+                        order.status === "confirmed" ||
+                        order.status === "processing" ||
+                        order.status === "Dispatch" ||
+                        order.status === "Delivered"
+                          ? "active"
+                          : "pending"
+                      }`}
+                    >
+                      <i
+                        className={
+                          order.status === "confirmed"
+                            ? "pe-7s-check mx-1"
+                            : "pe-7s-check mx-1"
+                        }
+                      ></i>
+                      <small>Order confirmed</small>
+                    </div>
+                    <div
+                      className={`progress-step ${
+                        order.status === "processing" ||
+                        order.status === "Dispatch" ||
+                        order.status === "Delivered"
+                          ? "active"
+                          : "pending"
+                      }`}
+                    >
+                      <i
+                        className={
+                          order.status === "processing"
+                            ? "pe-7s-hourglass mx-1"
+                            : order.status === "confirmed"
+                            ? "pe-7s-hourglass mx-1"
+                            : order.status === "Dispatch"
+                            ? "pe-7s-check mx-1"
+                            : "pe-7s-check mx-1" // Default icon for "Delivered" or any other status
+                        }
+                      ></i>
+                      <small>Processing</small>
+                    </div>
+                    <div
+                      className={`progress-step ${
+                        order.status === "Dispatch" ||
+                        order.status === "Delivered"
+                          ? "active"
+                          : "pending"
+                      }`}
+                    >
+                      <i
+                        className={
+                          order.status === "Dispatch"
+                            ? "pe-7s-car mx-1"
+                            : order.status === "confirmed"
+                            ? "pe-7s-car mx-1"
+                            : order.status === "processing"
+                            ? "pe-7s-car mx-1"
+                            : "pe-7s-check mx-1" // Default icon for "Delivered" or any other status
+                        }
+                      />
+                      <small>Dispatch</small>
+                    </div>
+                    <div
+                      className={`progress-step ${
+                        order.status === "Delivered" ? "active" : "pending"
+                      }`}
+                    >
+                      <i
+                        className={
+                          order.status === "Delivered"
+                            ? "pe-7s-check mx-1"
+                            : "pe-7s-gift mx-1"
+                        }
+                      />
+                      <small>Delivered</small>
+                    </div>
+                  </div>
+                  <div className="order-info">
+                    <h6 className="text-uppercase mb-3">Billing Information</h6>
+                    <div className="row">
+                      <div className="col-md-6">
+                        <p>
+                          <span className="label">Name:</span>{" "}
+                          {order.billingInfo?.firstName}{" "}
+                          {order.billingInfo?.lastName}
+                        </p>
+                        <p>
+                          <span className="label">Address:</span>{" "}
+                          {order.billingInfo?.streetAddress}
+                          <br />
+                          {order.billingInfo?.city}, {order.billingInfo?.state}{" "}
+                          {order.billingInfo?.postalCode}
+                        </p>
+                        <p>
+                          <span className="label">Phone:</span>{" "}
+                          {order.billingInfo?.phone}
+                        </p>
+                        <p>
+                          <span className="label">Email:</span>{" "}
+                          {order.billingInfo?.email}
+                        </p>
+                      </div>
+                      <div className="col-md-6">
+                        <p>
+                          <span className="label">ORDER ID:</span>
+                          <br />
+                          {order._id}
+                        </p>
+                        {
+                          order.status ==="Dispatch" &&(
+
+                        <p>
+                          <span className="label">SHIPPING:</span>
+                          <br />
+                          {order.shippingMethod}
+                        </p>
+                          )
+
+                        }
+                        {order.status === "Dispatch" && order.trackId && (
+                          <p>
+                            <span className="label"><b>TRACKING NUMBER:</b></span>
+                            <br />
+                            <b>{order.trackId}</b>
+                          </p>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="order-items">
+                    <h6 className="text-uppercase mb-3">Order Items</h6>
+                    {order.items?.map((item) => (
+                      <div
+                        key={item._id}
+                        className="d-flex justify-content-between align-items-center"
+                      >
+                        <div>
+                          <p className="mb-0">{item.product?.name}</p>
+                          <small className="text-muted">
+                            Quantity: {item.quantity}
+                          </small>
+                        </div>
+                        <div>
+                          <p className="mb-0 fw-bold">
+                            £ {order.overallTotal?.toFixed(2)}
+                          </p>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
         </Tab.Container>
       </LayoutOne>
     </Fragment>

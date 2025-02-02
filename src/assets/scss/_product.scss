@@ -3987,17 +3987,184 @@ input[type="radio"] {
   padding: 10px 20px; /* Button padding */
   font-size: 16px; /* Font size */
   border: none; /* Remove border */
-  border-radius: 5px; /* Rounded corners */
+  border-radius: 15px; /* Rounded corners */
   cursor: pointer; /* Pointer cursor on hover */
   transition: background-color 0.3s ease; /* Smooth hover effect */
 }
 
-.order-status:hover {
-  background-color: #45a049; /* Darker green on hover */
+// .order-status:hover {
+//   background-color: #45a049; /* Darker green on hover */
+// }
+
+// // .order-status-section {
+// //   height: 100vh; /* Full viewport height */
+// //   min-height: 600px; /* Ensure a minimum height */
+// //   padding: 20px; /* Optional padding */
+// // }
+
+// .order-status {
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+//   margin-bottom: 30px;
+// }
+
+// .status-item {
+//   width: 250px;
+//   height: 60px;
+//   border-radius: 35px;
+//   background-color: #f0f0f0;
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+//   margin: 0 10px;
+//   cursor: pointer;
+//   transition: background-color 0.3s ease;
+// }
+
+// .status-item.active {
+//   background-color: #4CAF50; /* Green */
+//   color: white;
+// }
+
+// .status-item i {
+//   font-size: 30px;
+// }
+
+// .order-info {
+//   display: flex;
+//   justify-content: space-between;
+//   margin-bottom: 30px;
+// }
+
+// .info-item {
+//   width: 45%;
+// }
+
+// .info-item h5 {
+//   margin-bottom: 10px;
+// }
+
+// .info-item ul {
+//   list-style: none;
+//   padding: 0;
+// }
+
+// .info-item li {
+//   margin-bottom: 5px;
+// }
+
+// .order-items {
+//   margin-bottom: 30px;
+// }
+
+// .order-items h5 {
+//   margin-bottom: 10px;
+// }
+
+// .order-items table {
+//   width: 100%;
+//   border-collapse: collapse;
+// }
+
+// .order-items th,
+// .order-items td {
+//   padding: 10px;
+//   text-align: left;
+//   border-bottom: 1px solid #ddd;
+// }
+
+// .order-items th {
+//   background-color: #f0f0f0;
+// }
+
+.progress-tracker {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 20px 0;
+  position: relative;
+}
+.card-header h5{
+  font-size: 20px;
+  font-weight: 600;
+  color: white;
+}
+.progress-step {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  z-index: 1;
+  background: white;
+  padding: 5px 15px;
+  border-radius: 20px;
+  width: 200px;
+  height: 50px;
+  margin: 3px;
 }
 
-// .order-status-section {
-//   height: 100vh; /* Full viewport height */
-//   min-height: 600px; /* Ensure a minimum height */
-//   padding: 20px; /* Optional padding */
-// }
+.progress-step.active {
+  background: linear-gradient(135deg, rgb(142, 190, 0), rgb(205, 232, 0));
+  border: 1px solid #28a745;
+}
+
+.progress-step.pending {
+  background: #f8f9fa;
+  border: 1px solid #6c757d;
+}
+.step-icon {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  color: white;
+}
+.progress-step i  {
+  font-size: 30px;
+
+}
+.progress-step small{
+  font-size: 16px;
+  font-family: $poppins;
+}
+.active .step-icon {
+  background: #28a745;
+}
+
+.pending .step-icon {
+  background: #6c757d;
+}
+
+.progress-line {
+  position: absolute;
+  height: 2px;
+  background: #e9ecef;
+  width: 100%;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 0;
+}
+
+.progress-line-active {
+  position: absolute;
+  height: 2px;
+  background: #28a745;
+  width: 25%;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 0;
+}
+
+.order-info {
+  border-bottom: 1px solid #e9ecef;
+  padding-bottom: 15px;
+  margin-bottom: 15px;
+}
+
+.label {
+  color: #6c757d;
+  font-size: 0.9rem;
+}

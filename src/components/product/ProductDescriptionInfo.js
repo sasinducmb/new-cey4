@@ -18,6 +18,7 @@ const ProductDescriptionInfo = ({
   wishlistItem,
   compareItem,
   productVariation,
+  onVariationClick,
 }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -46,7 +47,7 @@ const ProductDescriptionInfo = ({
     selectedProductColor,
     selectedProductSize
   );
-  console.log(productVariation);
+  // console.log(productVariation);
   const selectedVariation = productVariation?.find(
     (variation) => variation._id === selectedVariationId
   );
@@ -57,10 +58,12 @@ const ProductDescriptionInfo = ({
       <h2>{product.name}</h2>
       <div className="product-details-price">
         {selectedVariation ? (
-           <Fragment>
-          <div className="mt-1">
-            <p className="text-danger" style={{fontSize:"22px"}}>{currency.currencySymbol + selectedVariation.price.basePrice}</p>
-          </div>
+          <Fragment>
+            <div className="mt-1">
+              <p className="text-danger" style={{ fontSize: "22px" }}>
+                {currency.currencySymbol + selectedVariation.price.basePrice}
+              </p>
+            </div>
           </Fragment>
         ) : // Show main product price
         discountedPrice !== null ? (
@@ -75,8 +78,9 @@ const ProductDescriptionInfo = ({
         )}
       </div>
       <div className="d-flex flex-column">
-        <h5>Product Variation(Item quantity)</h5>
-
+        {productVariation && productVariation.length > 0 && (
+          <h5>Product Variation(Item quantity)</h5>
+        )}
         {productVariation && productVariation.length > 0 ? (
           <div className="d-flex flex-wrap gap-3">
             {productVariation.map((variation, index) => (
@@ -88,6 +92,7 @@ const ProductDescriptionInfo = ({
                   value={variation.itemQty}
                   checked={selectedVariationId === variation._id} // Bind to state
                   onChange={() => handleVariationChange(variation._id)}
+                  onClick={() => onVariationClick(variation.mainImage)}
                   style={{ transform: "scale(1.5)", cursor: "pointer" }}
                 />
                 <label htmlFor={`variation-${index}`}>{variation.name}</label>
@@ -102,7 +107,10 @@ const ProductDescriptionInfo = ({
         {selectedVariationId && (
           <div className="mt-2 mb-3">
             <button
-              onClick={handleResetSelection}
+              onClick={() => {
+                handleResetSelection();
+                onVariationClick(null);
+              }}
               style={{
                 backgroundColor: "#f44336",
                 color: "#fff",
