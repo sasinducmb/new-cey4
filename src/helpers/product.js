@@ -75,12 +75,23 @@ export const getSortedProducts = (products, sortType, sortValue) => {
         return categories.includes(sortValue);
       });
     }
-    if (sortType === "tag") {
+    if (sortType === "material") {
       return products.filter(product => {
-        const tags = Array.isArray(product.tag) ? product.tag : [product.tag];
-        return tags.includes(sortValue);
+        if (!product.material) return false; // Skip products with no material
+    
+        // If "All" is selected, return all products
+        if (sortValue.toLowerCase() === "all") {
+          return true;
+        }
+    
+        // Convert to lowercase for case-insensitive matching
+        const materialString = product.material.toLowerCase();
+        const selectedMaterial = sortValue.toLowerCase();
+    
+        return materialString.includes(selectedMaterial);
       });
     }
+    
     if (sortType === "color") {
       return products.filter(product =>
         product.variation &&

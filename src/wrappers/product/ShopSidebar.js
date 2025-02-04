@@ -34,7 +34,7 @@ const ShopSidebar = ({ products, getSortParams, sideSpaceClass }) => {
         categories={uniqueCategories}
         getSortParams={getSortParams}
       />
-      <div className="shop-side-banner"></div>
+      {/* <div className="shop-side-banner"></div> */}
       {/* filter by color */}
       {/* <ShopColor/> */}
 

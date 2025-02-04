@@ -71,6 +71,7 @@ const ShopGridStandard = () => {
       filterSortType,
       filterSortValue
     );
+
     sortedProducts = filterSortedProducts;
 
     setSortedProducts(sortedProducts);
@@ -124,6 +125,7 @@ const ShopGridStandard = () => {
                       </button>
                     </form>
                   </div>
+                  
                   <ShopSidebar
                     products={products}
                     getSortParams={getSortParams}
