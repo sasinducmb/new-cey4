@@ -14,7 +14,7 @@ const Product = () => {
   const { products } = useSelector((state) => state.product);
   const product = products.find(product => product._id === id);
   const { data, isLoading } = useGetVariationQuery();
-  console.log(data);
+  // console.log(data);
  const filteredData = Array.isArray(data)
     ? data.filter(item => item.productId?._id === id)
     : [];
@@ -23,7 +23,7 @@ const Product = () => {
     return <div>Product not found</div>;
   }
   
-console.log(filteredData);
+// console.log(filteredData);
   return (
     <Fragment>
       <SEO

@@ -39,7 +39,7 @@ const ProductImageDescription = ({
   const handleVariationClick = (variation) => {
     setSelectedVariation(variation);
   };
-// console.log(selectedVariation);
+  // console.log(selectedVariation);
   const renderContent = () => {
     if (activeSection === "description") {
       return (
@@ -128,13 +128,15 @@ const ProductImageDescription = ({
               <li>
                 <strong>Brand:</strong> EGI
               </li>
-              {
-                product.capacity && product.capacityMeasure && product.capacityMeasure !== "N/A" &&
-                <li>
-                  <strong>Capacity:</strong> {product.capacity} {product.capacityMeasure}
-                </li>
-              }
-              
+              {product.capacity &&
+                product.capacityMeasure &&
+                product.capacityMeasure !== "N/A" && (
+                  <li>
+                    <strong>Capacity:</strong> {product.capacity}{" "}
+                    {product.capacityMeasure}
+                  </li>
+                )}
+
               <li>
                 <strong>Condition:</strong> Brand New
               </li>
@@ -183,7 +185,7 @@ const ProductImageDescription = ({
                 <strong>Occasion:</strong> {product.occasion}
               </li>
               <li>
-                <strong>Additional Part Size:</strong>{" "}
+                <strong>Additional Part:</strong>{" "}
                 {product.itemRelatedParts &&
                 product.itemRelatedParts.partName ? (
                   <div>
@@ -195,24 +197,72 @@ const ProductImageDescription = ({
                     )}
                     {product.itemRelatedParts.width && (
                       <>
-                        Width: {product.itemRelatedParts.width} cm (Approximately)
+                        Width: {product.itemRelatedParts.width} cm
+                        (Approximately)
                         <br />
                       </>
                     )}
                     {product.itemRelatedParts.height && (
                       <>
-                        Height: {product.itemRelatedParts.height} cm (Approximately)
+                        Height: {product.itemRelatedParts.height} cm
+                        (Approximately)
                         <br />
                       </>
                     )}
                     {product.itemRelatedParts.length && (
-                      <>Length: {product.itemRelatedParts.length} cm (Approximately)</>
+                      <>
+                        Length: {product.itemRelatedParts.length} cm
+                        (Approximately)
+                      </>
                     )}
                   </div>
                 ) : (
                   <div>No related parts available</div>
                 )}
               </li>
+
+            <li>
+              <strong>Additional Part:</strong>{" "}
+            {product.itemRelatedPartsTwo &&
+              product.itemRelatedPartsTwo.length > 0 ? (
+                <div>
+                  {product.itemRelatedPartsTwo.map((part, index) => (
+                    <div key={index}>
+                      {part.partName && (
+                        <>
+                          Part {index + 1}: {part.partName}
+                          <br />
+                        </>
+                      )}
+                      {part.width && (
+                        <>
+                          Width: {part.width} cm (Approximately)
+                          <br />
+                        </>
+                      )}
+                      {part.height && (
+                        <>
+                          Height: {part.height} cm (Approximately)
+                          <br />
+                        </>
+                      )}
+                      {part.length && (
+                        <>
+                          Length: {part.length} cm (Approximately)
+                          <br />
+                        </>
+                      )}
+                      {index !== product.itemRelatedPartsTwo.length - 1 && (
+                        <hr />
+                      )}{" "}
+                      {/* Separator */}
+                    </div>
+                  ))}
+                </div>
+              ) : (
+                <div>No related parts available</div>
+              )}
+            </li>
             </ul>
           </div>
         </div>
@@ -259,7 +309,10 @@ const ProductImageDescription = ({
             ) : galleryType === "fixedImage" ? (
               <ProductImageFixed product={product} />
             ) : (
-              <ProductImageGallery product={product} variationImage={selectedVariation}/>
+              <ProductImageGallery
+                product={product}
+                variationImage={selectedVariation}
+              />
             )}
           </div>
           <div className="col-lg-6 col-md-6">
@@ -273,7 +326,7 @@ const ProductImageDescription = ({
               wishlistItem={wishlistItem}
               compareItem={compareItem}
               productVariation={productVariation}
-              onVariationClick={handleVariationClick} 
+              onVariationClick={handleVariationClick}
             />
           </div>
         </div>
