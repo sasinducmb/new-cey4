@@ -76,6 +76,15 @@ const ProductImageDescription = ({
                 <strong> Weight:</strong> {product.weight}{" "}
                 {product.weightMeasure}g (Approximately)
               </li>
+              {product.capacity &&
+                product.capacityMeasure &&
+                product.capacityMeasure !== "N/A" && (
+                  <li>
+                    <strong>Capacity:</strong> {product.capacity}{" "}
+                    {product.capacityMeasure}
+                  </li>
+                )}
+
             </ul>
           </div>
 
@@ -128,15 +137,7 @@ const ProductImageDescription = ({
               <li>
                 <strong>Brand:</strong> EGI
               </li>
-              {product.capacity &&
-                product.capacityMeasure &&
-                product.capacityMeasure !== "N/A" && (
-                  <li>
-                    <strong>Capacity:</strong> {product.capacity}{" "}
-                    {product.capacityMeasure}
-                  </li>
-                )}
-
+             
               <li>
                 <strong>Condition:</strong> Brand New
               </li>
@@ -197,21 +198,27 @@ const ProductImageDescription = ({
                     )}
                     {product.itemRelatedParts.width && (
                       <>
-                        Width: {product.itemRelatedParts.width} cm
+                        Width: {product.itemRelatedParts.width}cm
                         (Approximately)
                         <br />
                       </>
                     )}
                     {product.itemRelatedParts.height && (
                       <>
-                        Height: {product.itemRelatedParts.height} cm
+                        Height: {product.itemRelatedParts.height}cm
                         (Approximately)
                         <br />
                       </>
                     )}
                     {product.itemRelatedParts.length && (
                       <>
-                        Length: {product.itemRelatedParts.length} cm
+                        Length: {product.itemRelatedParts.length}cm
+                        (Approximately)
+                      </>
+                    )}
+                     {product.itemRelatedParts.weight && (
+                      <>
+                        Length: {product.itemRelatedParts.weight}g
                         (Approximately)
                       </>
                     )}
