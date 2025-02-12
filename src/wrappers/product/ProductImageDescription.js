@@ -81,7 +81,7 @@ const ProductImageDescription = ({
                 product.capacityMeasure !== "N/A" && (
                   <li>
                     <strong>Capacity:</strong> {product.capacity}{" "}
-                    {product.capacityMeasure}
+                    {product.capacityMeasure}(Approximately)
                   </li>
                 )}
 
@@ -218,7 +218,7 @@ const ProductImageDescription = ({
                     )}
                      {product.itemRelatedParts.weight && (
                       <>
-                        Length: {product.itemRelatedParts.weight}g
+                        Weight: {product.itemRelatedParts.weight}g
                         (Approximately)
                       </>
                     )}
