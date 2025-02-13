@@ -15,9 +15,12 @@ const Product = () => {
   const product = products.find(product => product._id === id);
   const { data, isLoading } = useGetVariationQuery();
   // console.log(data);
- const filteredData = Array.isArray(data)
-    ? data.filter(item => item.productId?._id === id)
-    : [];
+  const filteredData = Array.isArray(data)
+  ? data
+      .filter(item => item.productId?._id === id)
+      .sort((a, b) => a.itemQty - b.itemQty) // Sorting in ascending order
+  : [];
+console.log(filteredData);
   // console.log(filteredData);
   if (!product) {
     return <div>Product not found</div>;
