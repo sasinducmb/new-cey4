@@ -78,9 +78,17 @@ const ProductDescriptionInfo = ({
         )}
       </div>
       <div className="d-flex flex-column">
-        {productVariation && productVariation.length > 0 && (
-          <h5>Product Variation(Item quantity)</h5>
-        )}
+      {productVariation && productVariation.length > 0 && (
+    <>
+      {productVariation.some(variation => 
+        variation.variationType === 'quantity' || 
+        variation.variationType === null || 
+        variation.variationType === undefined
+      ) 
+        ? <h5>Product Variation (Item quantity)</h5>
+        : <h5>Product Variation (Item name)</h5>}
+    </>
+  )}
         {productVariation && productVariation.length > 0 ? (
           <div className="d-flex flex-wrap gap-3">
             {productVariation.map((variation, index) => (
