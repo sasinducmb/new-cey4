@@ -4164,7 +4164,9 @@ input[type="radio"] {
   margin-bottom: 15px;
 }
 
-.label {
-  color: #6c757d;
-  font-size: 0.9rem;
-}
+// .label {
+//   max-width: 50px; /* Adjust as needed */
+//   white-space: nowrap;
+//   overflow: hidden;
+//   text-overflow: ellipsis;
+// }

@@ -3,17 +3,17 @@ import PropTypes from "prop-types";
 const ShopCategories = ({ categories, getSortParams }) => {
   // Define the product materials array
   const productMaterials = [
-    "Coir",
-    "Clay",
-    "Brass",
-    "Wooden",
-    "Reed",
-    "Palmyra",
-    "Cane",
-    "Fabric",
-    "Areca",
-    "Paper",
-    "Spices",
+    { name: "Coir", values: ["Coir", "Coconut"] }, // Both map to Coir
+    { name: "Clay", values: ["Clay"] },
+    { name: "Brass", values: ["Brass"] },
+    { name: "Wooden", values: ["Wooden"] },
+    { name: "Reed", values: ["Reed"] },
+    { name: "Palmyra", values: ["Palmyra"] },
+    { name: "Cane", values: ["Cane"] },
+    { name: "Fabric", values: ["Fabric"] },
+    { name: "Areca", values: ["Areca"] },
+    { name: "Paper", values: ["Paper"] },
+    { name: "Spices", values: ["Spices"] },
   ];
 
   return (
@@ -58,7 +58,7 @@ const ShopCategories = ({ categories, getSortParams }) => {
         <ul>
           <li>
             <div className="sidebar-widget-list-left">
-              <button onClick={() => getSortParams("material", "All")}>
+              <button onClick={() => getSortParams("material", "all")}>
                 <span className="checkmark" /> All
               </button>
             </div>
@@ -67,11 +67,12 @@ const ShopCategories = ({ categories, getSortParams }) => {
             <li key={key}>
               <div className="sidebar-widget-list-left">
                 <button
-                  onClick={(e) => {
-                    getSortParams("material", material);
+                  onClick={() => {
+                    getSortParams("material", material.values);
+                    // Pass the array of values ["Coir", "Coconut"] for filtering
                   }}
                 >
-                  <span className="checkmark" /> {material}
+                  <span className="checkmark" /> {material.name}
                 </button>
               </div>
             </li>

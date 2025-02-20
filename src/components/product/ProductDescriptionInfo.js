@@ -78,32 +78,54 @@ const ProductDescriptionInfo = ({
         )}
       </div>
       <div className="d-flex flex-column">
-      {productVariation && productVariation.length > 0 && (
-    <>
-      {productVariation.some(variation => 
-        variation.variationType === 'quantity' || 
-        variation.variationType === null || 
-        variation.variationType === undefined
-      ) 
-        ? <h5>Product Variation (Item quantity)</h5>
-        : <h5>Product Variation (Item name)</h5>}
-    </>
-  )}
+        {productVariation && productVariation.length > 0 && (
+          <>
+            {productVariation.some(
+              (variation) =>
+                variation.variationType === "quantity" ||
+                variation.variationType === null ||
+                variation.variationType === undefined
+            ) ? (
+              <h5>Product Variation (Item quantity)</h5>
+            ) : (
+              <h5>Product Variation (Item name)</h5>
+            )}
+          </>
+        )}
         {productVariation && productVariation.length > 0 ? (
           <div className="d-flex flex-wrap gap-3">
             {productVariation.map((variation, index) => (
-              <div key={index} className="d-flex align-items-center gap-2">
-                <input
-                  type="radio"
-                  id={`variation-${index}`}
-                  name="productVariation"
-                  value={variation.itemQty}
-                  checked={selectedVariationId === variation._id} // Bind to state
-                  onChange={() => handleVariationChange(variation._id)}
-                  onClick={() => onVariationClick(variation.mainImage)}
-                  style={{ transform: "scale(1.5)", cursor: "pointer" }}
-                />
-                <label htmlFor={`variation-${index}`}>{variation.name}</label>
+              <div key={index} className="d-flex ">
+                <div
+                  style={{ display: "flex", alignItems: "center",}}
+                >
+                  <input
+                    type="radio"
+                    id={`variation-${index}`}
+                    name="productVariation"
+                    value={variation.itemQty}
+                    checked={selectedVariationId === variation._id}
+                    onChange={() => handleVariationChange(variation._id)}
+                    onClick={() => onVariationClick(variation.mainImage)}
+                    style={{
+                      cursor: "pointer",
+                     flexShrink: 0.9,
+                      transform: "scale(0.9)",
+                    }}
+                  />
+                  <label
+                    htmlFor={`variation-${index}`}
+                    
+                    style={{
+                      whiteSpace: "nowrap",
+                      overflow: "hidden",
+                      textOverflow: "ellipsis",
+                      minWidth: "80px", // Prevent label from collapsing
+                    }}
+                  >
+                    {variation.name}
+                  </label>
+                </div>
               </div>
             ))}
           </div>
