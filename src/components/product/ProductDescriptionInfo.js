@@ -77,28 +77,27 @@ const ProductDescriptionInfo = ({
           <span>{currency.currencySymbol + finalProductPrice}</span>
         )}
       </div>
-      <div className="d-flex flex-column">
-        {productVariation && productVariation.length > 0 && (
-          <>
-            {productVariation.some(
-              (variation) =>
-                variation.variationType === "quantity" ||
-                variation.variationType === null ||
-                variation.variationType === undefined
-            ) ? (
-              <h5>Product Variation (Item quantity)</h5>
-            ) : (
-              <h5>Product Variation (Item name)</h5>
-            )}
-          </>
-        )}
+
+      {productVariation && productVariation.length > 0 && (
+        <>
+          {productVariation.some(
+            (variation) =>
+              variation.variationType === "quantity" ||
+              variation.variationType === null ||
+              variation.variationType === undefined
+          ) ? (
+            <h5>Product Variation (Item quantity)</h5>
+          ) : (
+            <h5>Product Variation (Item name)</h5>
+          )}
+        </>
+      )}
+      <div className="d-flex">
         {productVariation && productVariation.length > 0 ? (
-          <div className="d-flex flex-wrap gap-3">
+          <div className="">
             {productVariation.map((variation, index) => (
-              <div key={index} className="d-flex ">
-                <div
-                  style={{ display: "flex", alignItems: "center",}}
-                >
+              <div className="">
+                <div key={index} className="variation-item d-flex ">
                   <input
                     type="radio"
                     id={`variation-${index}`}
@@ -107,24 +106,10 @@ const ProductDescriptionInfo = ({
                     checked={selectedVariationId === variation._id}
                     onChange={() => handleVariationChange(variation._id)}
                     onClick={() => onVariationClick(variation.mainImage)}
-                    style={{
-                      cursor: "pointer",
-                     flexShrink: 0.9,
-                      transform: "scale(0.9)",
-                    }}
+                    style={{ cursor: "pointer", width: "40px", height: "40px" }}
                   />
-                  <label
-                    htmlFor={`variation-${index}`}
-                    
-                    style={{
-                      whiteSpace: "nowrap",
-                      overflow: "hidden",
-                      textOverflow: "ellipsis",
-                      minWidth: "80px", // Prevent label from collapsing
-                    }}
-                  >
-                    {variation.name}
-                  </label>
+              
+                  <label htmlFor={`variation-${index}`} className="mt-2">{variation.name}</label>
                 </div>
               </div>
             ))}
@@ -132,7 +117,6 @@ const ProductDescriptionInfo = ({
         ) : (
           <p>No variations available.</p>
         )}
-
         {/* Reset Button */}
         {selectedVariationId && (
           <div className="mt-2 mb-3">
@@ -148,6 +132,7 @@ const ProductDescriptionInfo = ({
                 padding: "0.5rem 1rem",
                 borderRadius: "5px",
                 cursor: "pointer",
+                marginLeft: "20px",
               }}
             >
               Reset Selection

@@ -59,23 +59,30 @@ const ProductImageDescription = ({
           >
             <h3>Dimensions</h3>
             <ul>
-              <li>
-                <strong> Height: </strong> {product.dimensions.dheight} cm
-                (Approximately)
-              </li>
-              <li>
-                <strong> Width: </strong> {product.dimensions.dwidth} cm
-                (Approximately)
-              </li>
-              <li>
-                <strong> Length: </strong> {product.dimensions.dlength} cm
-                (Approximately)
-              </li>
-              <li>
-                {" "}
-                <strong> Weight:</strong> {product.weight}{" "}
-                {product.weightMeasure}g (Approximately)
-              </li>
+              {product.dimensions.dheight && (
+                <li>
+                  <strong> Height: </strong> {product.dimensions.dheight} cm
+                  (Approximately)
+                </li>
+              )}
+              {product.dimensions.dwidth && (
+                <li>
+                  <strong> Width: </strong> {product.dimensions.dwidth} cm
+                  (Approximately)
+                </li>
+              )}
+              {product.dimensions.dlength && (
+                <li>
+                  <strong> Length: </strong> {product.dimensions.dlength} cm
+                  (Approximately)
+                </li>
+              )}
+              {product.weight && product.weightMeasure && (
+                <li>
+                  <strong> Weight:</strong> {product.weight}{" "}
+                  {product.weightMeasure}g (Approximately)
+                </li>
+              )}
               {product.capacity &&
                 product.capacityMeasure &&
                 product.capacityMeasure !== "N/A" && (
@@ -84,7 +91,6 @@ const ProductImageDescription = ({
                     {product.capacityMeasure}(Approximately)
                   </li>
                 )}
-
             </ul>
           </div>
 
@@ -137,7 +143,7 @@ const ProductImageDescription = ({
               <li>
                 <strong>Brand:</strong> EGI
               </li>
-             
+
               <li>
                 <strong>Condition:</strong> Brand New
               </li>
@@ -214,9 +220,10 @@ const ProductImageDescription = ({
                       <>
                         Length: {product.itemRelatedParts.length}cm
                         (Approximately)
+                        <br />
                       </>
                     )}
-                     {product.itemRelatedParts.weight && (
+                    {product.itemRelatedParts.weight && (
                       <>
                         Weight: {product.itemRelatedParts.weight}g
                         (Approximately)
@@ -228,48 +235,50 @@ const ProductImageDescription = ({
                 )}
               </li>
 
-            <li>
-              <strong>Additional Part:</strong>{" "}
-            {product.itemRelatedPartsTwo &&
-              product.itemRelatedPartsTwo.length > 0 ? (
-                <div>
-                  {product.itemRelatedPartsTwo.map((part, index) => (
-                    <div key={index}>
-                      {part.partName && (
-                        <>
-                          Part {index + 1}: {part.partName}
-                          <br />
-                        </>
-                      )}
-                      {part.width && (
-                        <>
-                          Width: {part.width} cm (Approximately)
-                          <br />
-                        </>
-                      )}
-                      {part.height && (
-                        <>
-                          Height: {part.height} cm (Approximately)
-                          <br />
-                        </>
-                      )}
-                      {part.length && (
-                        <>
-                          Length: {part.length} cm (Approximately)
-                          <br />
-                        </>
-                      )}
-                      {index !== product.itemRelatedPartsTwo.length - 1 && (
-                        <hr />
-                      )}{" "}
-                      {/* Separator */}
-                    </div>
-                  ))}
-                </div>
-              ) : (
-                <div>No related parts available</div>
-              )}
-            </li>
+              <li>
+                {/* product.itemRelatedParts.partName ? */}
+                <strong>Additional Part:</strong>{" "}
+                {product.itemRelatedPartsTwo &&
+                product.itemRelatedPartsTwo.partName ? (
+                  <div>
+                    {product.itemRelatedPartsTwo.partName && (
+                      <>
+                        {product.itemRelatedPartsTwo.partName}
+                        <br />
+                      </>
+                    )}
+                    {product.itemRelatedPartsTwo.width && (
+                      <>
+                        Width: {product.itemRelatedPartsTwo.width}cm
+                        (Approximately)
+                        <br />
+                      </>
+                    )}
+                    {product.itemRelatedPartsTwo.height && (
+                      <>
+                        Height: {product.itemRelatedPartsTwo.height}cm
+                        (Approximately)
+                        <br />
+                      </>
+                    )}
+                    {product.itemRelatedPartsTwo.length && (
+                      <>
+                        Length: {product.itemRelatedPartsTwo.length}cm
+                        (Approximately)
+                        <br />
+                      </>
+                    )}
+                    {product.itemRelatedPartsTwo.weight && (
+                      <>
+                        Weight: {product.itemRelatedPartsTwo.weight}g
+                        (Approximately)
+                      </>
+                    )}
+                  </div>
+                ) : (
+                  <div>No related parts available</div>
+                )}
+              </li>
             </ul>
           </div>
         </div>
