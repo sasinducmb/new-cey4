@@ -98,20 +98,20 @@ const ShopGridStandard = () => {
 
       <LayoutOne headerTop="visible">
         {/* breadcrumb */}
-        <Breadcrumb
+        {/* <Breadcrumb
           pages={[
             { label: "Home", path: process.env.PUBLIC_URL + "/" },
             { label: "Shop", path: process.env.PUBLIC_URL + pathname },
           ]}
-        />
-
-        <div className="shop-area pt-95 pb-100">
-          <div className="container">
+        /> */}
+    
+        <div className="shop-area pb-100">
+          <div className="container-fluid">
             <div className="row">
-              <div className="col-lg-3 order-2 order-lg-1">
+              <div className="col-lg-2 order-2 order-lg-1 container-contact">
                 {/* shop sidebar */}
                 <div className="sidebar-widget">
-                  <h4 className="pro-sidebar-title">Search </h4>
+                  <h4 className="pro-sidebar-title mx-2">Search </h4>
                   <div className="pro-sidebar-search mb-50 mt-25">
                     <form className="pro-sidebar-search-form" action="#">
                       <input
@@ -133,7 +133,8 @@ const ShopGridStandard = () => {
                   />
                 </div>
               </div>
-              <div className="col-lg-9 order-1 order-lg-2">
+              <div className="col-lg-10 order-1 order-lg-2">
+              <img src="assets/img/banner/shop-img.png"  className="img-fluid w-100 h-25"/>
                 {/* shop topbar default */}
                 <ShopTopbar
                   getLayout={getLayout}

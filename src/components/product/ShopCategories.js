@@ -1,6 +1,9 @@
 import PropTypes from "prop-types";
+import { useState } from "react";
 
 const ShopCategories = ({ categories, getSortParams }) => {
+  const [isExpanded, setIsExpanded] = useState(false);
+  const [materialExpanded, setMaterialExpanded] = useState(false);
   // Define the product materials array
   const productMaterials = [
     { name: "Coir", values: ["Coir", "Coconut"] }, // Both map to Coir
@@ -18,10 +21,18 @@ const ShopCategories = ({ categories, getSortParams }) => {
 
   return (
     <div className="sidebar-widget">
-      <h4 className="pro-sidebar-title">Categories </h4>
-      <div className="sidebar-widget-list mt-3">
+      <h4 className="pro-sidebar-title mx-2">
+        Categories{" "}
+        <button
+          className="category-toggle-btn"
+          onClick={() => setIsExpanded(!isExpanded)}
+        >
+          {isExpanded ? "−" : "+"}
+        </button>
+      </h4>
+      <div className="sidebar-widget-list mt-3 mx-2">
         {categories ? (
-          <ul>
+          <ul className="category-list">
             <li>
               <div className="sidebar-widget-list-left">
                 <button
@@ -33,29 +44,44 @@ const ShopCategories = ({ categories, getSortParams }) => {
                 </button>
               </div>
             </li>
-            {categories.map((category, key) => (
-              <li key={key}>
-                <div className="sidebar-widget-list-left">
-                  <button
-                    onClick={(e) => {
-                      getSortParams("category", category);
-                    }}
-                  >
-                    <span className="checkmark" /> {category}
-                  </button>
-                </div>
-              </li>
-            ))}
+            <div
+              className={`expandable-categories ${
+                isExpanded ? "expanded" : "collapsed"
+              }`}
+            >
+              {categories.map((category, key) => (
+                <li key={key}>
+                  <div className="sidebar-widget-list-left">
+                    <button
+                      onClick={(e) => {
+                        getSortParams("category", category);
+                        // setIsExpanded(false); // Optionally collapse after selection
+                      }}
+                    >
+                      <span className="checkmark" /> {category}
+                    </button>
+                  </div>
+                </li>
+              ))}
+            </div>
           </ul>
         ) : (
           "No categories found"
         )}
       </div>
-
       {/* Product Materials Section */}
-      <h4 className="pro-sidebar-title mt-3">product Materials </h4>
-      <div className="sidebar-widget-list mt-3">
-        <ul>
+
+      <h4 className="pro-sidebar-title mt-3 mx-2">
+        Product Materials{" "}
+        <button
+          className="material-toggle-btn"
+          onClick={() => setMaterialExpanded(!materialExpanded)}
+        >
+          {materialExpanded ? "−" : "+"}
+        </button>
+      </h4>
+      <div className="sidebar-widget-list mt-3 mx-2">
+        <ul className="material-list">
           <li>
             <div className="sidebar-widget-list-left">
               <button onClick={() => getSortParams("material", "all")}>
@@ -63,20 +89,27 @@ const ShopCategories = ({ categories, getSortParams }) => {
               </button>
             </div>
           </li>
-          {productMaterials.map((material, key) => (
-            <li key={key}>
-              <div className="sidebar-widget-list-left">
-                <button
-                  onClick={() => {
-                    getSortParams("material", material.values);
-                    // Pass the array of values ["Coir", "Coconut"] for filtering
-                  }}
-                >
-                  <span className="checkmark" /> {material.name}
-                </button>
-              </div>
-            </li>
-          ))}
+          <div
+            className={`expandable-materials ${
+              materialExpanded ? "expanded" : "collapsed"
+            }`}
+          >
+            {productMaterials.map((material, key) => (
+              <li key={key}>
+                <div className="sidebar-widget-list-left">
+                  <button
+                    onClick={() => {
+                      getSortParams("material", material.values);
+                      // Pass the array of values ["Coir", "Coconut"] for filtering
+                      // setMaterialExpanded(false); // Optionally collapse after selection
+                    }}
+                  >
+                    <span className="checkmark" /> {material.name}
+                  </button>
+                </div>
+              </li>
+            ))}
+          </div>
         </ul>
       </div>
     </div>

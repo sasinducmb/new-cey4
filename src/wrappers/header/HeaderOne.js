@@ -42,7 +42,7 @@ const HeaderOne = ({
       >
         <div className={layout === "container-fluid" ? layout : "container"}>
           {/* header top */}
-          <HeaderTop borderStyle={borderStyle} />
+          {/* <HeaderTop borderStyle={borderStyle} /> */}
         </div>
       </div>
 

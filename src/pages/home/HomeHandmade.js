@@ -9,6 +9,9 @@ import FeatureIconFour from "../../wrappers/feature-icon/FeatureIconFour";
 import NewsletterThree from "../../wrappers/newsletter/NewsletterThree";
 import TestimonialOne from "../../wrappers/testimonial/TestimonialOne";
 import TabProductTen from "../../wrappers/product/TabProductTen";
+import Services from "../../components/newdesign/Services";
+import ContactUs from "../../components/newdesign/ContactUs";
+import AboutSub from "../other/AboutSub";
 
 const HomeHandmade = () => {
   return (
@@ -46,19 +49,22 @@ const HomeHandmade = () => {
           countDownImage="/assets/img/banner/deal-3.png"
         /> */}
         {/* testimonial */}
-        <TestimonialOne
+        {/* <TestimonialOne
           spaceTopClass="pt-100"
           spaceBottomClass="pb-95"
           spaceLeftClass="ml-70"
           spaceRightClass="mr-70"
           bgColorClass="bg-gray-3"
-        />
+        /> */}
         {/* newsletter */}
-        <NewsletterThree
+        {/* <NewsletterThree
           spaceTopClass="pt-100"
           spaceBottomClass="pb-100"
           subscribeBtnClass="dark-red-subscribe"
-        />
+        /> */}
+        <Services/>
+        <AboutSub/>
+        <ContactUs/>
       </LayoutOne>
     </Fragment>
   );

@@ -22,7 +22,7 @@ const TabProductTen = ({
     >
       <div className="container">
         <SectionTitle
-          titleText="Daily Deals"
+          titleText="Our Best-Selling Sustainable Products"
           positionClass="text-center"
           borderClass="no-border"
         />
@@ -32,7 +32,7 @@ const TabProductTen = ({
             // type="new"          // Uncomment if a specific type is required
 
             start={0}
-            end={16}
+            end={8}
             spaceBottomClass="mb-25"
           />
         </div>
@@ -47,12 +47,17 @@ const TabProductTen = ({
             />
           </a>
         </div> */}
+        <SectionTitle
+          titleText="New Arrivals"
+          positionClass="text-center"
+          borderClass="no-border"
+        />
         <div className="row">
           <ProductGrid
             // category={category} // Uncomment and define `category` if needed
             // type="new"          // Uncomment if a specific type is required
-            start={17}
-            end={33}
+            start={9}
+            end={16}
             spaceBottomClass="mb-25"
           />
         </div>

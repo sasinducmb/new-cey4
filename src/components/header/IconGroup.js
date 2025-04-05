@@ -57,8 +57,12 @@ const IconGroup = ({ iconWhiteClass }) => {
               </Link>
             </li>
           </ul>
+
         </div>
+        
       </div>
+    
+
       {/* <div className="same-style header-compare">
         <Link to={process.env.PUBLIC_URL + "/compare"}>
           <i className="pe-7s-shuffle" />
@@ -67,6 +71,12 @@ const IconGroup = ({ iconWhiteClass }) => {
           </span>
         </Link>
       </div> */}
+        <div className="same d-none d-lg-block" style={{fontSize:"18px"}}>
+        <Link to={process.env.PUBLIC_URL + '/login-register'} className="nav-link">
+          Login
+        </Link>
+      
+      </div>
 
       <div className="same-style header-wishlist">
         <Link to={process.env.PUBLIC_URL + '/wishlist'}>
