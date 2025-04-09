@@ -134,7 +134,7 @@ const ShopGridStandard = () => {
                 </div>
               </div>
               <div className="col-lg-10 order-1 order-lg-2">
-              <img src="assets/img/banner/shop-img.png"  className="img-fluid w-100 h-25"/>
+              {/* <img src="assets/img/banner/shop-img.png"  className="img-fluid w-100 h-25"/> */}
                 {/* shop topbar default */}
                 <ShopTopbar
                   getLayout={getLayout}
