@@ -232,11 +232,7 @@
   margin: 0;
 }
 
-.about-us-container {
-  padding: 2rem 1rem;
-  background: linear-gradient(to bottom, #ffffff, #4cd3a5);
-  min-height: 100vh;
-}
+
 
 .header h1 {
   color: #333;
@@ -323,4 +319,16 @@
   width: 1.5rem;
   height: 1.5rem;
   background-size: 100% 100%;
+}
+
+.about-card {
+  border: none;
+  box-shadow: 0 4px 8px rgba(18, 16, 16, 0.1);
+  background-color:#F3F4F6;
+  border-radius: 15px;
+}
+
+.img-fluid {
+  max-width: 100%;
+  /* height: auto; */
 }
