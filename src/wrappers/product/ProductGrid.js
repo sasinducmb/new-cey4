@@ -5,12 +5,14 @@ import { useDispatch, useSelector } from "react-redux";
 import ProductGridSingle from "../../components/product/ProductGridSingle";
 import {fetchProducts} from "../../store/slices/product-slice"
 import { Carousel } from "react-bootstrap";
+import { useMediaQuery } from "react-responsive";
 const ProductGrid = ({
   spaceBottomClass,
  
   start, 
   end
 }) => {
+  const isMobile = useMediaQuery({ maxWidth: 768 });
   const { products } = useSelector((state) => state.product);
   const currency = useSelector((state) => state.currency);
   const { cartItems } = useSelector((state) => state.cart);
@@ -18,16 +20,20 @@ const ProductGrid = ({
   const { compareItems } = useSelector((state) => state.compare);
   // const prods = getProducts(products, category, type, limit)
   // console.log(products)
-  const chunkArray = (arr, chunkSize) => {
+  const chunkArray = (arr, chunkSize, start = 0, end = null) => {
     const result = [];
+  
     for (let i = 0; i < arr.length; i += chunkSize) {
       result.push(arr.slice(i, i + chunkSize));
     }
-    return result;
+  
+    // Apply slicing based on start and end index of chunks
+    return result.slice(start, end ?? result.length);
   };
 
   // Chunk products into groups of 4
-  const productChunks = chunkArray(products, 4);
+  const chunkSize = isMobile ? 1 : 4;
+  const productChunks = chunkArray(products, chunkSize, start, end);
   return (
    
     <Carousel>

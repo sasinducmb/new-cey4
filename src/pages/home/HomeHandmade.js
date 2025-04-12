@@ -12,6 +12,8 @@ import TabProductTen from "../../wrappers/product/TabProductTen";
 import Services from "../../components/newdesign/Services";
 import ContactUs from "../../components/newdesign/ContactUs";
 import AboutSub from "../other/AboutSub";
+import ReviewSection from "../other/ReviewSection";
+import Design from "../../components/newdesign/Design";
 
 const HomeHandmade = () => {
   return (
@@ -63,6 +65,8 @@ const HomeHandmade = () => {
           subscribeBtnClass="dark-red-subscribe"
         /> */}
         <Services/>
+        <Design/>
+        <ReviewSection/>
         <AboutSub/>
         <ContactUs/>
       </LayoutOne>

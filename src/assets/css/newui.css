@@ -332,3 +332,178 @@
   max-width: 100%;
   /* height: auto; */
 }
+
+.review-section {
+  margin: 50px auto;
+  overflow: hidden;
+  position: relative;
+
+  /* max-width: 1000px; */
+}
+
+.review-cards-wrapper {
+  overflow: hidden;
+}
+
+.review-cards-container {
+  display: flex;
+  transition: transform 0.3s ease-in-out;
+  gap: 20px;
+}
+
+.review-card {
+  min-width: 300px;
+  max-width: 300px;
+  flex-shrink: 0;
+}
+
+.card-review {
+  border-radius: 10px;
+  border: 1px solid #099d33;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  height: 100%;
+  position: relative;
+  
+}
+
+.card-review::before {
+  content: '';
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 10px;
+  height: 10px;
+  background-color: #4CAF50;
+  border-radius: 50%;
+}
+
+.reviewer-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.avatar {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  object-fit: cover;
+  /* margin-bottom: 10px; */
+}
+
+.card-title {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 5px;
+}
+
+.review-text {
+  font-size: 14px;
+  line-height: 1.5;
+  color: #555;
+  margin-bottom: 15px;
+  font-family:Josefin Sans;
+}
+
+.stars {
+  color: #FFD700;
+  font-size: 18px;
+  text-align: center;
+}
+
+.star {
+  margin: 0 2px;
+}
+
+.next-btn,
+.prev-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: white;
+  border: 1px solid #e0e0e0;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 1000;
+}
+
+.next-btn {
+  right: -20px;
+}
+
+.prev-btn {
+  left: -20px;
+}
+
+.review-row {
+  height: 120px;
+  position: relative;
+  /* padding: 20px 15px; */
+}
+
+
+
+/* Common image styles */
+.reviewIcon-imgage {
+  width: 100px;
+  height: 100px;
+  /* object-fit: contain;
+  z-index: 1; */
+}
+
+/* Positioning for the right icon */
+.reviewIcon-imgage-right {
+  top: 50%;
+  left: 25%;
+}
+
+/* Positioning for the left icon */
+.reviewIcon-imgage-left {
+  top: -5%;
+  right: 25%;
+}
+
+/* Responsive tweaks */
+@media (max-width: 768px) {
+  .review-row {
+    height: auto;
+    flex-direction: column;
+    align-items: center;
+  
+  }
+
+  .reviewIcon-imgage {
+    width: 60px;
+    height: 60px;
+  }
+
+  .reviewIcon-imgage-right {
+    top: 0;
+    left: 10px;
+  }
+
+  .reviewIcon-imgage-left {
+    top: 0;
+    right: 10px;
+  }
+
+  .service-header {
+    font-size: 1.5rem;
+  
+  }
+}
+
+@media (max-width: 480px) {
+  .reviewIcon-imgage {
+    width: 50px;
+    height: 50px;
+  }
+
+ 
+}
