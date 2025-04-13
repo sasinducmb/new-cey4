@@ -14,6 +14,7 @@ import ContactUs from "../../components/newdesign/ContactUs";
 import AboutSub from "../other/AboutSub";
 import ReviewSection from "../other/ReviewSection";
 import Design from "../../components/newdesign/Design";
+import NewsletterSection from "../../components/newdesign/NewsletterSection";
 
 const HomeHandmade = () => {
   return (
@@ -69,6 +70,7 @@ const HomeHandmade = () => {
         <ReviewSection/>
         <AboutSub/>
         <ContactUs/>
+        {/* <NewsletterSection/> */}
       </LayoutOne>
     </Fragment>
   );

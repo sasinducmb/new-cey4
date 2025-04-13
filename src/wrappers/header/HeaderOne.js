@@ -32,13 +32,14 @@ const HeaderOne = ({
   };
 
   return (
-    <header className={clsx("header-area clearfix", headerBgClass, headerPositionClass)}>
+    <header className={clsx("header-area clearfix", headerBgClass, headerPositionClass)} style={{boxShadow:"0 0 10px rgba(0, 0, 0, 0.2)",marginBottom:"15px"}}>
       <div
         className={clsx(
           "header-top-area", 
           headerPaddingClass, top === "visible" ? "d-none d-lg-block" : "d-none", 
           borderStyle === "fluid-border" && "border-none" 
         )}
+        /* Add your desired background color here */
       >
         <div className={layout === "container-fluid" ? layout : "container"}>
           {/* header top */}

@@ -358,20 +358,21 @@ const LoginRegister = () => {
         </div> */}
         <div className="container d-flex justify-content-end align-items-center mb-5  green-section">
           <div className="row w-100">
-            <div className="col-md-6  d-none d-md-block">
+            <div className="col-md-6 d-flex justify-content-center align-items-center">
               <h1 className="green-section-right">Ready to Go Green?</h1>
+              <img src="assets/img/banner/Abstraction.png" className="img-fluid" style={{height:"300px",width:"300px"}}/>
             </div>
             <div className="col-md-6 form-section pb-5 green-section-left">
               <Tab.Container defaultActiveKey="login">
                 <Nav variant="pills" className="mb-4 justify-content-center">
                   <Nav.Item>
-                    <Nav.Link eventKey="login">
-                      <h4>Login</h4>
+                    <Nav.Link eventKey="login" aria-label="Login">
+                      <h4 className="m-1 mx-4">Sign In</h4>
                     </Nav.Link>
                   </Nav.Item>
                   <Nav.Item>
-                    <Nav.Link eventKey="register">
-                      <h4>Register</h4>
+                    <Nav.Link eventKey="register" aria-label="Register">
+                      <h4 className="m-1">Sign Up</h4>
                     </Nav.Link>
                   </Nav.Item>
                 </Nav>
@@ -428,7 +429,7 @@ const LoginRegister = () => {
                           Remember me
                         </label> */}
                       </div>
-                      <button type="submit" className="btn btn-primary w-100">
+                      <button type="submit" className="btn btn-primary w-25">
                         Login
                       </button>
                     </form>
@@ -549,7 +550,7 @@ const LoginRegister = () => {
                         </div>
                       </div>
 
-                      <button type="submit" className="btn btn-primary w-100">
+                      <button type="submit" className="btn btn-primary w-50">
                         Create Account
                       </button>
                     </form>

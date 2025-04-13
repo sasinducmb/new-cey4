@@ -503,13 +503,15 @@
   color: white;
   border-top-left-radius: 20px;
   border-bottom-left-radius: 20px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+ 
 
 }
 
 .form-section {
   background-color: white;
   color: #000000;
+
   /* border-top-right-radius: 20px; */
   /* border-bottom-right-radius: 20px; */
   border-radius: 25px 0px 0px 25px;
@@ -523,24 +525,31 @@
   border: none;
   background: none;
   margin-top: 40px;
-  transition: color 0.3s ease;
+  padding: 10px 30px; /* Increased padding for a more button-like appearance */
+  border-radius: 25px; /* Rounded corners for a softer look */
+  font-weight: 500; /* Slightly bolder text */
+  transition: all 0.3s ease; /* Smooth transition for all properties */
+  position: relative; /* For the underline effect */
 }
 
+/* Hover effect */
 .nav-pills .nav-link:hover {
   color: #4caf50; /* Green color on hover */
+  box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3); /* Subtle shadow on hover */
 }
 
 /* Underline effect on hover */
-/* .nav-pills .nav-link:after {
+.nav-pills .nav-link:after {
   content: "";
   position: absolute;
   width: 0;
   height: 2px;
-  bottom: 0;
+  bottom: -5px; /* Positioning the underline */
   left: 50%;
   background-color: #4caf50;
   transition: all 0.3s ease;
-} */
+  border-radius: 2px; /* Rounded underline */
+}
 
 .nav-pills .nav-link:hover:after {
   width: 100%;
@@ -550,6 +559,7 @@
 .nav-pills .nav-link.active {
   background-color: #4caf50;
   color: white;
+  box-shadow: 0 4px 15px rgba(76, 175, 80, 0.5); /* Shadow for active state */
 }
 
 .nav-pills .nav-link.active:after {
@@ -561,16 +571,17 @@
 .nav-pills .nav-link.active h4 {
   color: white;
 }
-
 .btn-primary {
-  background-color: #204922;
-  border-color:  #204922;
+  background-color: #3b9640;
+  border-color:  #3b9640;
+
+
 }
 
 .btn-primary:hover,
 .btn-primary:focus {
   background-color: #388e3c;
-  border-color: #388e3c;
+  border-color: #97ea9b;
 }
 
 .btn-light {
