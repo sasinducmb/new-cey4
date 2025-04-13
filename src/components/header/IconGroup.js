@@ -5,7 +5,7 @@ import clsx from "clsx";
 import MenuCart from "./sub-components/MenuCart";
 
 const IconGroup = ({ iconWhiteClass }) => {
-  const handleClick = e => {
+  const handleClick = (e) => {
     e.currentTarget.nextSibling.classList.toggle("active");
   };
 
@@ -20,7 +20,7 @@ const IconGroup = ({ iconWhiteClass }) => {
   const { cartItems } = useSelector((state) => state.cart);
 
   return (
-    <div className={clsx('header-right-wrap', iconWhiteClass)}>
+    <div className={clsx("header-right-wrap", iconWhiteClass)}>
       {/* <div className="same-style header-search d-none d-lg-block">
         <button className="search-active" onClick={(e) => handleClick(e)}>
           <i className="pe-7s-search" />
@@ -34,7 +34,7 @@ const IconGroup = ({ iconWhiteClass }) => {
           </form>
         </div>
       </div> */}
-      <div className="same-style account-setting d-none d-lg-block">
+      {/* <div className="same-style account-setting d-none d-lg-block">
         <button
           className="account-setting-active"
           onClick={(e) => handleClick(e)}
@@ -60,8 +60,7 @@ const IconGroup = ({ iconWhiteClass }) => {
 
         </div>
         
-      </div>
-    
+      </div> */}
 
       {/* <div className="same-style header-compare">
         <Link to={process.env.PUBLIC_URL + "/compare"}>
@@ -71,22 +70,24 @@ const IconGroup = ({ iconWhiteClass }) => {
           </span>
         </Link>
       </div> */}
-        <div className="same d-none d-lg-block" style={{fontSize:"18px"}}>
-        <Link to={process.env.PUBLIC_URL + '/login-register'} className="nav-link">
-          Login
-        </Link>
-      
-      </div>
 
-      <div className="same-style header-wishlist">
+      <div className="d-none d-lg-block">
+        <Link
+          to={process.env.PUBLIC_URL + "/login-register"}
+          className="btn btn-success"
+        >
+          Sign Up or Login
+        </Link>
+      </div>
+      {/* <div className="same-style header-wishlist">
         <Link to={process.env.PUBLIC_URL + '/wishlist'}>
           <i className="pe-7s-like" />
           <span className="count-style">
             {wishlistItems && wishlistItems.length ? wishlistItems.length : 0}
           </span>
         </Link>
-      </div>
-      <div className="same-style cart-wrap d-none d-lg-block">
+      </div> */}
+      <div className="same-style cart-wrap d-none d-lg-block mt-2">
         <button className="icon-cart" onClick={(e) => handleClick(e)}>
           <i className="pe-7s-shopbag" />
           <span className="count-style">
@@ -97,7 +98,7 @@ const IconGroup = ({ iconWhiteClass }) => {
         <MenuCart />
       </div>
       <div className="same-style cart-wrap d-block d-lg-none">
-        <Link className="icon-cart" to={process.env.PUBLIC_URL + '/cart'}>
+        <Link className="icon-cart" to={process.env.PUBLIC_URL + "/cart"}>
           <i className="pe-7s-shopbag" />
           <span className="count-style">
             {cartItems && cartItems.length ? cartItems.length : 0}
@@ -119,7 +120,5 @@ const IconGroup = ({ iconWhiteClass }) => {
 IconGroup.propTypes = {
   iconWhiteClass: PropTypes.string,
 };
-
-
 
 export default IconGroup;

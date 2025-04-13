@@ -29,7 +29,7 @@
   top: 0;
   right: 0;
 }
-.butterfly-image-small-second{
+.butterfly-image-small-second {
   height: 80px;
   width: 80px;
   position: absolute;
@@ -115,7 +115,6 @@
   .description {
     font-size: 0.8rem;
   }
-
 }
 .icon-container {
   margin-bottom: 15px;
@@ -232,8 +231,6 @@
   margin: 0;
 }
 
-
-
 .header h1 {
   color: #333;
   margin-bottom: 1rem;
@@ -307,7 +304,6 @@
   background-size: 100% 100%;
 } */
 
-
 .carousel-control-prev-icon {
   background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='green' viewBox='0 0 8 8'%3E%3Cpath d='M5.5 1L2.5 4l3 3V1z'/%3E%3C/svg%3E");
   width: 1.5rem;
@@ -324,7 +320,7 @@
 .about-card {
   border: none;
   box-shadow: 0 4px 8px rgba(18, 16, 16, 0.1);
-  background-color:#F3F4F6;
+  background-color: #f3f4f6;
   border-radius: 15px;
 }
 
@@ -363,17 +359,16 @@
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
   height: 100%;
   position: relative;
-  
 }
 
 .card-review::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 10px;
   right: 10px;
   width: 10px;
   height: 10px;
-  background-color: #4CAF50;
+  background-color: #4caf50;
   border-radius: 50%;
 }
 
@@ -403,11 +398,11 @@
   line-height: 1.5;
   color: #555;
   margin-bottom: 15px;
-  font-family:Josefin Sans;
+  font-family: Josefin Sans;
 }
 
 .stars {
-  color: #FFD700;
+  color: #ffd700;
   font-size: 18px;
   text-align: center;
 }
@@ -447,8 +442,6 @@
   /* padding: 20px 15px; */
 }
 
-
-
 /* Common image styles */
 .reviewIcon-imgage {
   width: 100px;
@@ -475,7 +468,6 @@
     height: auto;
     flex-direction: column;
     align-items: center;
-  
   }
 
   .reviewIcon-imgage {
@@ -495,7 +487,6 @@
 
   .service-header {
     font-size: 1.5rem;
-  
   }
 }
 
@@ -504,6 +495,123 @@
     width: 50px;
     height: 50px;
   }
+}
 
- 
+/* src/CreateAccount.css */
+.green-section {
+  background-color:#55B76B; /* Green */
+  color: white;
+  border-top-left-radius: 20px;
+  border-bottom-left-radius: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+
+}
+
+.form-section {
+  background-color: white;
+  color: #000000;
+  /* border-top-right-radius: 20px; */
+  /* border-bottom-right-radius: 20px; */
+  border-radius: 25px 0px 0px 25px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Updated Navigation Styling */
+.nav-pills .nav-link {
+  color: #6c757d;
+  cursor: pointer;
+  border: none;
+  background: none;
+  margin-top: 40px;
+  transition: color 0.3s ease;
+}
+
+.nav-pills .nav-link:hover {
+  color: #4caf50; /* Green color on hover */
+}
+
+/* Underline effect on hover */
+/* .nav-pills .nav-link:after {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: 0;
+  left: 50%;
+  background-color: #4caf50;
+  transition: all 0.3s ease;
+} */
+
+.nav-pills .nav-link:hover:after {
+  width: 100%;
+  left: 0;
+}
+
+.nav-pills .nav-link.active {
+  background-color: #4caf50;
+  color: white;
+}
+
+.nav-pills .nav-link.active:after {
+  width: 100%;
+  left: 0;
+  background-color: white;
+}
+
+.nav-pills .nav-link.active h4 {
+  color: white;
+}
+
+.btn-primary {
+  background-color: #204922;
+  border-color:  #204922;
+}
+
+.btn-primary:hover,
+.btn-primary:focus {
+  background-color: #388e3c;
+  border-color: #388e3c;
+}
+
+.btn-light {
+  border: 1px solid #dee2e6;
+}
+
+/* Responsive adjustments */
+@media (max-width: 767px) {
+  .form-section {
+    border-radius: 10px;
+  }
+}
+
+
+.green-section-right{
+  color: white;
+  margin-top: 20px;
+}
+
+/* App.css */
+.profile-sidebar {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+  margin-bottom: 20px;
+}
+
+.profile-sidebar .card-body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.list-group-item a {
+  color: #333;
+  text-decoration: none;
+}
+
+.list-group-item a:hover {
+  text-decoration: underline;
+}
+
+.edit-profile{
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+
 }

@@ -211,6 +211,7 @@ const ProductDescriptionInfo = ({
                   )
                 }
                 disabled={productCartQty >= productStock}
+                style={{borderRadius:"15px"}}
               >
                 {" "}
                 Add To Cart{" "}
@@ -225,6 +226,7 @@ const ProductDescriptionInfo = ({
                 onClick={() =>
                   navigate(`/checkout/${product._id}/${quantityCount}`)
                 }
+                style={{borderRadius:"15px"}}
               >
                 Buy Now
               </button>

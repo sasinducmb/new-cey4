@@ -143,7 +143,7 @@ const LoginRegister = () => {
       />
       <LayoutOne headerTop="visible">
         {/* breadcrumb */}
-        <Breadcrumb
+        {/* <Breadcrumb
           pages={[
             { label: "Home", path: process.env.PUBLIC_URL + "/" },
             {
@@ -151,8 +151,8 @@ const LoginRegister = () => {
               path: process.env.PUBLIC_URL + pathname,
             },
           ]}
-        />
-        <div className="login-register-area pt-100 pb-100">
+        /> */}
+        {/* <div className="login-register-area pt-100 pb-100">
           <div className="container">
             <div className="row">
               <div className="col-lg-7 col-md-12 ms-auto me-auto">
@@ -193,9 +193,7 @@ const LoginRegister = () => {
                                 <div className="login-toggle-btn">
                                   <input type="checkbox" />
                                   <label className="ml-10">Remember me</label>
-                                  {/* <Link to={process.env.PUBLIC_URL + "/"}>
-                                    Forgot Password?
-                                  </Link> */}
+                            
                                 </div>
                                 <button type="submit">
                                   <span>Login</span>
@@ -284,6 +282,280 @@ const LoginRegister = () => {
                   </Tab.Container>
                 </div>
               </div>
+            </div>
+          </div>
+        </div> */}
+        {/* <div className="container d-flex justify-content-center align-items-center">
+          <div className="row w-100">
+            <div className="col-md-6 green-section d-none d-md-block">
+              <h1>Ready to Go Green?</h1>
+            </div>
+            <div className="col-md-6 form-section p-5">
+              <h2>Create Account</h2>
+              <div className="mb-3">
+                <button className="btn btn-light w-100 mb-2">
+                  Sign up with Google
+                </button>
+                <button className="btn btn-light w-100">
+                  Sign up with Facebook
+                </button>
+              </div>
+              <p className="text-center">- OR -</p>
+              <form>
+                <div className="mb-3">
+                  <label htmlFor="fullName" className="form-label">
+                    Full Name
+                  </label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    id="fullName"
+                    required
+                  />
+                </div>
+                <div className="mb-3">
+                  <label htmlFor="email" className="form-label">
+                    Email Address
+                  </label>
+                  <input
+                    type="email"
+                    className="form-control"
+                    id="email"
+                    required
+                  />
+                </div>
+                <div className="mb-3">
+                  <label htmlFor="password" className="form-label">
+                    Password
+                  </label>
+                  <input
+                    type="password"
+                    className="form-control"
+                    id="password"
+                    required
+                  />
+                </div>
+                <div className="mb-4">
+                  <label htmlFor="confirmPassword" className="form-label">
+                    Confirm Password
+                  </label>
+                  <input
+                    type="password"
+                    className="form-control"
+                    id="confirmPassword"
+                    required
+                  />
+                </div>
+                <button type="submit" className="btn btn-primary w-100">
+                  Create Account
+                </button>
+              </form>
+              <p className="mt-3 text-center">
+                Already have an account? <a href="#">Log in</a>
+              </p>
+            </div>
+          </div>
+        </div> */}
+        <div className="container d-flex justify-content-end align-items-center mb-5  green-section">
+          <div className="row w-100">
+            <div className="col-md-6  d-none d-md-block">
+              <h1 className="green-section-right">Ready to Go Green?</h1>
+            </div>
+            <div className="col-md-6 form-section pb-5 green-section-left">
+              <Tab.Container defaultActiveKey="login">
+                <Nav variant="pills" className="mb-4 justify-content-center">
+                  <Nav.Item>
+                    <Nav.Link eventKey="login">
+                      <h4>Login</h4>
+                    </Nav.Link>
+                  </Nav.Item>
+                  <Nav.Item>
+                    <Nav.Link eventKey="register">
+                      <h4>Register</h4>
+                    </Nav.Link>
+                  </Nav.Item>
+                </Nav>
+
+                {/* <div className="mb-3">
+                  <button className="btn btn-light w-100 mb-2">
+                    Continue with Google
+                  </button>
+                  <button className="btn btn-light w-100">
+                    Continue with Facebook
+                  </button>
+                </div>
+                <p className="text-center">- OR -</p> */}
+
+                <Tab.Content>
+                  <Tab.Pane eventKey="login">
+                    <form onSubmit={handleLogin}>
+                      <div className="mb-3">
+                        <label htmlFor="login-email" className="form-label">
+                          Email Address
+                        </label>
+                        <input
+                          type="email"
+                          className="form-control"
+                          id="login-email"
+                          value={email}
+                          onChange={(e) => setEmail(e.target.value)}
+                          required
+                        />
+                      </div>
+                      <div className="mb-3">
+                        <label htmlFor="login-password" className="form-label">
+                          Password
+                        </label>
+                        <input
+                          type="password"
+                          className="form-control"
+                          id="login-password"
+                          value={password}
+                          onChange={(e) => setPassword(e.target.value)}
+                          required
+                        />
+                      </div>
+                      <div className="mb-1 form-check">
+                        {/* <input
+                          type="checkbox"
+                          className="form-check-input"
+                          id="remember-me"
+                        /> */}
+                        {/* <label
+                          className="form-check-label"
+                          htmlFor="remember-me"
+                        >
+                          Remember me
+                        </label> */}
+                      </div>
+                      <button type="submit" className="btn btn-primary w-100">
+                        Login
+                      </button>
+                    </form>
+                  </Tab.Pane>
+
+                  <Tab.Pane eventKey="register">
+                    <form onSubmit={handleRegister}>
+                      <div className="mb-3">
+                        <label htmlFor="username" className="form-label">
+                          Username
+                        </label>
+                        <input
+                          type="text"
+                          className="form-control"
+                          id="username"
+                          value={name}
+                          onChange={(e) => setName(e.target.value)}
+                          required
+                        />
+                      </div>
+                      <div className="mb-3">
+                        <label htmlFor="register-email" className="form-label">
+                          Email Address
+                        </label>
+                        <input
+                          type="email"
+                          className="form-control"
+                          id="register-email"
+                          value={email}
+                          onChange={(e) => setEmail(e.target.value)}
+                          required
+                        />
+                      </div>
+                      <div className="mb-3">
+                        <label
+                          htmlFor="register-password"
+                          className="form-label"
+                        >
+                          Password
+                        </label>
+                        <input
+                          type="password"
+                          className="form-control"
+                          id="register-password"
+                          value={password}
+                          onChange={(e) => setPassword(e.target.value)}
+                          required
+                        />
+                      </div>
+                      <div className="mb-3">
+                        <label
+                          htmlFor="confirm-password"
+                          className="form-label"
+                        >
+                          Confirm Password
+                        </label>
+                        <input
+                          type="password"
+                          className="form-control"
+                          id="confirm-password"
+                          value={confirmPassword}
+                          onChange={(e) => setConfirmPassword(e.target.value)}
+                          required
+                        />
+                      </div>
+
+                      <div className="row">
+                        <div className="col-md-6 mb-3">
+                          <label htmlFor="city" className="form-label">
+                            City
+                          </label>
+                          <input
+                            type="text"
+                            className="form-control"
+                            id="city"
+                            value={city}
+                            onChange={(e) => setCity(e.target.value)}
+                          />
+                        </div>
+                        <div className="col-md-6 mb-3">
+                          <label htmlFor="state" className="form-label">
+                            State
+                          </label>
+                          <input
+                            type="text"
+                            className="form-control"
+                            id="state"
+                            value={state}
+                            onChange={(e) => setState(e.target.value)}
+                          />
+                        </div>
+                      </div>
+
+                      <div className="row">
+                        <div className="col-md-6 mb-3">
+                          <label htmlFor="phone" className="form-label">
+                            Phone Number
+                          </label>
+                          <input
+                            type="tel"
+                            className="form-control"
+                            id="phone"
+                            value={phoneNumber}
+                            onChange={(e) => setPhoneNumber(e.target.value)}
+                          />
+                        </div>
+                        <div className="col-md-6 mb-3">
+                          <label htmlFor="country" className="form-label">
+                            Country
+                          </label>
+                          <input
+                            type="text"
+                            className="form-control"
+                            id="country"
+                            value={country}
+                            onChange={(e) => setCountry(e.target.value)}
+                          />
+                        </div>
+                      </div>
+
+                      <button type="submit" className="btn btn-primary w-100">
+                        Create Account
+                      </button>
+                    </form>
+                  </Tab.Pane>
+                </Tab.Content>
+              </Tab.Container>
             </div>
           </div>
         </div>
