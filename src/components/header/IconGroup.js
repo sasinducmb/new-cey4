@@ -74,7 +74,7 @@ const IconGroup = ({ iconWhiteClass }) => {
       <div className="d-none d-lg-block">
         <Link
           to={process.env.PUBLIC_URL + "/login-register"}
-          className="btn btn-success"
+          className="btn btn-success register-btn"
         >
           Sign Up or Login
         </Link>
@@ -89,7 +89,7 @@ const IconGroup = ({ iconWhiteClass }) => {
       </div> */}
       <div className="same-style cart-wrap d-none d-lg-block mt-2">
         <button className="icon-cart" onClick={(e) => handleClick(e)}>
-          <i className="pe-7s-shopbag" />
+        <i className="pe-7s-cart" />
           <span className="count-style">
             {cartItems && cartItems.length ? cartItems.length : 0}
           </span>

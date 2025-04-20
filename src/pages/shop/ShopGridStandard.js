@@ -108,7 +108,7 @@ const ShopGridStandard = () => {
         <div className="shop-area pb-100">
           <div className="container-fluid">
             <div className="row">
-              <div className="col-lg-2 order-2 order-lg-1 container-contact">
+              <div className="col-lg-2 order-2 order-lg-1 shop-sidebar">
                 {/* shop sidebar */}
                 <div className="sidebar-widget">
                   <h4 className="pro-sidebar-title mx-2">Search </h4>

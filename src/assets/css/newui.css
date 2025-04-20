@@ -1,3 +1,5 @@
+
+
 .welcome-title {
   font-size: 2.5rem;
   color: #000000;
@@ -137,6 +139,12 @@
 
 .container-contact {
   background: linear-gradient(180deg, #e6f7f0 0%, #4ecca6 100%);
+  min-height: 100vh;
+  padding: 40px 0;
+}
+.shop-sidebar{
+  background-color: #ffffff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
   min-height: 100vh;
   padding: 40px 0;
 }
@@ -503,7 +511,7 @@
   color: white;
   border-top-left-radius: 20px;
   border-bottom-left-radius: 20px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); */
  
 
 }
@@ -511,11 +519,12 @@
 .form-section {
   background-color: white;
   color: #000000;
+  border: #3b870d 1px solid;
 
   /* border-top-right-radius: 20px; */
   /* border-bottom-right-radius: 20px; */
   border-radius: 25px 0px 0px 25px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); */
 }
 
 /* Updated Navigation Styling */
@@ -572,8 +581,8 @@
   color: white;
 }
 .btn-primary {
-  background-color: #3b9640;
-  border-color:  #3b9640;
+  background-color: #01483C;
+  border-color:  #01483C;
 
 
 }
@@ -626,3 +635,12 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
 
 }
+
+.register-btn{
+
+  border-radius: 25px;
+  font-size: 0.9rem;
+ 
+}
+
+

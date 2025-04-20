@@ -360,7 +360,7 @@ const LoginRegister = () => {
           <div className="row w-100">
             <div className="col-md-6 d-flex justify-content-center align-items-center">
               <h1 className="green-section-right">Ready to Go Green?</h1>
-              <img src="assets/img/banner/Abstraction.png" className="img-fluid" style={{height:"300px",width:"300px"}}/>
+              {/* <img src="assets/img/banner/Abstraction.png" className="img-fluid" style={{height:"300px",width:"300px"}}/> */}
             </div>
             <div className="col-md-6 form-section pb-5 green-section-left">
               <Tab.Container defaultActiveKey="login">
@@ -429,9 +429,12 @@ const LoginRegister = () => {
                           Remember me
                         </label> */}
                       </div>
-                      <button type="submit" className="btn btn-primary w-25">
-                        Login
-                      </button>
+                      <div className="row d-flex justify-content-center">
+                        <button type="submit" className="btn btn-primary w-50">
+                          Login
+                        </button>
+                      </div>
+               
                     </form>
                   </Tab.Pane>
 
@@ -549,10 +552,11 @@ const LoginRegister = () => {
                           />
                         </div>
                       </div>
-
-                      <button type="submit" className="btn btn-primary w-50">
-                        Create Account
-                      </button>
+                      <div className="row d-flex justify-content-center">
+                        <button type="submit" className="btn btn-primary w-75">
+                          Create Account
+                        </button>
+                      </div>
                     </form>
                   </Tab.Pane>
                 </Tab.Content>

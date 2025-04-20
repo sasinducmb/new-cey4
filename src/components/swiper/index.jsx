@@ -53,7 +53,7 @@ const SwiperSlider = forwardRef(
             >
                 <Swiper {...sliderOptions}>{children}</Swiper>
 
-                {sliderOptions?.navigation && (
+                {/* {sliderOptions?.navigation && (
                     <>
                         <button
                             type="button"
@@ -69,7 +69,7 @@ const SwiperSlider = forwardRef(
                             <i className={cn(nextIcon, "icon")} style={{ fontSize: "4.5rem", fontWeight: "900" }} />
                         </button>
                     </>
-                )}
+                )} */}
             </div>
         );
     }

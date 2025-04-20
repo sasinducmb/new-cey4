@@ -51,16 +51,15 @@ const About = () => {
 
         {/* brand logo slider */}
         {/* <BrandLogoSliderOne spaceBottomClass="pb-70" /> */}
-        <div className="container-fluid border">
+        {/* <div className="container-fluid border">
           <div className="row">
-
-          <img
-            src="assets/img/banner/about-banner.png"
-            alt="Respect for Nature"
-            className="img-fluid"
-          />
+            <img
+              src="assets/img/banner/about-banner.png"
+              alt="Respect for Nature"
+              className="img-fluid"
+            />
           </div>
-        </div>
+        </div> */}
 
         <div className="container mt-5">
           <h1 className="text-center mb-4">About Us</h1>
@@ -70,6 +69,13 @@ const About = () => {
             public. We are focusing on this through various aspects and also we
             are building core values for that.
           </p>
+          <div className="row mb-3">
+            {/* video content */}
+            <video width="100%" autoPlay loop>
+              <source src="assets/img/video/0420.mp4" type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
+          </div>
           <div className="row text-center">
             <div className="col-md-6 mb-4 d-flex">
               <div className="card about-card h-100">
