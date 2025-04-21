@@ -32,7 +32,7 @@ const TabProductTen = ({
             // type="new"          // Uncomment if a specific type is required
 
             start={0}
-            end={4}
+            end={8}
             spaceBottomClass="mb-25"
           />
         </div>
@@ -56,8 +56,8 @@ const TabProductTen = ({
           <ProductGrid
             // category={category} // Uncomment and define `category` if needed
             // type="new"          // Uncomment if a specific type is required
-            start={5}
-            end={8}
+            start={9}
+            end={17}
             spaceBottomClass="mb-25"
           />
         </div>

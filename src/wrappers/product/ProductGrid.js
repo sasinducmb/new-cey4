@@ -20,20 +20,22 @@ const ProductGrid = ({
   const { compareItems } = useSelector((state) => state.compare);
   // const prods = getProducts(products, category, type, limit)
   // console.log(products)
-  const chunkArray = (arr, chunkSize, start = 0, end = null) => {
+  const chunkArray = (arr, chunkSize) => {
     const result = [];
-  
     for (let i = 0; i < arr.length; i += chunkSize) {
       result.push(arr.slice(i, i + chunkSize));
     }
-  
-    // Apply slicing based on start and end index of chunks
-    return result.slice(start, end ?? result.length);
+    return result;
   };
-
-  // Chunk products into groups of 4
+  
+  // Slice the products directly based on start and end
+  const slicedProducts = products.slice(start, end);
+  
+  // Then chunk the sliced products
   const chunkSize = isMobile ? 1 : 4;
-  const productChunks = chunkArray(products, chunkSize, start, end);
+  const productChunks = chunkArray(slicedProducts, chunkSize);
+  
+  console.log(productChunks);
   return (
    
     <Carousel>

@@ -70,11 +70,12 @@ const IconGroup = ({ iconWhiteClass }) => {
           </span>
         </Link>
       </div> */}
-
-      <div className="d-none d-lg-block">
+{/* btn btn-success register-btn */}
+      <div className="d-none d-lg-block mt-2">
         <Link
           to={process.env.PUBLIC_URL + "/login-register"}
-          className="btn btn-success register-btn"
+          className=""
+          style={{color:"green",fontWeight:"bold"}}
         >
           Sign Up or Login
         </Link>
