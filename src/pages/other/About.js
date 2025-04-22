@@ -55,13 +55,23 @@ const About = () => {
             />
           </div>
         </div> */}{" "}
-        <div className="container-fluid border p-0">
+        {/* <div className="container-fluid border p-0">
           <img
             src="assets/img/banner/newAboutUs.png"
             alt="Butterfly Decoration"
             className="img-fluid w-100 rounded-0"
           />
-        </div>
+          
+        </div> */}
+
+
+         <div className="row ">
+          {/* video content */}
+          <video width="100%" autoPlay loop>
+              <source src="assets/img/video/new.mp4" type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
+          </div>
         <div className="container mt-5 ">
           {/* <h1 className="text-center mb-4 fw-bold">About Us</h1> */}
 
@@ -111,13 +121,7 @@ const About = () => {
               </div>
             </div>
           </div>
-          {/* <div className="row "> */}
-          {/* video content */}
-          {/* <video width="100%" autoPlay loop>
-              <source src="assets/img/video/0420.mp4" type="video/mp4" />
-              Your browser does not support the video tag.
-            </video> */}
-          {/* </div> */}
+         
           <div className="row text-center">
             <div className="col-md-6 mb-4 d-flex">
               <div className="card about-card h-100">
