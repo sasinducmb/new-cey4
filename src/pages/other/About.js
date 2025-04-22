@@ -65,7 +65,7 @@ const About = () => {
         <div className="container mt-5 ">
           {/* <h1 className="text-center mb-4 fw-bold">About Us</h1> */}
 
-          <p className="text-center" style={{fontSize:"18px"}}>
+          <p className="text-center">
             Our main goal is to create an environmentally friendly lifestyle by
             promoting renewable and bio-degradable solutions to the general
             public. We are focusing on this through various aspects and also we
