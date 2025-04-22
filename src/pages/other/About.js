@@ -63,15 +63,13 @@ const About = () => {
           />
           
         </div> */}
-
-
-         <div className="row ">
+        <div className="row ">
           {/* video content */}
           <video width="100%" autoPlay loop>
-              <source src="assets/img/video/new.mp4" type="video/mp4" />
-              Your browser does not support the video tag.
-            </video>
-          </div>
+            <source src="assets/img/video/new.mp4" type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
+        </div>
         <div className="container mt-5 ">
           {/* <h1 className="text-center mb-4 fw-bold">About Us</h1> */}
 
@@ -84,10 +82,12 @@ const About = () => {
           <div class="container mt-5 ">
             <div class="row mb-4">
               <div class="col-md-6">
-                <div class="card text-white gradient-background mb-4 h-100 " style={{border:"none"}}>
-        
-                    <h3 className="text-center mt-4 fw-bold">Vision</h3>
-                
+                <div
+                  class="card text-white gradient-background mb-4 h-100 "
+                  style={{ border: "none" }}
+                >
+                  <h3 className="text-center mt-4 fw-bold">Vision</h3>
+
                   <div class="card-body">
                     <p class="card-text vesion-card">
                       We envision a future where sustainable consumerism is the
@@ -103,10 +103,12 @@ const About = () => {
               </div>
 
               <div class="col-md-6">
-                <div class="card text-white gradient-background mb-3 h-100" style={{border:"none"}}>
-                
-                <h3 className="text-center mt-4 fw-bold">Mission</h3>
-                  
+                <div
+                  class="card text-white gradient-background mb-3 h-100"
+                  style={{ border: "none" }}
+                >
+                  <h3 className="text-center mt-4 fw-bold">Mission</h3>
+
                   <div class="card-body">
                     <p class="card-text vesion-card">
                       Our mission is to empower consumers to make informed
@@ -121,7 +123,7 @@ const About = () => {
               </div>
             </div>
           </div>
-         
+
           <div className="row text-center">
             <div className="col-md-6 mb-4 d-flex">
               <div className="card about-card h-100">
@@ -133,11 +135,9 @@ const About = () => {
                   />
                   <h5 className="card-title mt-3">RESPECT FOR NATURE</h5>
                   <p className="card-text">
-                    Respect for nature is about recognizing our deep connection
-                    to the environment and taking responsibility for its
-                    protection. We have been implementing business decisions
-                    while protecting the ecosystem, promoting sustainability and
-                    respecting nature.
+                    We value our connection to nature by making responsible
+                    business decisions that protect the environment and promote
+                    sustainability.
                   </p>
                 </div>
               </div>
@@ -152,10 +152,7 @@ const About = () => {
                   />
                   <h5 className="card-title mt-3">STEWARDSHIP</h5>
                   <p className="card-text">
-                    We provide clear leadership and responsibility in direct
-                    outreach, and make available resources for investing in and
-                    nurturing future generations. It is creating a healthy
-                    environment and a moral society.
+                  We lead with purpose, offering support and resources to empower future generations and build a healthy, ethical society.
                   </p>
                 </div>
               </div>
@@ -170,11 +167,7 @@ const About = () => {
                   />
                   <h5 className="card-title mt-3">SUSTAINABILITY</h5>
                   <p className="card-text">
-                    We plan for the needs of the present without compromising
-                    the well-being of future generations. Sustainability is
-                    about reducing waste, conserving resources, being efficient
-                    and respecting nature, and working to create a healthier,
-                    better lifestyle for all.
+                  We meet today's needs responsibly, ensuring a sustainable future through efficiency, conservation, and respect for nature
                   </p>
                 </div>
               </div>
@@ -191,11 +184,7 @@ const About = () => {
                     REDUCED ENERGY CONSUMPTION
                   </h5>
                   <p className="card-text">
-                    Our production process uses 100% natural resources, which
-                    does not harm the environment, but we reduce the amount of
-                    waste we throw away and use resources with maximum
-                    efficiency and effectiveness by using new technology. This
-                    has a significant positive impact on the environment.
+                  We use 100% natural resources and advanced technology to minimize waste and maximize efficiency, positively impacting the environment
                   </p>
                 </div>
               </div>
@@ -210,12 +199,7 @@ const About = () => {
                   />
                   <h5 className="card-title mt-3">ZERO WASTE</h5>
                   <p className="card-text">
-                    Our concept uses environmentally friendly materials from the
-                    beginning of production to the end of consumption, and waste
-                    is kept to a minimum, with many items being reusable and
-                    others being biodegradable without harming the environment.
-                    Each of our small efforts makes a huge positive contribution
-                    to the future of
+                  From production to consumption, we use eco-friendly, reusable, and biodegradable materials, minimizing waste and contributing to a sustainable future
                   </p>
                 </div>
               </div>
@@ -233,11 +217,7 @@ const About = () => {
                     Sustainable Transport & Packaging
                   </h5>
                   <p className="card-text">
-                    Efficient public transportation and environmentally friendly
-                    packaging are often used from the time goods are produced to
-                    the time they reach the consumer. Every step towards
-                    sustainable mobility contributes to a more resilient and
-                    environmentally responsible future
+                  We use eco-friendly transport and packaging from production to delivery, promoting sustainable mobility for a greener future.
                   </p>
                 </div>
               </div>
@@ -254,12 +234,7 @@ const About = () => {
                     Local and Sustainable Food
                   </h5>
                   <p className="card-text">
-                    Due to a busy lifestyle, we are prone to major health and
-                    disease problems due to their  tendency towards simple and
-                    artificial food patterns. Therefore, the aim is to create a
-                    healthy human resource by adopting a non-artificial, local
-                    and healthy food pattern that is free from toxins and
-                    pesticides.
+                  Busy lifestyles and artificial diets harm our health, so we promote clean, local, and toxin-free food for a healthier future.
                   </p>
                 </div>
               </div>
@@ -276,12 +251,7 @@ const About = () => {
                     Natural Habitats and Wildlife
                   </h5>
                   <p className="card-text">
-                    Our concept uses environmentally friendly materials from the
-                    beginning of production to the end of consumption, and waste
-                    is kept to a minimum, with many items being reusable and
-                    others being biodegradable without harming the environment.
-                    Each of our small efforts makes a huge positive contribution
-                    to the future of society
+                  We use eco-friendly, reusable, and biodegradable materials from start to finish, minimizing waste and making a positive impact on society’s future.
                   </p>
                 </div>
               </div>
@@ -296,11 +266,7 @@ const About = () => {
                   />
                   <h5 className="card-title mt-3">Culture and Heritage</h5>
                   <p className="card-text">
-                    This concept, in production and other actions, protects and
-                    respects the past values, culture, heritage, language, art,
-                    customs, and traditions inherited by humanity, giving
-                    respect to human history and creating a deep understanding
-                    for future generations.
+                  Our approach honors cultural heritage and traditions, preserving human history and passing its value to future generations.
                   </p>
                 </div>
               </div>
