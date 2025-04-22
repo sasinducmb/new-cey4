@@ -20,18 +20,18 @@ const params = {
 const HeroSliderSeventeen = () => {
   // Array of 4 image objects for the carousel
   const carouselMedia = [
-    // {
-    //   id: 1,
-    //   type: "image",
-    //   source: "assets/img/banner/hero_image.png",
-    //   alt: "Sustainable Products 1"
-    // },
-    // {
-    //   id: 2,
-    //   type: "image",
-    //   source: "assets/img/banner/webbanner.png",
-    //   alt: "Sustainable Products 2"
-    // },
+    {
+      id: 1,
+      type: "image",
+      source: "assets/img/banner/product2.png",
+      alt: "Sustainable Products 1"
+    },
+    {
+      id: 2,
+      type: "image",
+      source: "assets/img/banner/product02.png",
+      alt: "Sustainable Products 2"
+    },
     {
       id: 3,
       type: "video",

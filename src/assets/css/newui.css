@@ -1,4 +1,6 @@
-
+body {
+  overflow-x: hidden;
+}
 
 .welcome-title {
   font-size: 2.5rem;
@@ -142,9 +144,9 @@
   min-height: 100vh;
   padding: 40px 0;
 }
-.shop-sidebar{
+.shop-sidebar {
   background-color: #ffffff;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   min-height: 100vh;
   padding: 40px 0;
 }
@@ -507,13 +509,11 @@
 
 /* src/CreateAccount.css */
 .green-section {
-  background-color:#55B76B; /* Green */
+  background-color: #55b76b; /* Green */
   color: white;
   border-top-left-radius: 20px;
   border-bottom-left-radius: 20px;
   /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); */
- 
-
 }
 
 .form-section {
@@ -581,10 +581,8 @@
   color: white;
 }
 .btn-primary {
-  background-color: #01483C;
-  border-color:  #01483C;
-
-
+  background-color: #01483c;
+  border-color: #01483c;
 }
 
 .btn-primary:hover,
@@ -604,8 +602,7 @@
   }
 }
 
-
-.green-section-right{
+.green-section-right {
   color: white;
   margin-top: 20px;
 }
@@ -631,16 +628,21 @@
   text-decoration: underline;
 }
 
-.edit-profile{
+.edit-profile {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
-
 }
 
-.register-btn{
-
+.register-btn {
   border-radius: 25px;
   font-size: 0.9rem;
- 
 }
 
+.gradient-background {
+  background: linear-gradient(to bottom, #2BFCA8 0%, #FFFFFF 100%);
 
+}
+.vesion-card{
+  line-height: 30px;
+  /* font-size: 18px; */
+  text-align: center;
+}

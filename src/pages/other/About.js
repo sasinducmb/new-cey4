@@ -9,6 +9,7 @@ import TextGridOne from "../../wrappers/text-grid/TextGridOne";
 import FunFactOne from "../../wrappers/fun-fact/FunFactOne";
 import TeamMemberOne from "../../wrappers/team-member/TeamMemberOne";
 import BrandLogoSliderOne from "../../wrappers/brand-logo/BrandLogoSliderOne";
+import { node } from "prop-types";
 // import backgroundImage from '../../../public/assets/img/banner/new-about-back.png';
 const About = () => {
   let { pathname } = useLocation();
@@ -22,7 +23,6 @@ const About = () => {
       />
       <LayoutOne headerTop="visible">
         {/* breadcrumb */}
-
         {/* <Breadcrumb
           pages={[
             { label: 'Home', path: process.env.PUBLIC_URL + '/' },
@@ -32,23 +32,18 @@ const About = () => {
         {/* <div className="about-banner"></div> */}
         {/* section title with text */}
         {/* <SectionTitleWithText spaceTopClass="pt-100" spaceBottomClass="pb-95" /> */}
-
         {/* banner */}
         {/* <BannerOne spaceBottomClass="pb-70" /> */}
-
         {/* text grid */}
         {/* <TextGridOne spaceBottomClass="pb-70" /> */}
-
         {/* fun fact */}
         {/* <FunFactOne
           spaceTopClass="pt-100"
           spaceBottomClass="pb-70"
           bgClass="bg-gray-3"
         /> */}
-
         {/* team member */}
         {/* <TeamMemberOne spaceTopClass="pt-10" spaceBottomClass="pb-20" /> */}
-
         {/* brand logo slider */}
         {/* <BrandLogoSliderOne spaceBottomClass="pb-70" /> */}
         {/* <div className="container-fluid border">
@@ -59,23 +54,70 @@ const About = () => {
               className="img-fluid"
             />
           </div>
-        </div> */}
+        </div> */}{" "}
+        <div className="container-fluid border p-0">
+          <img
+            src="assets/img/banner/newAboutUs.png"
+            alt="Butterfly Decoration"
+            className="img-fluid w-100 rounded-0"
+          />
+        </div>
+        <div className="container mt-5 ">
+          {/* <h1 className="text-center mb-4 fw-bold">About Us</h1> */}
 
-        <div className="container mt-5">
-          <h1 className="text-center mb-4">About Us</h1>
-          <p className="text-center">
+          <p className="text-center" style={{fontSize:"18px"}}>
             Our main goal is to create an environmentally friendly lifestyle by
             promoting renewable and bio-degradable solutions to the general
             public. We are focusing on this through various aspects and also we
             are building core values for that.
           </p>
-          <div className="row mb-3">
-            {/* video content */}
-            <video width="100%" autoPlay loop>
+          <div class="container mt-5 ">
+            <div class="row mb-4">
+              <div class="col-md-6">
+                <div class="card text-white gradient-background mb-4 h-100 " style={{border:"none"}}>
+        
+                    <h3 className="text-center mt-4 fw-bold">Vision</h3>
+                
+                  <div class="card-body">
+                    <p class="card-text vesion-card">
+                      We envision a future where sustainable consumerism is the
+                      standard, and every purchase contributes to a healthier
+                      planet. Our retail arm, cey4hub, aims to be the go-to
+                      destination for individuals seeking high-quality,
+                      eco-friendly goods, fostering a community that celebrates
+                      responsible living and champions innovation in sustainable
+                      practices.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <div class="card text-white gradient-background mb-3 h-100" style={{border:"none"}}>
+                
+                <h3 className="text-center mt-4 fw-bold">Mission</h3>
+                  
+                  <div class="card-body">
+                    <p class="card-text vesion-card">
+                      Our mission is to empower consumers to make informed
+                      choices by providing an ethically sourced selection of
+                      eco-friendly products that prioritise sustainability,
+                      ethical sourcing, and minimal environmental impact. We are
+                      dedicated to fostering a conscious consumer culture that
+                      values the health of our planet and communities.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          {/* <div className="row "> */}
+          {/* video content */}
+          {/* <video width="100%" autoPlay loop>
               <source src="assets/img/video/0420.mp4" type="video/mp4" />
               Your browser does not support the video tag.
-            </video>
-          </div>
+            </video> */}
+          {/* </div> */}
           <div className="row text-center">
             <div className="col-md-6 mb-4 d-flex">
               <div className="card about-card h-100">

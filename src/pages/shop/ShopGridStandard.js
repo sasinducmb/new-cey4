@@ -10,7 +10,7 @@ import ShopSidebar from "../../wrappers/product/ShopSidebar";
 import ShopTopbar from "../../wrappers/product/ShopTopbar";
 import ShopProducts from "../../wrappers/product/ShopProducts";
 import { fetchProducts } from "../../store/slices/product-slice";
-
+import Carousel from "react-bootstrap/Carousel";
 const ShopGridStandard = () => {
   const [layout, setLayout] = useState("grid three-column");
   const [sortType, setSortType] = useState("");
@@ -104,7 +104,7 @@ const ShopGridStandard = () => {
             { label: "Shop", path: process.env.PUBLIC_URL + pathname },
           ]}
         /> */}
-    
+
         <div className="shop-area pb-100">
           <div className="container-fluid">
             <div className="row">
@@ -125,7 +125,7 @@ const ShopGridStandard = () => {
                       </button>
                     </form>
                   </div>
-                  
+
                   <ShopSidebar
                     products={products}
                     getSortParams={getSortParams}
@@ -134,7 +134,23 @@ const ShopGridStandard = () => {
                 </div>
               </div>
               <div className="col-lg-10 order-1 order-lg-2">
-              {/* <img src="assets/img/banner/shop-img.png"  className="img-fluid w-100 h-25"/> */}
+                <Carousel fade indicators={false} className="custom-carousel">
+                  <Carousel.Item>
+                    <img
+                      src="assets/img/banner/shopbanner1.png"
+                      className="d-block w-100 rounded-0"
+                      alt="First slide"
+                    />
+                  </Carousel.Item>
+                  <Carousel.Item>
+                    <img
+                      src="assets/img/banner/shopbanner2.png"
+                      className="d-block w-100 rounded-0"
+                      alt="Second slide"
+                    />
+                  </Carousel.Item>
+                </Carousel>
+
                 {/* shop topbar default */}
                 <ShopTopbar
                   getLayout={getLayout}

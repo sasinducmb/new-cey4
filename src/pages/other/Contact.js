@@ -179,10 +179,18 @@ const Contact = () => {
             </div>
           </div>
         </div> */}
+        <div className="container-fluid border p-0">
+          <img
+            src="assets/img/banner/newContactUs.png"
+            alt="Butterfly Decoration"
+            className="img-fluid w-100 rounded-0"
+          />
+        </div>
+
         <div className="container-contact">
           <div className="text-center mb-5">
-            <h2 className="fw-bold">Contact Us</h2>
-            <p>Any question or remarks? Just write us a message!</p>
+            {/* <h2 className="fw-bold">Contact Us</h2> */}
+            <p style={{fontSize:"18px"}}>Any question or remarks? Just write us a message!</p>
           </div>
 
           <div className="row justify-content-center">
@@ -482,16 +490,14 @@ const Contact = () => {
                     </div>
                   </div>
                 </div>
-              
               </div>
             </div>
           </div>
         </div>
         <div className="container">
-
-        <div className="contact-map mb-10 mt-5">
-                  <GoogleMap lat={51.607018} lng={-0.275863} />
-                </div>
+          <div className="contact-map mb-10 mt-5">
+            <GoogleMap lat={51.607018} lng={-0.275863} />
+          </div>
         </div>
       </LayoutOne>
     </Fragment>

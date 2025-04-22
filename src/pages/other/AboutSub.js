@@ -1,8 +1,12 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 function AboutSub() {
+  const navigate = useNavigate();
   const backgroundImagePathback = `${process.env.PUBLIC_URL}/assets/img/banner/aboutnew.jpg`;
-
+  const handleReadMore = () => {
+    navigate("/about");
+  };
   return (
     <section className="cey4-about-section py-5">
       <div
@@ -28,11 +32,12 @@ function AboutSub() {
           }}
         ></div>
 
-
         <div className="row justify-content-center text-center mb-4">
           <div className="col-lg-8">
             <h2 className="cey4-welcome-text fw-bold mt-2">About us</h2>
-            <p className="cey4-welcome-text">this is all we are cey4hub about section</p>
+            <p className="cey4-welcome-text">
+              this is all we are cey4hub about section
+            </p>
           </div>
         </div>
 
@@ -47,14 +52,20 @@ function AboutSub() {
           {/* <img src="assets/img/banner/choose-1.png" alt="Sustainable Products" className="img-fluid" /> */}
 
           <div className="cey4-content-overlay p-4 p-md-5">
-            <p className="cey4-welcome-text mb-4" style={{ position: "relative", zIndex: 2}}>
+            <p
+              className="cey4-welcome-text mb-4"
+              style={{ position: "relative", zIndex: 2 }}
+            >
               welcome to cey4hub - your trusted destination for eco-friendly and
               sustainable products. we are driven by a passion to build a
               greener future by offering high-quality goods that not only cater
               to your needs but also contribute positively to the environment.
             </p>
 
-            <h4 className="mt-5 mb-3 cey4-welcome-text" style={{ fontWeight: "bold"}}>
+            <h4
+              className="mt-5 mb-3 cey4-welcome-text"
+              style={{ fontWeight: "bold" }}
+            >
               Mission Statement
             </h4>
             <p className="cey4-welcome-text cey4-welcome-text-new">
@@ -66,7 +77,9 @@ function AboutSub() {
               communities
             </p>
 
-            <h4 className="mt-5 mb-3 fw-bold cey4-welcome-text">Vision Statement</h4>
+            <h4 className="mt-5 mb-3 fw-bold cey4-welcome-text">
+              Vision Statement
+            </h4>
             <p className="cey4-welcome-text cey4-welcome-text-new">
               we envision a future where sustainable consumerism is the
               standard, and every purchase contributes to a healthier planet.
@@ -77,7 +90,12 @@ function AboutSub() {
             </p>
 
             <div className="text-center mt-4 cey4-welcome-text">
-              <button className=" px-4 py-2 btn btn-success">READ MORE</button>
+              <button
+                className="px-4 py-2 btn btn-success"
+                onClick={handleReadMore}
+              >
+                READ MORE
+              </button>
             </div>
           </div>
         </div>
