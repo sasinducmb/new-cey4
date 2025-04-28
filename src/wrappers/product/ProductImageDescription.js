@@ -77,10 +77,10 @@ const ProductImageDescription = ({
                   (Approximately)
                 </li>
               )}
-              {product.weight && product.weightMeasure && (
+              {product.weight && (
                 <li>
                   <strong> Weight:</strong> {product.weight}{" "}
-                  {product.weightMeasure}g (Approximately)
+                  g (Approximately)
                 </li>
               )}
               {product.capacity &&

@@ -1,16 +1,15 @@
 import { Fragment, useState, useEffect } from "react";
-import Paginator from "react-hooks-paginator";
 import { useDispatch, useSelector } from "react-redux";
-import { useLocation } from "react-router-dom";
+import { useLocation, useParams, useNavigate } from "react-router-dom";
 import { getSortedProducts } from "../../helpers/product";
 import SEO from "../../components/seo";
 import LayoutOne from "../../layouts/LayoutOne";
-import Breadcrumb from "../../wrappers/breadcrumb/Breadcrumb";
 import ShopSidebar from "../../wrappers/product/ShopSidebar";
 import ShopTopbar from "../../wrappers/product/ShopTopbar";
 import ShopProducts from "../../wrappers/product/ShopProducts";
 import { fetchProducts } from "../../store/slices/product-slice";
 import Carousel from "react-bootstrap/Carousel";
+
 const ShopGridStandard = () => {
   const [layout, setLayout] = useState("grid three-column");
   const [sortType, setSortType] = useState("");
@@ -18,14 +17,15 @@ const ShopGridStandard = () => {
   const [filterSortType, setFilterSortType] = useState("");
   const [filterSortValue, setFilterSortValue] = useState("");
   const [searchTerm, setSearchTerm] = useState("");
-  const [offset, setOffset] = useState(0);
-  const [currentPage, setCurrentPage] = useState(1);
   const [currentData, setCurrentData] = useState([]);
   const [sortedProducts, setSortedProducts] = useState([]);
   const { products } = useSelector((state) => state.product);
   const dispatch = useDispatch();
-  // console.log(products);
+  const { page } = useParams();
+  const navigate = useNavigate();
+
   const pageLimit = 16;
+  const currentPage = page ? parseInt(page, 10) : 1;
   let { pathname } = useLocation();
 
   const getLayout = (layout) => {
@@ -47,12 +47,12 @@ const ShopGridStandard = () => {
   }, [dispatch]);
 
   useEffect(() => {
-    // Filter products based on the search term
+    const offset = (currentPage - 1) * pageLimit;
+
     const filteredProducts = products.filter((product) =>
       product.name.toLowerCase().includes(searchTerm.toLowerCase())
     );
 
-    // Apply category filtering
     const categoryFilteredProducts =
       filterSortType === "category" && filterSortValue
         ? filteredProducts.filter(
@@ -60,7 +60,6 @@ const ShopGridStandard = () => {
           )
         : filteredProducts;
 
-    // Apply sorting logic
     let sortedProducts = getSortedProducts(
       categoryFilteredProducts,
       sortType,
@@ -77,7 +76,7 @@ const ShopGridStandard = () => {
     setSortedProducts(sortedProducts);
     setCurrentData(sortedProducts.slice(offset, offset + pageLimit));
   }, [
-    offset,
+    currentPage,
     products,
     sortType,
     sortValue,
@@ -89,6 +88,50 @@ const ShopGridStandard = () => {
   const handleSearchChange = (e) => {
     setSearchTerm(e.target.value);
   };
+
+  // Custom pagination component to replace react-hooks-paginator
+  const Pagination = ({ totalPages }) => {
+    const pages = Array.from({ length: totalPages }, (_, i) => i + 1);
+    
+    const handlePageClick = (newPage) => {
+      if (newPage !== currentPage) {
+        navigate(`${process.env.PUBLIC_URL}/shop-grid-standard/${newPage}`);
+      }
+    };
+    
+    return (
+      <div className="pro-pagination-style text-center mt-30">
+        <ul className="mb-0 mt-0">
+          {currentPage > 1 && (
+            <li>
+              <button onClick={() => handlePageClick(currentPage - 1)}>
+                «
+              </button>
+            </li>
+          )}
+          
+          {pages.map(page => (
+            <li key={page} className={page === currentPage ? "active" : ""}>
+              <button onClick={() => handlePageClick(page)}>
+                {page}
+              </button>
+            </li>
+          ))}
+          
+          {currentPage < totalPages && (
+            <li>
+              <button onClick={() => handlePageClick(currentPage + 1)}>
+                »
+              </button>
+            </li>
+          )}
+        </ul>
+      </div>
+    );
+  };
+
+  const totalPages = Math.ceil(sortedProducts.length / pageLimit);
+
   return (
     <Fragment>
       <SEO
@@ -97,19 +140,10 @@ const ShopGridStandard = () => {
       />
 
       <LayoutOne headerTop="visible">
-        {/* breadcrumb */}
-        {/* <Breadcrumb
-          pages={[
-            { label: "Home", path: process.env.PUBLIC_URL + "/" },
-            { label: "Shop", path: process.env.PUBLIC_URL + pathname },
-          ]}
-        /> */}
-
         <div className="shop-area pb-100">
           <div className="container-fluid">
             <div className="row">
               <div className="col-lg-2 order-2 order-lg-1 shop-sidebar">
-                {/* shop sidebar */}
                 <div className="sidebar-widget">
                   <h4 className="pro-sidebar-title mx-2">Search </h4>
                   <div className="pro-sidebar-search mb-50 mt-25">
@@ -118,7 +152,7 @@ const ShopGridStandard = () => {
                         type="text"
                         placeholder="Search here..."
                         value={searchTerm}
-                        onChange={handleSearchChange} // Handle input change
+                        onChange={handleSearchChange}
                       />
                       <button>
                         <i className="pe-7s-search" />
@@ -151,7 +185,6 @@ const ShopGridStandard = () => {
                   </Carousel.Item>
                 </Carousel>
 
-                {/* shop topbar default */}
                 <ShopTopbar
                   getLayout={getLayout}
                   getFilterSortParams={getFilterSortParams}
@@ -159,23 +192,10 @@ const ShopGridStandard = () => {
                   sortedProductCount={currentData.length}
                 />
 
-                {/* shop page content default */}
                 <ShopProducts layout={layout} products={currentData} />
 
-                {/* shop product pagination */}
-                <div className="pro-pagination-style text-center mt-30">
-                  <Paginator
-                    totalRecords={sortedProducts.length}
-                    pageLimit={pageLimit}
-                    pageNeighbours={2}
-                    setOffset={setOffset}
-                    currentPage={currentPage}
-                    setCurrentPage={setCurrentPage}
-                    pageContainerClass="mb-0 mt-0"
-                    pagePrevText="«"
-                    pageNextText="»"
-                  />
-                </div>
+                {/* Custom pagination instead of react-hooks-paginator */}
+                <Pagination totalPages={totalPages} />
               </div>
             </div>
           </div>

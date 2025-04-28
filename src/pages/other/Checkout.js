@@ -158,6 +158,22 @@ const Checkout = () => {
                   <div className="col-lg-7">
                     <div className="billing-info-wrap">
                       <h3>Billing Details</h3>
+                      <div
+                        style={{
+                          backgroundColor: "#fff3cd",
+                          color: "#856404",
+                          padding: "10px 15px",
+                          border: "1px solid #ffeeba",
+                          borderRadius: "5px",
+                          marginBottom: "20px",
+                        }}
+                      >
+                        <strong>Note:</strong> Our standard delivery service is
+                        limited to the United Kingdom. If you are outside the
+                        UK, please contact our customer service for a delivery
+                        quote.
+                      </div>
+
                       <div className="row">
                         <div className="col-lg-6 col-md-6">
                           <div className="billing-info mb-20">

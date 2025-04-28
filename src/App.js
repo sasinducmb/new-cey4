@@ -103,9 +103,9 @@ const Wishlist = lazy(() => import("./pages/other/Wishlist"));
 const Compare = lazy(() => import("./pages/other/Compare"));
 const Checkout = lazy(() => import("./pages/other/Checkout"));
 const EmailVerification = lazy(() => import("./pages/other/EmailVerification"));
-  
+
 const NotFound = lazy(() => import("./pages/other/NotFound"));
-const OrderConfirm = lazy(() => import("./pages/other/OrderConfirm"));  
+const OrderConfirm = lazy(() => import("./pages/other/OrderConfirm"));
 const App = () => {
   return (
     <Router>
@@ -281,10 +281,15 @@ const App = () => {
             /> */}
 
             {/* Shop pages */}
-            <Route
+            {/* <Route
               path={process.env.PUBLIC_URL + "/shop-grid-standard"}
               element={<ShopGridStandard />}
+            /> */}
+            <Route
+              path={process.env.PUBLIC_URL + "/shop-grid-standard/:page?"}
+              element={<ShopGridStandard />}
             />
+
             <Route
               path={process.env.PUBLIC_URL + "/shop-grid-filter"}
               element={<ShopGridFilter />}
@@ -393,7 +398,7 @@ const App = () => {
               path={process.env.PUBLIC_URL + "/checkout"}
               element={<Checkout />}
             />
-             <Route
+            <Route
               path={process.env.PUBLIC_URL + "/checkout/:id/:itemQuantity"}
               element={<Checkout />}
             />
@@ -401,11 +406,14 @@ const App = () => {
               path={process.env.PUBLIC_URL + "/email-verification"}
               element={<EmailVerification />}
             />
-             <Route
+            <Route
               path={process.env.PUBLIC_URL + "/order-confirm"}
               element={<OrderConfirm />}
             />
-            <Route path={process.env.PUBLIC_URL + "/order-status"} element={<OrderStatus/>} />
+            <Route
+              path={process.env.PUBLIC_URL + "/order-status"}
+              element={<OrderStatus />}
+            />
 
             <Route path="*" element={<NotFound />} />
           </Routes>
