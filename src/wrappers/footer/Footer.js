@@ -108,8 +108,8 @@ const Footer = () => {
                   />
                 </svg>
               </span>
-              <span>+44 7941332938 </span>
-              <span className="mx-2">+44 7941332938</span>
+              <span>+44(0)79 4133 2938 </span>
+              <span className="mx-2">+44(0)20 3371 178</span>
             </div>
 
             <div className="mb-2 d-flex align-items-center">
@@ -143,7 +143,8 @@ const Footer = () => {
                 </svg>
               </span>
               <span>
-                Unit 24,2nd Floor,Cavendish House
+                Unit 2A,2nd Floor <br />
+                Cavendish House
                 <br />
                 369 Burnt Oak Broadway <br />
                 Edgware HA8 5AW <br />

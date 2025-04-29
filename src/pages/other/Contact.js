@@ -225,10 +225,10 @@ const Contact = () => {
                           </svg>
                           <div>
                             <p className="mb-0 contact-info-p mx-2">
-                              +44 7941332938
+                            +44(0)79 4133 2938 
                             </p>
                             <p className="mb-4 contact-info-p mt-3 mx-2">
-                              +44 2033711782
+                            +44(0)20 3371 178
                             </p>
                           </div>
                         </div>
@@ -266,7 +266,7 @@ const Contact = () => {
                           </svg>
                           <div className="mx-3">
                             <p className="mb-0 contact-info-p-address">
-                              Unit 24,2nd Floor
+                              Unit 2A,2nd Floor
                             </p>
                             <p className="mb-0 contact-info-p-address">
                               Cavendish House
