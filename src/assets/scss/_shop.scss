@@ -293,6 +293,13 @@
   }
 }
 
+.pro-pagination-style li.active button {
+  background-color: green;
+  color: white;
+  border-color: green;
+}
+
+
 @media #{$xs-layout} {
   .shop-area.pb-100 {
     padding-bottom: 45px;

@@ -79,8 +79,13 @@ const Footer = () => {
             </div>
 
             <div className="small">
-              <a href="#" className="text-white text-decoration-none">
+              <a href="/Terms-and-Conditions" className="text-white text-decoration-none">
                 Terms & services
+              </a>
+            </div>
+            <div className="small mt-2">
+              <a href="/privacy-policy" className="text-white text-decoration-none">
+                Privacy policy
               </a>
             </div>
 

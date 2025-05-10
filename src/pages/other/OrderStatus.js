@@ -47,6 +47,11 @@ function OrderStatus() {
                   onChange={(e) => setOrderId(e.target.value)}
                   required
                 />
+                <small className="text-muted d-block mt-2">
+                  Your Order ID is available on your order receipt and order
+                  confirmation email.
+                </small>
+
                 <div className="place-order mt-25">
                   <button type="submit" className="order-status mb-4">
                     Get Order Status
@@ -184,20 +189,18 @@ function OrderStatus() {
                           <br />
                           {order._id}
                         </p>
-                        {
-                          order.status ==="Dispatch" &&(
-
-                        <p>
-                          <span className="label">SHIPPING:</span>
-                          <br />
-                          {order.shippingMethod}
-                        </p>
-                          )
-
-                        }
+                        {order.status === "Dispatch" && (
+                          <p>
+                            <span className="label">SHIPPING:</span>
+                            <br />
+                            {order.shippingMethod}
+                          </p>
+                        )}
                         {order.status === "Dispatch" && order.trackId && (
                           <p>
-                            <span className="label"><b>TRACKING NUMBER:</b></span>
+                            <span className="label">
+                              <b>TRACKING NUMBER:</b>
+                            </span>
                             <br />
                             <b>{order.trackId}</b>
                           </p>

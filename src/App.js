@@ -2,6 +2,8 @@ import { Suspense, lazy } from "react";
 import ScrollToTop from "./helpers/scroll-top";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import OrderStatus from "./pages/other/OrderStatus";
+import Terms from "./pages/other/Terms";
+import PrivacyPolicy from "./pages/other/PrivacyPolicy";
 
 // home pages
 const HomeFashion = lazy(() => import("./pages/home/HomeHandmade"));
@@ -413,6 +415,14 @@ const App = () => {
             <Route
               path={process.env.PUBLIC_URL + "/order-status"}
               element={<OrderStatus />}
+            />
+            <Route 
+              path={process.env.PUBLIC_URL + "/Terms-and-Conditions"}
+              element={<Terms />}
+            />
+             <Route 
+              path={process.env.PUBLIC_URL + "/privacy-policy"}
+              element={<PrivacyPolicy/>}
             />
 
             <Route path="*" element={<NotFound />} />
