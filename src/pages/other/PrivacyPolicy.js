@@ -5,7 +5,7 @@ const PrivacyPolicy = () => {
   return (
     <LayoutOne>
       <div className="container mt-5">
-        <h1 className="text-center" style={{ color: "#4caf50" }}>
+        <h1 className="text-center" style={{ color: "#4caf50",fontWeight:"bold"}}>
           Privacy Policy
         </h1>
         <p className="text-center">
@@ -16,7 +16,7 @@ const PrivacyPolicy = () => {
           practices described in this policy.
         </p>
 
-        <h2 style={{ color: "#4caf50" }}>Information We Collect</h2>
+        <h3 style={{ color: "#4caf50",fontWeight:"bold"}}>Information We Collect</h3>
         <p>
           When you visit our website, we may collect the following information:
         </p>
@@ -38,7 +38,7 @@ const PrivacyPolicy = () => {
           </li>
         </ul>
 
-        <h2 style={{ color: "#4caf50" }}>Use of Information</h2>
+        <h3 style={{ color: "#4caf50",fontWeight:"bold" }}>Use of Information</h3>
         <p>We may use the information collected for the following purposes:</p>
         <ul>
           <li>Processing and fulfilling orders, including delivery.</li>
@@ -58,7 +58,7 @@ const PrivacyPolicy = () => {
           </li>
         </ul>
 
-        <h2 style={{ color: "#4caf50" }}>Information Sharing</h2>
+        <h3 style={{ color: "#4caf50",fontWeight:"bold" }}>Information Sharing</h3>
         <p>
           We respect your privacy and do not sell or transfer your personal
           information to third parties without your consent, except in the
@@ -77,7 +77,7 @@ const PrivacyPolicy = () => {
           </li>
         </ul>
 
-        <h2 style={{ color: "#4caf50" }}>Data Security</h2>
+        <h3 style={{ color: "#4caf50",fontWeight:"bold" }}>Data Security</h3>
         <p>
           We implement industry-standard measures to protect your personal
           information from unauthorized access or disclosure. While we work to
@@ -85,7 +85,7 @@ const PrivacyPolicy = () => {
           completely secure.
         </p>
 
-        <h2 style={{ color: "#4caf50" }}>Cookies and Tracking Technologies</h2>
+        <h3 style={{ color: "#4caf50",fontWeight:"bold" }}>Cookies and Tracking Technologies</h3>
         <p>
           We use cookies to enhance your browsing experience, track website
           traffic, and gather information about your preferences. You may
@@ -93,14 +93,14 @@ const PrivacyPolicy = () => {
           certain website features.
         </p>
 
-        <h2 style={{ color: "#4caf50" }}>Changes to the Privacy Policy</h2>
+        <h3 style={{ color: "#4caf50",fontWeight:"bold" }}>Changes to the Privacy Policy</h3>
         <p>
           Cey4Hub reserves the right to update this Privacy Policy at any time.
           Changes will be posted on this page with the updated date. Please
           review the policy periodically to stay informed.
         </p>
 
-        <h2 style={{ color: "#4caf50" }}>Contact Us</h2>
+        <h3 style={{ color: "#4caf50",fontWeight:"bold" }}>Contact Us</h3>
         <p>
           If you have questions or concerns regarding this Privacy Policy,
           please contact us at{" "}

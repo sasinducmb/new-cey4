@@ -5,7 +5,7 @@ function Terms() {
   return (
     <LayoutOne>
       <div className="container mt-5">
-        <h1 className="text-center" style={{ color: "#4caf50" }}>
+        <h1 className="text-center" style={{ color: "#4caf50",fontWeight:"bold" }}>
           Terms and Conditions
         </h1>
         <p className="text-center">
@@ -16,7 +16,7 @@ function Terms() {
           regulations for the use of our platform and services.
         </p>
 
-        <h2 style={{ color: "#4caf50" }}>Use of the Website</h2>
+        <h3 style={{ color: "#4caf50",fontWeight:"bold" }}>Use of the Website</h3>
         <ul>
           <li>
             You are responsible for maintaining the confidentiality of your
@@ -31,7 +31,7 @@ function Terms() {
           </li>
         </ul>
 
-        <h2 style={{ color: "#4caf50" }}>Account Registration</h2>
+        <h3 style={{ color: "#4caf50",fontWeight:"bold" }}>Account Registration</h3>
         <p>
           To access some features, you may need to create an account. You agree
           to:
@@ -46,7 +46,7 @@ function Terms() {
           </li>
         </ul>
 
-        <h2 style={{ color: "#4caf50" }}>Product Information and Pricing</h2>
+        <h3 style={{ color: "#4caf50",fontWeight:"bold" }}>Product Information and Pricing</h3>
         <ul>
           <li>
             We strive to provide accurate product descriptions and pricing.
@@ -59,7 +59,7 @@ function Terms() {
           </li>
         </ul>
 
-        <h2 style={{ color: "#4caf50" }}>Orders and Payments</h2>
+        <h3 style={{ color: "#4caf50",fontWeight:"bold" }}>Orders and Payments</h3>
         <ul>
           <li>
             By placing an order, you make an offer to purchase the selected
@@ -81,7 +81,7 @@ function Terms() {
           </li>
         </ul>
 
-        <h2 style={{ color: "#4caf50" }}>Shipping and Delivery</h2>
+        <h3 style={{ color: "#4caf50",fontWeight:"bold" }}>Shipping and Delivery</h3>
         <ul>
           <li>
             We strive to ship orders promptly. However, delivery times are
@@ -97,7 +97,7 @@ function Terms() {
           </li>
         </ul>
 
-        <h2 style={{ color: "#4caf50" }}>Returns & Refunds</h2>
+        <h3 style={{ color: "#4caf50",fontWeight:"bold" }}>Returns & Refunds</h3>
         <ul>
           <li>
             Items must be returned in their original condition within the return
@@ -114,7 +114,7 @@ function Terms() {
           </li>
         </ul>
 
-        <h2 style={{ color: "#4caf50" }}>User Conduct</h2>
+        <h3 style={{ color: "#4caf50",fontWeight:"bold" }}>User Conduct</h3>
         <p>You agree not to:</p>
         <ul>
           <li>Use the website for unlawful purposes.</li>
@@ -126,7 +126,7 @@ function Terms() {
           access.
         </p>
 
-        <h2 style={{ color: "#4caf50" }}>Intellectual Property</h2>
+        <h3 style={{ color: "#4caf50",fontWeight:"bold" }}>Intellectual Property</h3>
         <ul>
           <li>
             All website content, including text, images, and graphics, logos,
@@ -140,7 +140,7 @@ function Terms() {
           <li>Use our trademarks or branding without authorization.</li>
         </ul>
 
-        <h2 style={{ color: "#4caf50" }}>Limitation of Liability</h2>
+        <h3 style={{ color: "#4caf50",fontWeight:"bold" }}>Limitation of Liability</h3>
         <ul>
           <li>
             Cey4hub is not liable for any indirect or consequential damages
@@ -152,7 +152,7 @@ function Terms() {
           </li>
         </ul>
 
-        <h2 style={{ color: "#4caf50" }}>Disclaimer of Warranties</h2>
+        <h3 style={{ color: "#4caf50",fontWeight:"bold" }}>Disclaimer of Warranties</h3>
         <p>
           Cey4Hub provides the website and services "as is" and "as available"
           without any warranties, express or implied. We do not guarantee:
@@ -162,7 +162,7 @@ function Terms() {
           <li>The accuracy or reliability of information or products.</li>
         </ul>
 
-        <h2 style={{ color: "#4caf50" }}>Amendments and Termination</h2>
+        <h3 style={{ color: "#4caf50" }}>Amendments and Termination</h3>
         <ul>
           <li>
             Cey4hub reserves the right to modify these Terms and Conditions
