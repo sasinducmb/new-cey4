@@ -36,14 +36,20 @@ const LoginRegister = () => {
     e.preventDefault();
     try {
       const response = await login({ email, password }).unwrap();
-
+  
       if (response.message) {
         cogoToast.success("Login successful", { position: "top-right" });
+  
+        // Save token to localStorage
         localStorage.setItem("token", response.token);
-        navigate("/");
+  
+        // Check role and redirect accordingly
+        if (response.user.role === "admin") {
+          window.location.href = process.env.REACT_APP_DASHBOARD_URL;
+        } else {
+          navigate("/"); // Redirect to user home or main site
+        }
       }
-
-      // Handle successful login, e.g., navigate to dashboard
     } catch (error) {
       if (error.status === 400 && error.data && error.data.message) {
         cogoToast.error(`Login failed: ${error.data.message}`, {

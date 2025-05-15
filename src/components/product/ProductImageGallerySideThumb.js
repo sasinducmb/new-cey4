@@ -21,6 +21,7 @@ const ProductImageGalleryLeftThumb = ({ product, thumbPosition }) => {
     spaceBetween: 10,
     loop: true,
     effect: "fade",
+    navigation: true,
     fadeEffect: {
       crossFade: true
     },

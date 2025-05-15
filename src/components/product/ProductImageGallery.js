@@ -40,6 +40,7 @@ const ProductImageGallery = ({ product, variationImage }) => {
   const gallerySwiperParams = {
     spaceBetween: 10,
     loop: true,
+    navigation: true,
     effect: "fade",
     fadeEffect: {
       crossFade: true,
