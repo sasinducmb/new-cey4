@@ -44,7 +44,7 @@ const LoginRegister = () => {
 
         if (userRole === "admin") {
           // Full redirect to admin dashboard running on port 3001
-          window.location.href = "http://localhost:3001";
+          window.location.href = process.env.REACT_APP_DASHBOARD_URL;
         } else if (userRole === "user") {
           // Navigate within the current React app
           navigate("/");
