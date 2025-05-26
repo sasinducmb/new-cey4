@@ -2,7 +2,10 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 export const userApi = createApi({
   reducerPath: "userApi",
-  baseQuery: fetchBaseQuery({ baseUrl: process.env.REACT_APP_BACKEND_URL }),
+   baseQuery: fetchBaseQuery({
+    baseUrl: process.env.REACT_APP_BACKEND_URL,
+    credentials: 'include', // Include cookies in requests
+  }),
   endpoints: (builder) => ({
     registerUser: builder.mutation({
       query: (user) => ({
@@ -18,6 +21,12 @@ export const userApi = createApi({
         body: credentials,
       }),
     }),
+     logout: builder.mutation({
+      query: () => ({
+        url: "/user/logout",
+        method: "POST",
+      }),
+    }),
     verifyEmail: builder.mutation({
       query: (verificationData) => ({
         url: "/user/verify-email",
@@ -27,10 +36,11 @@ export const userApi = createApi({
     }),
     getUserProfile: builder.query({
       query: () => {
-        const token = localStorage.getItem("token");
+      
         return {
-          url: `/user/getUserProfile?token=${token}`,
+          url: "/user/getUserProfile",
           method: "GET",
+
         };
       },
     }),
@@ -60,5 +70,6 @@ export const {
   useVerifyEmailMutation,
   useGetUserProfileQuery,
   useGetVariationQuery,
-  useUpdateUserProfileMutation
+  useUpdateUserProfileMutation,
+  useLogoutMutation,
 } = userApi;

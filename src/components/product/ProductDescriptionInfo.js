@@ -92,28 +92,31 @@ const ProductDescriptionInfo = ({
           )}
         </>
       )}
-      <div className="d-flex">
+      <div className="d-flex flex-wrap gap-3">
         {productVariation && productVariation.length > 0 ? (
-          <div className="">
-            {productVariation.map((variation, index) => (
-              <div className="">
-                <div key={index} className="variation-item d-flex ">
-                  <input
-                    type="radio"
-                    id={`variation-${index}`}
-                    name="productVariation"
-                    value={variation.itemQty}
-                    checked={selectedVariationId === variation._id}
-                    onChange={() => handleVariationChange(variation._id)}
-                    onClick={() => onVariationClick(variation.mainImage)}
-                    style={{ cursor: "pointer", width: "40px", height: "40px" }}
-                  />
-              
-                  <label htmlFor={`variation-${index}`} className="mt-2">{variation.name}</label>
-                </div>
-              </div>
-            ))}
-          </div>
+          productVariation.map((variation, index) => (
+            <div
+              key={index}
+              className="variation-item d-flex flex-column align-items-center"
+            >
+              <input
+                type="radio"
+                id={`variation-${index}`}
+                name="productVariation"
+                value={variation.itemQty}
+                checked={selectedVariationId === variation._id}
+                onChange={() => handleVariationChange(variation._id)}
+                onClick={() => onVariationClick(variation.mainImage)}
+                style={{ cursor: "pointer", width: "40px", height: "40px" }}
+              />
+              <label
+                htmlFor={`variation-${index}`}
+                className="mt-2 text-center"
+              >
+                {variation.name}
+              </label>
+            </div>
+          ))
         ) : (
           <p>No variations available.</p>
         )}
@@ -211,7 +214,7 @@ const ProductDescriptionInfo = ({
                   )
                 }
                 disabled={productCartQty >= productStock}
-                style={{borderRadius:"15px"}}
+                style={{ borderRadius: "15px" }}
               >
                 {" "}
                 Add To Cart{" "}
@@ -226,7 +229,7 @@ const ProductDescriptionInfo = ({
                 onClick={() =>
                   navigate(`/checkout/${product._id}/${quantityCount}`)
                 }
-                style={{borderRadius:"15px"}}
+                style={{ borderRadius: "15px" }}
               >
                 Buy Now
               </button>

@@ -3,8 +3,11 @@ import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import clsx from "clsx";
 import MenuCart from "./sub-components/MenuCart";
-
+import {
+  useGetUserProfileQuery,
+} from "../../store/slices/user-slice";
 const IconGroup = ({ iconWhiteClass }) => {
+  
   const handleClick = (e) => {
     e.currentTarget.nextSibling.classList.toggle("active");
   };
@@ -18,7 +21,10 @@ const IconGroup = ({ iconWhiteClass }) => {
   const { compareItems } = useSelector((state) => state.compare);
   const { wishlistItems } = useSelector((state) => state.wishlist);
   const { cartItems } = useSelector((state) => state.cart);
-
+  const { data, isLoading, isError } = useGetUserProfileQuery();
+  if (isLoading) return null; // or loader/spinner
+  // If user data exists, user is logged in
+  const isLoggedIn = !!data?.user;
   return (
     <div className={clsx("header-right-wrap", iconWhiteClass)}>
       {/* <div className="same-style header-search d-none d-lg-block">
@@ -71,15 +77,36 @@ const IconGroup = ({ iconWhiteClass }) => {
         </Link>
       </div> */}
       {/* btn btn-success register-btn */}
-      <div className="d-none d-lg-block mt-2">
+      {/* <div className="d-none d-lg-block mt-2">
         <Link
           to={process.env.PUBLIC_URL + "/login-register"}
           className=""
           style={{ color: "green", fontWeight: "bold" }}
         >
           Sign Up or Login
+         
         </Link>
-      </div>
+      </div> */}
+       {isLoggedIn ? (
+        <div className="d-flex align-items-center">
+          <i className="pe-7s-user-female" style={{ fontSize: '24px', marginRight: '4px' }} />
+          <Link
+            to="/my-account"
+            style={{ color: 'green', fontWeight: 'bold', textDecoration: 'none' }}
+          >
+            My Account
+          </Link>
+        </div>
+      ) : (
+        <div className="d-none d-lg-block mt-2">
+          <Link
+            to="/login-register"
+            style={{ color: 'green', fontWeight: 'bold', textDecoration: 'none' }}
+          >
+            Sign Up or Login
+          </Link>
+        </div>
+      )}
       {/* <div className="same-style header-wishlist">
         <Link to={process.env.PUBLIC_URL + '/wishlist'}>
           <i className="pe-7s-like" />

@@ -12,7 +12,7 @@ import {
   useLoginMutation,
 } from "../../store/slices/user-slice";
 import ClipLoader from "react-spinners/ClipLoader";
-import { Modal, Button } from 'react-bootstrap';
+import { Modal, Button } from "react-bootstrap";
 const LoginRegister = () => {
   let { pathname } = useLocation();
   const [name, setName] = useState("");
@@ -27,8 +27,8 @@ const LoginRegister = () => {
   const [login, { isLoading }] = useLoginMutation();
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
-  const [userType, setUserType] = useState('regular');
-  
+  const [userType, setUserType] = useState("regular");
+
   // Terms and conditions modal state
   const [showTerms, setShowTerms] = useState(false);
   const [acceptedTerms, setAcceptedTerms] = useState(false);
@@ -36,18 +36,23 @@ const LoginRegister = () => {
     e.preventDefault();
     try {
       const response = await login({ email, password }).unwrap();
-  
+
       if (response.message) {
+        const userRole = response.user.role; // assuming the backend sends `role`
+
         cogoToast.success("Login successful", { position: "top-right" });
-  
-        // Save token to localStorage
-        localStorage.setItem("token", response.token);
-  
-        // Check role and redirect accordingly
-        if (response.user.role === "admin") {
-          window.location.href = process.env.REACT_APP_DASHBOARD_URL;
+
+        if (userRole === "admin") {
+          // Full redirect to admin dashboard running on port 3001
+          window.location.href = "http://localhost:3001";
+        } else if (userRole === "user") {
+          // Navigate within the current React app
+          navigate("/");
         } else {
-          navigate("/"); // Redirect to user home or main site
+          // Optional: handle unknown role
+          cogoToast.error("Unknown role. Access denied.", {
+            position: "top-right",
+          });
         }
       }
     } catch (error) {
@@ -65,9 +70,9 @@ const LoginRegister = () => {
   const handleUserTypeChange = (e) => {
     const newUserType = e.target.value;
     setUserType(newUserType);
-    
+
     // If switching to reseller, show terms modal
-    if (newUserType === 'reseller' && !acceptedTerms) {
+    if (newUserType === "reseller" && !acceptedTerms) {
       setShowTerms(true);
     }
   };
@@ -75,10 +80,10 @@ const LoginRegister = () => {
     setShowTerms(false);
     // If terms were not accepted, revert to regular user
     if (!acceptedTerms) {
-      setUserType('regular');
+      setUserType("regular");
     }
   };
-  
+
   // Handle terms acceptance
   const handleAcceptTerms = () => {
     setAcceptedTerms(true);
@@ -467,225 +472,258 @@ const LoginRegister = () => {
                           Login
                         </button>
                       </div>
-               
                     </form>
                   </Tab.Pane>
                   <Tab.Pane eventKey="register">
-        <form onSubmit={handleRegister}>
-          <div className="mb-3">
-            <label htmlFor="username" className="form-label">
-              Username
-            </label>
-            <input
-              type="text"
-              className="form-control"
-              id="username"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              required
-            />
-          </div>
-          <div className="mb-3">
-            <label htmlFor="register-email" className="form-label">
-              Email Address
-            </label>
-            <input
-              type="email"
-              className="form-control"
-              id="register-email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-            />
-          </div>
-          <div className="mb-3">
-            <label
-              htmlFor="register-password"
-              className="form-label"
-            >
-              Password
-            </label>
-            <input
-              type="password"
-              className="form-control"
-              id="register-password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-            />
-          </div>
-          <div className="mb-3">
-            <label
-              htmlFor="confirm-password"
-              className="form-label"
-            >
-              Confirm Password
-            </label>
-            <input
-              type="password"
-              className="form-control"
-              id="confirm-password"
-              value={confirmPassword}
-              onChange={(e) => setConfirmPassword(e.target.value)}
-              required
-            />
-          </div>
+                    <form onSubmit={handleRegister}>
+                      <div className="mb-3">
+                        <label htmlFor="username" className="form-label">
+                          Username
+                        </label>
+                        <input
+                          type="text"
+                          className="form-control"
+                          id="username"
+                          value={name}
+                          onChange={(e) => setName(e.target.value)}
+                          required
+                        />
+                      </div>
+                      <div className="mb-3">
+                        <label htmlFor="register-email" className="form-label">
+                          Email Address
+                        </label>
+                        <input
+                          type="email"
+                          className="form-control"
+                          id="register-email"
+                          value={email}
+                          onChange={(e) => setEmail(e.target.value)}
+                          required
+                        />
+                      </div>
+                      <div className="mb-3">
+                        <label
+                          htmlFor="register-password"
+                          className="form-label"
+                        >
+                          Password
+                        </label>
+                        <input
+                          type="password"
+                          className="form-control"
+                          id="register-password"
+                          value={password}
+                          onChange={(e) => setPassword(e.target.value)}
+                          required
+                        />
+                      </div>
+                      <div className="mb-3">
+                        <label
+                          htmlFor="confirm-password"
+                          className="form-label"
+                        >
+                          Confirm Password
+                        </label>
+                        <input
+                          type="password"
+                          className="form-control"
+                          id="confirm-password"
+                          value={confirmPassword}
+                          onChange={(e) => setConfirmPassword(e.target.value)}
+                          required
+                        />
+                      </div>
 
-          {/* User Type Selection */}
-          <div className="mb-4">
-            <label className="form-label">Register as</label>
-            <div className="d-flex gap-4">
-              <div className="form-check">
-                <input
-                  className="form-check-input"
-                  type="radio"
-                  name="userType"
-                  id="regularUser"
-                  value="regular"
-                  checked={userType === 'regular'}
-                  onChange={handleUserTypeChange}
-                />
-                <label className="form-check-label" htmlFor="regularUser">
-                  Regular User
-                </label>
-              </div>
-              <div className="form-check">
-                <input
-                  className="form-check-input"
-                  type="radio"
-                  name="userType"
-                  id="resellerUser"
-                  value="reseller"
-                  checked={userType === 'reseller'}
-                  onChange={handleUserTypeChange}
-                />
-                <label className="form-check-label" htmlFor="resellerUser">
-                  Reseller
-                  {acceptedTerms && (
-                    <span className="ms-2 text-success">
-                      <small>(Terms Accepted)</small>
-                    </span>
-                  )}
-                </label>
-              </div>
-            </div>
-          </div>
+                      {/* User Type Selection */}
+                      <div className="mb-4">
+                        <label className="form-label">Register as</label>
+                        <div className="d-flex gap-4">
+                          <div className="form-check">
+                            <input
+                              className="form-check-input"
+                              type="radio"
+                              name="userType"
+                              id="regularUser"
+                              value="regular"
+                              checked={userType === "regular"}
+                              onChange={handleUserTypeChange}
+                            />
+                            <label
+                              className="form-check-label"
+                              htmlFor="regularUser"
+                            >
+                              Regular User
+                            </label>
+                          </div>
+                          <div className="form-check">
+                            <input
+                              className="form-check-input"
+                              type="radio"
+                              name="userType"
+                              id="resellerUser"
+                              value="reseller"
+                              checked={userType === "reseller"}
+                              onChange={handleUserTypeChange}
+                            />
+                            <label
+                              className="form-check-label"
+                              htmlFor="resellerUser"
+                            >
+                              Reseller
+                              {acceptedTerms && (
+                                <span className="ms-2 text-success">
+                                  <small>(Terms Accepted)</small>
+                                </span>
+                              )}
+                            </label>
+                          </div>
+                        </div>
+                      </div>
 
-          <div className="row">
-            <div className="col-md-6 mb-3">
-              <label htmlFor="city" className="form-label">
-                City
-              </label>
-              <input
-                type="text"
-                className="form-control"
-                id="city"
-                value={city}
-                onChange={(e) => setCity(e.target.value)}
-              />
-            </div>
-            <div className="col-md-6 mb-3">
-              <label htmlFor="state" className="form-label">
-                State
-              </label>
-              <input
-                type="text"
-                className="form-control"
-                id="state"
-                value={state}
-                onChange={(e) => setState(e.target.value)}
-              />
-            </div>
-          </div>
+                      <div className="row">
+                        <div className="col-md-6 mb-3">
+                          <label htmlFor="city" className="form-label">
+                            City
+                          </label>
+                          <input
+                            type="text"
+                            className="form-control"
+                            id="city"
+                            value={city}
+                            onChange={(e) => setCity(e.target.value)}
+                          />
+                        </div>
+                        <div className="col-md-6 mb-3">
+                          <label htmlFor="state" className="form-label">
+                            State
+                          </label>
+                          <input
+                            type="text"
+                            className="form-control"
+                            id="state"
+                            value={state}
+                            onChange={(e) => setState(e.target.value)}
+                          />
+                        </div>
+                      </div>
 
-          <div className="row">
-            <div className="col-md-6 mb-3">
-              <label htmlFor="phone" className="form-label">
-                Phone Number
-              </label>
-              <input
-                type="tel"
-                className="form-control"
-                id="phone"
-                value={phoneNumber}
-                onChange={(e) => setPhoneNumber(e.target.value)}
-              />
-            </div>
-            <div className="col-md-6 mb-3">
-              <label htmlFor="country" className="form-label">
-                Country
-              </label>
-              <input
-                type="text"
-                className="form-control"
-                id="country"
-                value={country}
-                onChange={(e) => setCountry(e.target.value)}
-              />
-            </div>
-          </div>
-          <div className="row d-flex justify-content-center">
-            <button 
-              type="submit" 
-              className="btn btn-primary w-75"
-              disabled={userType === 'reseller' && !acceptedTerms}
-            >
-              Create Account
-            </button>
-            {userType === 'reseller' && !acceptedTerms && (
-              <div className="text-center mt-2 text-danger">
-                <small>Please accept reseller terms to continue</small>
-              </div>
-            )}
-          </div>
-        </form>
-      </Tab.Pane>
+                      <div className="row">
+                        <div className="col-md-6 mb-3">
+                          <label htmlFor="phone" className="form-label">
+                            Phone Number
+                          </label>
+                          <input
+                            type="tel"
+                            className="form-control"
+                            id="phone"
+                            value={phoneNumber}
+                            onChange={(e) => setPhoneNumber(e.target.value)}
+                          />
+                        </div>
+                        <div className="col-md-6 mb-3">
+                          <label htmlFor="country" className="form-label">
+                            Country
+                          </label>
+                          <input
+                            type="text"
+                            className="form-control"
+                            id="country"
+                            value={country}
+                            onChange={(e) => setCountry(e.target.value)}
+                          />
+                        </div>
+                      </div>
+                      <div className="row d-flex justify-content-center">
+                        <button
+                          type="submit"
+                          className="btn btn-primary w-75"
+                          disabled={userType === "reseller" && !acceptedTerms}
+                        >
+                          Create Account
+                        </button>
+                        {userType === "reseller" && !acceptedTerms && (
+                          <div className="text-center mt-2 text-danger">
+                            <small>
+                              Please accept reseller terms to continue
+                            </small>
+                          </div>
+                        )}
+                      </div>
+                    </form>
+                  </Tab.Pane>
 
-      {/* Terms and Conditions Modal */}
-      <Modal show={showTerms} onHide={handleCloseTerms} size="lg">
-        <Modal.Header closeButton>
-          <Modal.Title>Reseller Terms and Conditions</Modal.Title>
-        </Modal.Header>
-        <Modal.Body style={{ maxHeight: '60vh', overflowY: 'auto' }}>
-          <h5>Reseller Agreement</h5>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam auctor, nisl eget ultricies tincidunt, 
-          nisl nisl aliquet nisl, eget aliquet nisl nisl eget nisl. Nullam auctor, nisl eget ultricies tincidunt, 
-          nisl nisl aliquet nisl, eget aliquet nisl nisl eget nisl.</p>
-          
-          <h5>1. Definitions</h5>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam auctor, nisl eget ultricies tincidunt, 
-          nisl nisl aliquet nisl, eget aliquet nisl nisl eget nisl. Nullam auctor, nisl eget ultricies tincidunt,
-          nisl nisl aliquet nisl, eget aliquet nisl nisl eget nisl.</p>
-          
-          <h5>2. Terms of Service</h5>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam auctor, nisl eget ultricies tincidunt, 
-          nisl nisl aliquet nisl, eget aliquet nisl nisl eget nisl. Nullam auctor, nisl eget ultricies tincidunt,
-          nisl nisl aliquet nisl, eget aliquet nisl nisl eget nisl.</p>
-          
-          <h5>3. Pricing and Payment</h5>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam auctor, nisl eget ultricies tincidunt, 
-          nisl nisl aliquet nisl, eget aliquet nisl nisl eget nisl. Nullam auctor, nisl eget ultricies tincidunt,
-          nisl nisl aliquet nisl, eget aliquet nisl nisl eget nisl.</p>
-          
-          <h5>4. Responsibilities</h5>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam auctor, nisl eget ultricies tincidunt, 
-          nisl nisl aliquet nisl, eget aliquet nisl nisl eget nisl. Nullam auctor, nisl eget ultricies tincidunt,
-          nisl nisl aliquet nisl, eget aliquet nisl nisl eget nisl.</p>
-          
-          <h5>5. Term and Termination</h5>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam auctor, nisl eget ultricies tincidunt, 
-          nisl nisl aliquet nisl, eget aliquet nisl nisl eget nisl. Nullam auctor, nisl eget ultricies tincidunt,
-          nisl nisl aliquet nisl, eget aliquet nisl nisl eget nisl.</p>
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleCloseTerms}>
-            Reject
-          </Button>
-          <Button variant="primary" onClick={handleAcceptTerms}>
-            Accept Terms
-          </Button>
-        </Modal.Footer>
-      </Modal>
+                  {/* Terms and Conditions Modal */}
+                  <Modal show={showTerms} onHide={handleCloseTerms} size="lg">
+                    <Modal.Header closeButton>
+                      <Modal.Title>Reseller Terms and Conditions</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body
+                      style={{ maxHeight: "60vh", overflowY: "auto" }}
+                    >
+                      <h5>Reseller Agreement</h5>
+                      <p>
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                        Nullam auctor, nisl eget ultricies tincidunt, nisl nisl
+                        aliquet nisl, eget aliquet nisl nisl eget nisl. Nullam
+                        auctor, nisl eget ultricies tincidunt, nisl nisl aliquet
+                        nisl, eget aliquet nisl nisl eget nisl.
+                      </p>
+
+                      <h5>1. Definitions</h5>
+                      <p>
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                        Nullam auctor, nisl eget ultricies tincidunt, nisl nisl
+                        aliquet nisl, eget aliquet nisl nisl eget nisl. Nullam
+                        auctor, nisl eget ultricies tincidunt, nisl nisl aliquet
+                        nisl, eget aliquet nisl nisl eget nisl.
+                      </p>
+
+                      <h5>2. Terms of Service</h5>
+                      <p>
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                        Nullam auctor, nisl eget ultricies tincidunt, nisl nisl
+                        aliquet nisl, eget aliquet nisl nisl eget nisl. Nullam
+                        auctor, nisl eget ultricies tincidunt, nisl nisl aliquet
+                        nisl, eget aliquet nisl nisl eget nisl.
+                      </p>
+
+                      <h5>3. Pricing and Payment</h5>
+                      <p>
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                        Nullam auctor, nisl eget ultricies tincidunt, nisl nisl
+                        aliquet nisl, eget aliquet nisl nisl eget nisl. Nullam
+                        auctor, nisl eget ultricies tincidunt, nisl nisl aliquet
+                        nisl, eget aliquet nisl nisl eget nisl.
+                      </p>
+
+                      <h5>4. Responsibilities</h5>
+                      <p>
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                        Nullam auctor, nisl eget ultricies tincidunt, nisl nisl
+                        aliquet nisl, eget aliquet nisl nisl eget nisl. Nullam
+                        auctor, nisl eget ultricies tincidunt, nisl nisl aliquet
+                        nisl, eget aliquet nisl nisl eget nisl.
+                      </p>
+
+                      <h5>5. Term and Termination</h5>
+                      <p>
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                        Nullam auctor, nisl eget ultricies tincidunt, nisl nisl
+                        aliquet nisl, eget aliquet nisl nisl eget nisl. Nullam
+                        auctor, nisl eget ultricies tincidunt, nisl nisl aliquet
+                        nisl, eget aliquet nisl nisl eget nisl.
+                      </p>
+                    </Modal.Body>
+                    <Modal.Footer>
+                      <Button variant="secondary" onClick={handleCloseTerms}>
+                        Reject
+                      </Button>
+                      <Button variant="primary" onClick={handleAcceptTerms}>
+                        Accept Terms
+                      </Button>
+                    </Modal.Footer>
+                  </Modal>
                 </Tab.Content>
               </Tab.Container>
             </div>
