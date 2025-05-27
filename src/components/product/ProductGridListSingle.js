@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import { Fragment, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import clsx from "clsx";
@@ -9,6 +9,7 @@ import ProductModal from "./ProductModal";
 import { addToCart } from "../../store/slices/cart-slice";
 import { addToWishlist } from "../../store/slices/wishlist-slice";
 import { addToCompare } from "../../store/slices/compare-slice";
+import { useGetUserProfileQuery } from "../../store/slices/user-slice";
 
 const ProductGridListSingle = ({
   product,
@@ -30,7 +31,14 @@ const ProductGridListSingle = ({
     discountedPrice * currency.currencyRate
   ).toFixed(2);
   const dispatch = useDispatch();
+  const { data, error, isLoading } = useGetUserProfileQuery();
+  const [isReseller, setIsReseller] = useState(false);
 
+  useEffect(() => {
+    if (data?.user?.role === "reseller") {
+      setIsReseller(true);
+    }
+  }, [data]);
   return (
     <Fragment>
       <div className={clsx("product-wrap", spaceBottomClass)}>
@@ -71,7 +79,7 @@ const ProductGridListSingle = ({
           )}
 
           <div className="product-action">
-            <div className="pro-same-action pro-wishlist">
+            {/* <div className="pro-same-action pro-wishlist">
               <button
                 className={wishlistItem !== undefined ? "active" : ""}
                 disabled={wishlistItem !== undefined}
@@ -84,7 +92,7 @@ const ProductGridListSingle = ({
               >
                 <i className="pe-7s-like" />
               </button>
-            </div>
+            </div> */}
             <div className="pro-same-action pro-cart">
               {product.affiliateLink ? (
                 <a
@@ -144,6 +152,15 @@ const ProductGridListSingle = ({
           ) : (
             ""
           )}
+          <div>
+            {isReseller && product.stock > 0 && (
+              <div className="product-stock-status">
+                <span className="in-stock">
+                  Available Stock {product.stock}
+                </span>
+              </div>
+            )}
+          </div>
           <div className="product-price">
             {discountedPrice !== null ? (
               <Fragment>
