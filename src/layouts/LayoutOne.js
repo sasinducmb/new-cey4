@@ -4,6 +4,7 @@ import HeaderOne from "../wrappers/header/HeaderOne";
 import ScrollToTop from "../components/scroll-to-top"
 import Footer from "../wrappers/footer/Footer";
 import NewsletterSection from "../components/newdesign/NewsletterSection";
+import WhatsAppWidget from "../components/header/WhatsAppWidget";
 
 const LayoutOne = ({
   children,
@@ -26,9 +27,10 @@ const LayoutOne = ({
         spaceTopClass="pt-100"
         spaceBottomClass="pb-70"
       /> */}
+      <WhatsAppWidget/>
       <NewsletterSection/>
       <Footer/>
-      <ScrollToTop/>
+      {/* <ScrollToTop/> */}
     </Fragment>
   );
 };
