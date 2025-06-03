@@ -20,19 +20,24 @@ const ProductGridListSingle = ({
   spaceBottomClass,
 }) => {
   const [modalShow, setModalShow] = useState(false);
-  const discountedPrice = getDiscountPrice(
-    product.price.basePrice,
-    product.discount
-  );
-  const finalProductPrice = +(
-    product.price.basePrice * currency.currencyRate
-  ).toFixed(2);
-  const finalDiscountedPrice = +(
-    discountedPrice * currency.currencyRate
-  ).toFixed(2);
-  const dispatch = useDispatch();
+   const dispatch = useDispatch();
   const { data, error, isLoading } = useGetUserProfileQuery();
   const [isReseller, setIsReseller] = useState(false);
+const discountedPrice = getDiscountPrice(
+  product.price.basePrice,
+  product.discount
+);
+
+const isResellerPrice =
+  isReseller && product.resellerPrice
+    ? product.price.basePrice - product.resellerPrice
+    : product.price.basePrice;
+
+const finalProductPrice = +(isResellerPrice * currency.currencyRate).toFixed(2);
+const finalDiscountedPrice = +(
+  (isReseller ? isResellerPrice : discountedPrice) * currency.currencyRate
+).toFixed(2);
+ 
 
   useEffect(() => {
     if (data?.user?.role === "reseller") {

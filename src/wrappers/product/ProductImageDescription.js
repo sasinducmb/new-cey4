@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { useSelector } from "react-redux";
 import clsx from "clsx";
@@ -7,6 +7,7 @@ import ProductImageGallery from "../../components/product/ProductImageGallery";
 import ProductDescriptionInfo from "../../components/product/ProductDescriptionInfo";
 import ProductImageGallerySideThumb from "../../components/product/ProductImageGallerySideThumb";
 import ProductImageFixed from "../../components/product/ProductImageFixed";
+import { useGetUserProfileQuery } from "../../store/slices/user-slice";
 const ProductImageDescription = ({
   spaceTopClass,
   spaceBottomClass,
@@ -20,16 +21,28 @@ const ProductImageDescription = ({
   const { compareItems } = useSelector((state) => state.compare);
   const wishlistItem = wishlistItems.find((item) => item.id === product.id);
   const compareItem = compareItems.find((item) => item.id === product.id);
-  const discountedPrice = getDiscountPrice(
-    product.price.basePrice,
-    product.discount
-  );
-  const finalProductPrice = +(
-    product.price.basePrice * currency.currencyRate
-  ).toFixed(2);
-  const finalDiscountedPrice = +(
-    discountedPrice * currency.currencyRate
-  ).toFixed(2);
+  const { data, error, isLoading } = useGetUserProfileQuery();
+const [isReseller, setIsReseller] = useState(false);
+
+useEffect(() => {
+  if (data?.user?.role === "reseller") {
+    setIsReseller(true);
+  }
+}, [data]);
+ const discountedPrice = getDiscountPrice(
+  product.price.basePrice,
+  product.discount
+);
+
+const isResellerPrice =
+  isReseller && product.resellerPrice
+    ? product.price.basePrice - product.resellerPrice
+    : product.price.basePrice;
+
+const finalProductPrice = +(isResellerPrice * currency.currencyRate).toFixed(2);
+const finalDiscountedPrice = +(
+  (isReseller ? isResellerPrice : discountedPrice) * currency.currencyRate
+).toFixed(2);
 
   // State to handle switching between Full Description and Specification
   const [activeSection, setActiveSection] = useState(null);
@@ -343,6 +356,7 @@ const ProductImageDescription = ({
               compareItem={compareItem}
               productVariation={productVariation}
               onVariationClick={handleVariationClick}
+              isReseller={isReseller}
             />
           </div>
         </div>
