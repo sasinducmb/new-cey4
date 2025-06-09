@@ -1,4 +1,4 @@
-import { Fragment, useState } from "react";
+import { Fragment, useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useLocation } from "react-router-dom";
 import SEO from "../../components/seo";
@@ -11,18 +11,29 @@ import {
   deleteFromCart,
   deleteAllFromCart,
 } from "../../store/slices/cart-slice";
+import { useGetUserProfileQuery } from "../../store/slices/user-slice";
 import { cartItemStock } from "../../helpers/product";
 
 const Cart = () => {
   let cartTotalPrice = 0;
 
   const [quantityCount] = useState(1);
+  const [isReseller, setIsReseller] = useState(false);
   const dispatch = useDispatch();
   let { pathname } = useLocation();
 
   const currency = useSelector((state) => state.currency);
   const { cartItems } = useSelector((state) => state.cart);
+  const { data, error, isLoading } = useGetUserProfileQuery();
+
+  useEffect(() => {
+    if (data?.user?.role === "reseller") {
+      setIsReseller(true);
+    }
+  }, [data]);
+
   console.log(cartItems);
+  
   return (
     <Fragment>
       <SEO
@@ -62,27 +73,40 @@ const Cart = () => {
                             let discountedPrice = null;
                             let finalProductPrice = 0;
                             let finalDiscountedPrice = 0;
+                            
                             if (cartItem.selectedVariation) {
+                              // For variations, apply reseller logic
+                              const variationBasePrice = cartItem.selectedVariation.price.basePrice;
+                              const resellerVariationPrice = isReseller && cartItem.selectedVariation.resellerPrice
+                                ? variationBasePrice - cartItem.selectedVariation.resellerPrice
+                                : variationBasePrice;
+                              
                               finalProductPrice = (
-                                cartItem.selectedVariation.price.basePrice *
-                                currency.currencyRate
+                                resellerVariationPrice * currency.currencyRate
                               ).toFixed(2);
                               finalDiscountedPrice = (
-                                cartItem.selectedVariation.price.basePrice *
-                                currency.currencyRate
+                                resellerVariationPrice * currency.currencyRate
                               ).toFixed(2);
                             } else {
+                              // For regular products, apply reseller logic
+                              const basePrice = cartItem.price.basePrice;
+                              const resellerPrice = isReseller && cartItem.resellerPrice
+                                ? basePrice - cartItem.resellerPrice
+                                : basePrice;
+                              
                               discountedPrice = getDiscountPrice(
-                                cartItem.price.basePrice,
+                                resellerPrice,
                                 cartItem.discount
                               );
+                              
                               finalProductPrice = (
-                                cartItem.price.basePrice * currency.currencyRate
+                                resellerPrice * currency.currencyRate
                               ).toFixed(2);
                               finalDiscountedPrice = (
                                 discountedPrice * currency.currencyRate
                               ).toFixed(2);
                             }
+                            
                             discountedPrice != null
                               ? (cartTotalPrice +=
                                   finalDiscountedPrice * cartItem.quantity)
@@ -241,50 +265,6 @@ const Cart = () => {
                 </div>
 
                 <div className="row">
-                  {/* <div className="col-lg-4 col-md-6">
-                    <div className="cart-tax">
-                      <div className="title-wrap">
-                        <h4 className="cart-bottom-title section-bg-gray">
-                          Estimate Shipping And Tax
-                        </h4>
-                      </div>
-                      <div className="tax-wrapper">
-                        <p>
-                          Enter your destination to get a shipping estimate.
-                        </p>
-                        <div className="tax-select-wrapper">
-                          <div className="tax-select">
-                            <label>* Country</label>
-                            <select className="email s-email s-wid">
-                              <option>Bangladesh</option>
-                              <option>Albania</option>
-                              <option>Åland Islands</option>
-                              <option>Afghanistan</option>
-                              <option>Belgium</option>
-                            </select>
-                          </div>
-                          <div className="tax-select">
-                            <label>* Region / State</label>
-                            <select className="email s-email s-wid">
-                              <option>Bangladesh</option>
-                              <option>Albania</option>
-                              <option>Åland Islands</option>
-                              <option>Afghanistan</option>
-                              <option>Belgium</option>
-                            </select>
-                          </div>
-                          <div className="tax-select">
-                            <label>* Zip/Postal Code</label>
-                            <input type="text" />
-                          </div>
-                          <button className="cart-btn-2" type="submit">
-                            Get A Quote
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-                  </div> */}
-
                   <div className="col-lg-4 col-md-6">
                     <div className="discount-code-wrapper">
                       <div className="title-wrap">

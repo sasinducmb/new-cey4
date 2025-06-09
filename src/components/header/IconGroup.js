@@ -124,7 +124,7 @@ const IconGroup = ({ iconWhiteClass }) => {
         </button>
      
         {/* menu cart */}
-        <MenuCart />
+         <MenuCart userProfile={data?.user} />
       </div>
       <Link to="/order-status" className="mx-3">
           <button className="btn"   title="Check your order status">

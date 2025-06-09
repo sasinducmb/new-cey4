@@ -10,26 +10,33 @@ const cartSlice = createSlice({
   reducers: {
     addToCart(state, action) {
       const product = action.payload;
-    
+      
+      // Add validation to ensure product has required properties
+      if (!product || !product._id) {
+        cogoToast.error("Invalid product data", { position: "bottom-left" });
+        return;
+      }
+      
       let cartItem;
       if (product.selectedVariation) {
         cartItem = state.cartItems.find(
           (item) =>
             item._id === product._id &&
-            item.selectedVariation._id === product.selectedVariation._id);
+            item.selectedVariation?._id === product.selectedVariation._id
+        );
       } else {
         cartItem = state.cartItems.find((item) => item._id === product._id);
       }
-    
-      const deliveryCost = parseFloat(product.deliveryCost);
+      
+      const deliveryCost = parseFloat(product.deliveryCost || 0);
       
       // Calculate available stock
-      const saleCount = product.saleCount || 0; // Default to 0 if saleCount is undefined or null
-      const availableStock = product.stock - saleCount;
-    
+      const saleCount = product.saleCount || 0;
+      const availableStock = (product.stock || 0) - saleCount;
+      
       // Determine the quantity to add (or default to 1)
       const quantityToAdd = product.quantity || 1;
-    
+      
       if (!cartItem) {
         // Initial add to cart logic
         if (quantityToAdd > availableStock) {
@@ -47,7 +54,7 @@ const cartSlice = createSlice({
       } else {
         // Logic for updating quantity if the item already exists in the cart
         const newQuantity = cartItem.quantity + quantityToAdd;
-    
+        
         if (newQuantity > availableStock) {
           cogoToast.warn("Maximum limit reached", {
             position: "bottom-left",
@@ -87,7 +94,7 @@ const cartSlice = createSlice({
             return {
               ...item,
               quantity: newQuantity,
-              totalDeliveryCost: parseFloat(product.deliveryCost) * newQuantity,
+              totalDeliveryCost: parseFloat(product.deliveryCost || 0) * newQuantity,
             };
           }
           return item;

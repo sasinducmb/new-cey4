@@ -1,57 +1,52 @@
-import { Fragment } from "react";
+import { Fragment, useState } from "react";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { getDiscountPrice } from "../../../helpers/product";
 import { deleteFromCart } from "../../../store/slices/cart-slice";
+import { useGetUserProfileQuery } from "../../../store/slices/user-slice";
 
-const MenuCart = () => {
+const MenuCart = ({ userProfile }) => {
   const dispatch = useDispatch();
   const currency = useSelector((state) => state.currency);
   const { cartItems } = useSelector((state) => state.cart);
   let cartTotalPrice = 0;
-
+  const isReseller = userProfile?.role === "reseller";
   return (
     <div className="shopping-cart-content">
       {cartItems && cartItems.length > 0 ? (
         <Fragment>
-          <ul>
-          {cartItems.map((item, key) => {
-                            let discountedPrice = null;
-                            let finalProductPrice = 0;
-                            let finalDiscountedPrice = 0;
-                            if (item.selectedVariation) {
-                              finalProductPrice = (
-                                item.selectedVariation.price.basePrice *
-                                currency.currencyRate
-                              ).toFixed(2);
-                              finalDiscountedPrice = (
-                                item.selectedVariation.price.basePrice *
-                                currency.currencyRate
-                              ).toFixed(2);
-                            } else {
-                              discountedPrice = getDiscountPrice(
-                                item.price.basePrice,
-                                item.discount
-                              );
-                              finalProductPrice = (
-                                item.price.basePrice * currency.currencyRate
-                              ).toFixed(2);
-                              finalDiscountedPrice = (
-                                discountedPrice * currency.currencyRate
-                              ).toFixed(2);
-                            }
-                            discountedPrice != null
-                              ? (cartTotalPrice +=
-                                  finalDiscountedPrice * item.quantity)
-                              : (cartTotalPrice +=
-                                  finalProductPrice * item.quantity);
+        <ul>
+            {cartItems.map((item) => {
+              let finalProductPrice = 0;
+              let finalDiscountedPrice = 0;
+
+              let basePrice = item.selectedVariation
+                ? item.selectedVariation.price.basePrice
+                : item.price.basePrice;
+
+              let resellerPrice =
+                isReseller && item.resellerPrice
+                  ? basePrice - item.resellerPrice
+                  : basePrice;
+
+              let discountedPrice = getDiscountPrice(resellerPrice, item.discount);
+
+              finalProductPrice = +(resellerPrice * currency.currencyRate).toFixed(2);
+              finalDiscountedPrice = +(
+                (discountedPrice ?? resellerPrice) * currency.currencyRate
+              ).toFixed(2);
+
+              cartTotalPrice +=
+                (discountedPrice !== null ? finalDiscountedPrice : finalProductPrice) *
+                item.quantity;
+
               return (
                 <li className="single-shopping-cart" key={item.cartItemId}>
                   <div className="shopping-cart-img">
                     <Link to={process.env.PUBLIC_URL + "/product/" + item.id}>
                       {item.mainImage ? (
                         <img
-                        className="img-fluid"
+                          className="img-fluid"
                           src={`${
                             process.env.REACT_APP_BACKEND_URL
                           }/${item.mainImage.replace(/\\/g, "/")}`}
@@ -65,15 +60,10 @@ const MenuCart = () => {
                   <div className="shopping-cart-title">
                     <h4>
                       <Link to={process.env.PUBLIC_URL + "/product/" + item.id}>
-                        {" "}
                         {item.name}
-                                    {item.selectedVariation &&
-                                      item.selectedVariation.name && (
-                                        <span>
-                                          {" "}
-                                          ({item.selectedVariation.name})
-                                        </span>
-                                      )}{" "}
+                        {item.selectedVariation?.name && (
+                          <span> ({item.selectedVariation.name})</span>
+                        )}
                       </Link>
                     </h4>
                     <h6>Qty: {item.quantity}</h6>
@@ -87,9 +77,7 @@ const MenuCart = () => {
                         <span>Color: {item.selectedProductColor}</span>
                         <span>Size: {item.selectedProductSize}</span>
                       </div>
-                    ) : (
-                      ""
-                    )}
+                    ) : null}
                   </div>
                   <div className="shopping-cart-delete">
                     <button
