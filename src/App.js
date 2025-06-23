@@ -4,6 +4,8 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import OrderStatus from "./pages/other/OrderStatus";
 import Terms from "./pages/other/Terms";
 import PrivacyPolicy from "./pages/other/PrivacyPolicy";
+import Collobaration from "./pages/other/Collobaration";
+import Reselling from "./pages/other/Reselling";
 
 // home pages
 const HomeFashion = lazy(() => import("./pages/home/HomeHandmade"));
@@ -424,6 +426,12 @@ const App = () => {
               path={process.env.PUBLIC_URL + "/privacy-policy"}
               element={<PrivacyPolicy/>}
             />
+            {/* <Route
+              path={process.env.PUBLIC_URL + "/collabaration"}
+              element={<Collobaration/>}/> */}
+                <Route
+              path={process.env.PUBLIC_URL + "/collabaration"}
+              element={<Reselling/>}/>
 
             <Route path="*" element={<NotFound />} />
           </Routes>

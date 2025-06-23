@@ -638,11 +638,101 @@ body {
 }
 
 .gradient-background {
-  background: linear-gradient(to bottom, #2BFCA8 0%, #FFFFFF 100%);
-
+  background: linear-gradient(to bottom, #2bfca8 0%, #ffffff 100%);
 }
-.vesion-card{
+.vesion-card {
   line-height: 30px;
   /* font-size: 18px; */
   text-align: center;
+}
+
+.card-custom {
+  width: 280px;
+  height: 340px;
+  border-radius: 20px;
+  background: linear-gradient(to bottom, #36b37e 0%, #ffffff 100%);
+  color: white;
+  font-weight: 700;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  padding: 20px 10px;
+  box-shadow: 0 8px 24px rgba(54, 179, 126, 0.5);
+  user-select: none;
+  position: relative;
+  margin-top: 80px;
+}
+
+.reselling{
+   background: linear-gradient(to top, #36b37e 0%, #ffffff 100%);
+}
+
+.card-title {
+  font-size: 1.25rem;
+  margin-top: 10px;
+  color: #ffffff;
+}
+.btn-custom {
+  border-radius: 30px;
+  font-weight: 700;
+  color: #36b37e;
+  background-color: #f4f6f5;
+  border: none;
+  width: 100px;
+  height: 66px;
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 12px;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(54, 179, 126, 0.3);
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.btn-custom-re{
+   border-radius: 30px;
+  font-weight: 700;
+  color: #2b945f;
+  background-color: #ffffff;
+  border: none;
+  width: 200px;
+  height: 56px;
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 12px;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(54, 179, 126, 0.3);
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+.btn-custom-re:hover,
+.btn-custom-re:focus {
+  background-color: #e6f0ec;
+  box-shadow: 0 4px 14px rgba(54, 179, 126, 0.5);
+}
+.btn-custom:hover,
+.btn-custom:focus {
+  background-color: #e6f0ec;
+  box-shadow: 0 4px 14px rgba(54, 179, 126, 0.5);
+}
+.icon-leaves {
+  width: 60px;
+  height: 60px;
+  margin-top: auto;
+  filter: drop-shadow(0 2px 2px rgba(0, 0, 0, 0.15));
+}
+.dropdown-arrow {
+  border: solid #36b37e;
+  border-width: 0 2.5px 2.5px 0;
+  display: inline-block;
+  padding: 4px;
+  transform: rotate(45deg);
+  transition: transform 0.3s ease;
+  margin-left: 4px;
+}
+.dropdown-arrow.open {
+  transform: rotate(-135deg);
 }
