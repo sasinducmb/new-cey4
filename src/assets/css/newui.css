@@ -708,6 +708,23 @@ body {
   box-shadow: 0 2px 6px rgba(54, 179, 126, 0.3);
   transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
+.btn-custom-com{
+    border-radius: 30px;
+    font-weight: 700;
+    color: #ffffff;
+    background-color: #36b37e;
+    border: none;
+    width: 300px;
+    height: 56px;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px 12px;
+    cursor: pointer;
+    box-shadow: 0 2px 6px rgba(54, 179, 126, 0.3);
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
 .btn-custom-re:hover,
 .btn-custom-re:focus {
   background-color: #e6f0ec;
@@ -715,7 +732,7 @@ body {
 }
 .btn-custom:hover,
 .btn-custom:focus {
-  background-color: #e6f0ec;
+  background-color: #6fe3b4;
   box-shadow: 0 4px 14px rgba(54, 179, 126, 0.5);
 }
 .icon-leaves {
@@ -735,4 +752,17 @@ body {
 }
 .dropdown-arrow.open {
   transform: rotate(-135deg);
+}
+
+
+.Transparent {
+  position: absolute;
+  top: 20%;
+  left: 25%;
+  width: 800px;
+  height: 400px;
+  background-color: rgba(255, 255, 255, 0.5); /* Transparent color */
+  border-radius: 8px;
+  padding: 20px;
+  color: #000;
 }

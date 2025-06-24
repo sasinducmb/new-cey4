@@ -6,6 +6,8 @@ import Terms from "./pages/other/Terms";
 import PrivacyPolicy from "./pages/other/PrivacyPolicy";
 import Collobaration from "./pages/other/Collobaration";
 import Reselling from "./pages/other/Reselling";
+import Franchise from "./pages/other/Franchise";
+import WholeSale from "./pages/other/WholeSale";
 
 // home pages
 const HomeFashion = lazy(() => import("./pages/home/HomeHandmade"));
@@ -418,20 +420,35 @@ const App = () => {
               path={process.env.PUBLIC_URL + "/order-status"}
               element={<OrderStatus />}
             />
-            <Route 
+            <Route
               path={process.env.PUBLIC_URL + "/Terms-and-Conditions"}
               element={<Terms />}
             />
-             <Route 
+            <Route
               path={process.env.PUBLIC_URL + "/privacy-policy"}
-              element={<PrivacyPolicy/>}
+              element={<PrivacyPolicy />}
             />
             {/* <Route
               path={process.env.PUBLIC_URL + "/collabaration"}
               element={<Collobaration/>}/> */}
-                <Route
+            <Route
               path={process.env.PUBLIC_URL + "/collabaration"}
-              element={<Reselling/>}/>
+              element={<Collobaration />}
+            />
+            <Route
+              path={process.env.PUBLIC_URL + "/reselling"}
+              element={<Reselling />}
+            />
+            <Route
+              path={process.env.PUBLIC_URL + "/franchise"}
+              element={<Franchise />}
+            />
+           
+            <Route
+              path={process.env.PUBLIC_URL + "/wholesale"}
+              element={<WholeSale />}/>
+
+            {/* Not found page */}
 
             <Route path="*" element={<NotFound />} />
           </Routes>
