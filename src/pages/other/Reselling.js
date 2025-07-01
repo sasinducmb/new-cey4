@@ -1,91 +1,107 @@
 import React, { Fragment } from "react";
 import SEO from "../../components/seo";
 import LayoutOne from "../../layouts/LayoutOne";
+import { useNavigate } from "react-router-dom";
 
 function Reselling() {
+  const navigate = useNavigate();
   return (
     <Fragment>
       <SEO titleTemplate="Collobaration" />
       <LayoutOne headerTop="visible">
-        <div className="container-fluid reselling">
-          <div className="row ">
-            <div className="col-md-12 d-flex justify-content-center align-items-center flex-column">
-              <h2 className="mt-5">Welcome To Commercial Arm </h2>
-              <h1>
-                {" "}
-                <b>RESELLING</b>
-              </h1>
-              <p className="text-center mt-5">
-                Become a reseller and start your own business with minimal
-                investment. <br></br>Our reselling program allows individuals
-                and small businesses to sell our products and earn a profit.
+        <div className="container-fluid reselling px-3">
+          {/* Header Section */}
+          <div className="row">
+            <div className="col-12 d-flex justify-content-center align-items-center flex-column text-center py-5">
+              <h2 className="fw-bold">Welcome To Commercial Arm</h2>
+              <h1 className="fw-bold text-uppercase mt-2">Reselling</h1>
+              <p className="mt-4 mb-3 px-2 px-md-5">
+                Become a reseller and start your own business with minimal investment. <br />
+                Our reselling program allows individuals and small businesses to sell our products and earn a profit.
               </p>
             </div>
           </div>
-          <div>
-            <div className="row d-flex justify-content-center align-items-center mt-3">
-              <div className="col-md-10 ">
-                <img
-                  src="assets/img/banner/video.png"
-                  className="d-block w-100 rounded-0"
-                  alt="First slide"
-                />
-              </div>
+
+          {/* Banner Image */}
+          <div className="row justify-content-center mb-4">
+            <div className="col-12 col-md-10">
+              <img
+                src="assets/img/banner/video.png"
+                className="img-fluid w-100 rounded"
+                alt="Reselling Visual"
+              />
             </div>
           </div>
-          <div className="row d-flex justify-content-center align-items-center mt-3">
-            <div className="col-md-10">
-              <div className="text-center mt-5">
-                <h1>
-                  {" "}
-                  <b>Benefits of Joining Us</b>
-                </h1>
-                <p className="text-center mt-3">
-                  As a reseller, you'll enjoy the flexibility of selling without
-                  holding inventory, allowing you to start your business with
-                  minimal upfront investment. You have the opportunity to earn
-                  profits on every sale, setting your own margins to maximize
-                  earnings. The work model is flexible, enabling you to sell
-                  online or offline at your convenience, and we provide
-                  marketing support, including promotional materials, to help
-                  boost your sales and visibility. With these benefits, our
-                  reselling program makes it easy for you to grow a profitable
-                  business with our trusted products.
+
+          {/* Benefits Section (Mobile & Desktop Split) */}
+          <div className="row justify-content-center">
+            <div className="col-12 col-md-10">
+              {/* Small screens with white bg and rounded edges */}
+              <div className="text-center bg-white p-3 rounded-4 d-block d-md-none shadow-sm">
+                <h1 className="fw-bold">Benefits of Joining Us</h1>
+                <p className="mt-3 px-2">
+                  As a reseller, you'll enjoy the flexibility of selling without holding inventory,
+                  allowing you to start your business with minimal upfront investment.
+                  You have the opportunity to earn profits on every sale, setting your own margins
+                  to maximize earnings. The work model is flexible, enabling you to sell online or offline
+                  at your convenience, and we provide marketing support to help boost your sales.
                 </p>
               </div>
-            </div>
-          </div>
-          <div className="row d-flex justify-content-center align-items-center mt-3">
-            <div className="col-md-10">
-              <div className="text-center mt-3">
-                <h1>
-                  {" "}
-                  <b>Rules & Conditions</b>
-                </h1>
-                <p className="text-center mt-3">
-                  For our reselling program, partners must place orders through
-                  our official channels and ensure they maintain fair pricing to
-                  protect the brand’s integrity. Ethical marketing and selling
-                  practices are required to build trust and promote a positive
-                  brand image. Resellers are also expected to comply with local
-                  business regulations to operate legally and responsibly within
-                  their markets.
+              {/* Desktop version */}
+              <div className="text-center mt-5 d-none d-md-block">
+                <h1 className="fw-bold">Benefits of Joining Us</h1>
+                <p className="mt-3 px-2 px-md-5">
+                  As a reseller, you'll enjoy the flexibility of selling without holding inventory,
+                  allowing you to start your business with minimal upfront investment.
+                  You have the opportunity to earn profits on every sale, setting your own margins
+                  to maximize earnings. The work model is flexible, enabling you to sell online or offline
+                  at your convenience, and we provide marketing support to help boost your sales.
                 </p>
               </div>
             </div>
           </div>
 
-          <div className="row d-flex justify-content-center align-items-center">
-            <button className="btn btn-custom-re d-flex justify-content-center mt-4">
-              Register
-            </button>
+          {/* Rules Section (Mobile & Desktop Split) */}
+          <div className="row justify-content-center">
+            <div className="col-12 col-md-10">
+              {/* Small screens with white bg and rounded edges */}
+              <div className="text-center bg-white p-3 rounded-4 d-block d-md-none shadow-sm mt-4">
+                <h1 className="fw-bold">Rules & Conditions</h1>
+                <p className="mt-3 px-2">
+                  Resellers must place orders through official channels and maintain fair pricing
+                  to protect the brand’s integrity. Ethical marketing practices are required to build trust.
+                  Compliance with local business regulations is expected for legal and responsible operations.
+                </p>
+              </div>
+              {/* Desktop version */}
+              <div className="text-center mt-5 d-none d-md-block">
+                <h1 className="fw-bold">Rules & Conditions</h1>
+                <p className="mt-3 px-2 px-md-5">
+                  Resellers must place orders through official channels and maintain fair pricing
+                  to protect the brand’s integrity. Ethical marketing practices are required to build trust.
+                  Compliance with local business regulations is expected for legal and responsible operations.
+                </p>
+              </div>
+            </div>
           </div>
-          <div className="row d-flex justify-content-center align-items-center mt-3">
-            <div className="col-md-10 mb-5">
+
+          {/* Register Button */}
+          <div className="row justify-content-center">
+            <div className="col-12 text-center">
+              <button className="btn btn-custom-re mt-4 px-5 py-2 mb-4"
+               onClick={() => navigate("/login-register")}>
+                Register
+              </button>
+            </div>
+          </div>
+
+          {/* Footer Image */}
+          <div className="row justify-content-center mb-5">
+            <div className="col-12 col-md-10">
               <img
                 src="assets/img/banner/video.png"
-                className="d-block w-100 rounded-0"
-                alt="First slide"
+                className="img-fluid w-100 rounded"
+                alt="Final Visual"
               />
             </div>
           </div>

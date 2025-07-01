@@ -13,6 +13,7 @@ import {
 } from "../../store/slices/user-slice";
 import ClipLoader from "react-spinners/ClipLoader";
 import { Modal, Button } from "react-bootstrap";
+
 const LoginRegister = () => {
   let { pathname } = useLocation();
   const [name, setName] = useState("");
@@ -23,15 +24,24 @@ const LoginRegister = () => {
   const [state, setState] = useState("");
   const [country, setCountry] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
+  
+  // New reseller-specific fields
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [fullAddress, setFullAddress] = useState("");
+  const [sellingPlatform, setSellingPlatform] = useState("");
+  const [otherPlatform, setOtherPlatform] = useState("");
+  
   const [registerUser] = useRegisterUserMutation();
   const [login, { isLoading }] = useLoginMutation();
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const [userType, setUserType] = useState("regular");
-
+  const [activeTab, setActiveTab] = useState("login");
   // Terms and conditions modal state
   const [showTerms, setShowTerms] = useState(false);
   const [acceptedTerms, setAcceptedTerms] = useState(false);
+
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
@@ -67,6 +77,7 @@ const LoginRegister = () => {
       }
     }
   };
+
   const handleUserTypeChange = (e) => {
     const newUserType = e.target.value;
     setUserType(newUserType);
@@ -76,6 +87,7 @@ const LoginRegister = () => {
       setShowTerms(true);
     }
   };
+
   const handleCloseTerms = () => {
     setShowTerms(false);
     // If terms were not accepted, revert to regular user
@@ -89,6 +101,7 @@ const LoginRegister = () => {
     setAcceptedTerms(true);
     setShowTerms(false);
   };
+
   const handleRegister = async (e) => {
     e.preventDefault();
 
@@ -97,9 +110,26 @@ const LoginRegister = () => {
       cogoToast.error("Passwords do not match", { position: "top-right" });
       return;
     }
+
+    // Additional validation for reseller
+    if (userType === "reseller") {
+      if (!firstName || !lastName || !fullAddress || !sellingPlatform) {
+        cogoToast.error("Please fill in all required reseller fields", { 
+          position: "top-right" 
+        });
+        return;
+      }
+      if (sellingPlatform === "Other" && !otherPlatform) {
+        cogoToast.error("Please specify your selling platform", { 
+          position: "top-right" 
+        });
+        return;
+      }
+    }
+
     setLoading(true);
     try {
-      const response = await registerUser({
+      const registrationData = {
         name,
         password,
         email,
@@ -107,13 +137,24 @@ const LoginRegister = () => {
         state,
         country,
         phoneNumber,
-      }).unwrap();
+        userType,
+        // Include reseller-specific data if applicable
+        ...(userType === "reseller" && {
+          firstName,
+          lastName,
+          fullAddress,
+          sellingPlatform: sellingPlatform === "Other" ? otherPlatform : sellingPlatform,
+        })
+      };
+
+      const response = await registerUser(registrationData).unwrap();
 
       if (response.message) {
         setLoading(false);
         navigate("/email-verification");
       }
     } catch (error) {
+      setLoading(false);
       // Check if the error is a specific API response
       if (error.status === 400 && error.data && error.data.message) {
         if (error.data.message === "User already exists") {
@@ -180,228 +221,16 @@ const LoginRegister = () => {
         description="Login page of flone react minimalist eCommerce template."
       />
       <LayoutOne headerTop="visible">
-        {/* breadcrumb */}
-        {/* <Breadcrumb
-          pages={[
-            { label: "Home", path: process.env.PUBLIC_URL + "/" },
-            {
-              label: "Login Register",
-              path: process.env.PUBLIC_URL + pathname,
-            },
-          ]}
-        /> */}
-        {/* <div className="login-register-area pt-100 pb-100">
-          <div className="container">
-            <div className="row">
-              <div className="col-lg-7 col-md-12 ms-auto me-auto">
-                <div className="login-register-wrapper">
-                  <Tab.Container defaultActiveKey="login">
-                    <Nav variant="pills" className="login-register-tab-list">
-                      <Nav.Item>
-                        <Nav.Link eventKey="login">
-                          <h4>Login</h4>
-                        </Nav.Link>
-                      </Nav.Item>
-                      <Nav.Item>
-                        <Nav.Link eventKey="register">
-                          <h4>Register</h4>
-                        </Nav.Link>
-                      </Nav.Item>
-                    </Nav>
-                    <Tab.Content>
-                      <Tab.Pane eventKey="login">
-                        <div className="login-form-container">
-                          <div className="login-register-form">
-                            <form onSubmit={handleLogin}>
-                              <input
-                                type="email"
-                                name="user-name"
-                                placeholder="Email"
-                                value={email}
-                                onChange={(e) => setEmail(e.target.value)}
-                              />
-                              <input
-                                type="password"
-                                name="user-password"
-                                placeholder="Password"
-                                value={password}
-                                onChange={(e) => setPassword(e.target.value)}
-                              />
-                              <div className="button-box">
-                                <div className="login-toggle-btn">
-                                  <input type="checkbox" />
-                                  <label className="ml-10">Remember me</label>
-                            
-                                </div>
-                                <button type="submit">
-                                  <span>Login</span>
-                                </button>
-                              </div>
-                            </form>
-                          </div>
-                        </div>
-                      </Tab.Pane>
-                      <Tab.Pane eventKey="register">
-                        <div className="login-form-container">
-                          <div className="login-register-form">
-                            <form onSubmit={handleRegister}>
-                              <input
-                                type="text"
-                                name="user-name"
-                                placeholder="Username"
-                                value={name}
-                                onChange={(e) => setName(e.target.value)}
-                                required
-                              />
-                              <input
-                                type="password"
-                                name="user-password"
-                                placeholder="Password"
-                                value={password}
-                                onChange={(e) => setPassword(e.target.value)}
-                                required
-                              />
-                              <input
-                                type="password"
-                                name="user-confpassword"
-                                placeholder="Confirm Password"
-                                value={confirmPassword}
-                                onChange={(e) =>
-                                  setConfirmPassword(e.target.value)
-                                }
-                                required
-                              />
-                              <input
-                                name="user-email"
-                                placeholder="Email"
-                                type="email"
-                                value={email}
-                                onChange={(e) => setEmail(e.target.value)}
-                                required
-                              />
-                              <input
-                                name="user-city"
-                                placeholder="City"
-                                type="text"
-                                value={city}
-                                onChange={(e) => setCity(e.target.value)}
-                              />
-                              <input
-                                name="user-state"
-                                placeholder="State"
-                                type="text"
-                                value={state}
-                                onChange={(e) => setState(e.target.value)}
-                              />
-                              <input
-                                name="user-mobile"
-                                placeholder="Phone No"
-                                type="number"
-                                value={phoneNumber}
-                                onChange={(e) => setPhoneNumber(e.target.value)}
-                              />
-                              <input
-                                name="user-country"
-                                placeholder="Country"
-                                type="text"
-                                value={country}
-                                onChange={(e) => setCountry(e.target.value)}
-                              />
-                              <div className="button-box">
-                                <button type="submit">
-                                  <span>Register</span>
-                                </button>
-                              </div>
-                            </form>
-                          </div>
-                        </div>
-                      </Tab.Pane>
-                    </Tab.Content>
-                  </Tab.Container>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div> */}
-        {/* <div className="container d-flex justify-content-center align-items-center">
-          <div className="row w-100">
-            <div className="col-md-6 green-section d-none d-md-block">
-              <h1>Ready to Go Green?</h1>
-            </div>
-            <div className="col-md-6 form-section p-5">
-              <h2>Create Account</h2>
-              <div className="mb-3">
-                <button className="btn btn-light w-100 mb-2">
-                  Sign up with Google
-                </button>
-                <button className="btn btn-light w-100">
-                  Sign up with Facebook
-                </button>
-              </div>
-              <p className="text-center">- OR -</p>
-              <form>
-                <div className="mb-3">
-                  <label htmlFor="fullName" className="form-label">
-                    Full Name
-                  </label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    id="fullName"
-                    required
-                  />
-                </div>
-                <div className="mb-3">
-                  <label htmlFor="email" className="form-label">
-                    Email Address
-                  </label>
-                  <input
-                    type="email"
-                    className="form-control"
-                    id="email"
-                    required
-                  />
-                </div>
-                <div className="mb-3">
-                  <label htmlFor="password" className="form-label">
-                    Password
-                  </label>
-                  <input
-                    type="password"
-                    className="form-control"
-                    id="password"
-                    required
-                  />
-                </div>
-                <div className="mb-4">
-                  <label htmlFor="confirmPassword" className="form-label">
-                    Confirm Password
-                  </label>
-                  <input
-                    type="password"
-                    className="form-control"
-                    id="confirmPassword"
-                    required
-                  />
-                </div>
-                <button type="submit" className="btn btn-primary w-100">
-                  Create Account
-                </button>
-              </form>
-              <p className="mt-3 text-center">
-                Already have an account? <a href="#">Log in</a>
-              </p>
-            </div>
-          </div>
-        </div> */}
         <div className="container d-flex justify-content-end align-items-center mb-5  green-section">
           <div className="row w-100">
             <div className="col-md-6 d-flex justify-content-center align-items-center">
               <h1 className="green-section-right">Ready to Go Green?</h1>
-              {/* <img src="assets/img/banner/Abstraction.png" className="img-fluid" style={{height:"300px",width:"300px"}}/> */}
             </div>
             <div className="col-md-6 form-section pb-5 green-section-left">
-              <Tab.Container defaultActiveKey="login">
+              <Tab.Container
+                activeKey={activeTab}
+                onSelect={(k) => setActiveTab(k)}
+              >
                 <Nav variant="pills" className="mb-4 justify-content-center">
                   <Nav.Item>
                     <Nav.Link eventKey="login" aria-label="Login">
@@ -414,16 +243,6 @@ const LoginRegister = () => {
                     </Nav.Link>
                   </Nav.Item>
                 </Nav>
-
-                {/* <div className="mb-3">
-                  <button className="btn btn-light w-100 mb-2">
-                    Continue with Google
-                  </button>
-                  <button className="btn btn-light w-100">
-                    Continue with Facebook
-                  </button>
-                </div>
-                <p className="text-center">- OR -</p> */}
 
                 <Tab.Content>
                   <Tab.Pane eventKey="login">
@@ -454,23 +273,20 @@ const LoginRegister = () => {
                           required
                         />
                       </div>
-                      <div className="mb-1 form-check">
-                        {/* <input
-                          type="checkbox"
-                          className="form-check-input"
-                          id="remember-me"
-                        /> */}
-                        {/* <label
-                          className="form-check-label"
-                          htmlFor="remember-me"
-                        >
-                          Remember me
-                        </label> */}
-                      </div>
                       <div className="row d-flex justify-content-center">
                         <button type="submit" className="btn btn-primary w-50">
                           Login
                         </button>
+                        <p
+                          className="mt-2"
+                          onClick={() => setActiveTab("register")}
+                          style={{ cursor: "pointer" }}
+                        >
+                          Don't have an account?{" "}
+                          <span style={{ color: "#007bff" }}>
+                            Please sign up
+                          </span>
+                        </p>
                       </div>
                     </form>
                   </Tab.Pane>
@@ -581,59 +397,172 @@ const LoginRegister = () => {
                         </div>
                       </div>
 
-                      <div className="row">
-                        <div className="col-md-6 mb-3">
-                          <label htmlFor="city" className="form-label">
-                            City
-                          </label>
-                          <input
-                            type="text"
-                            className="form-control"
-                            id="city"
-                            value={city}
-                            onChange={(e) => setCity(e.target.value)}
-                          />
-                        </div>
-                        <div className="col-md-6 mb-3">
-                          <label htmlFor="state" className="form-label">
-                            State
-                          </label>
-                          <input
-                            type="text"
-                            className="form-control"
-                            id="state"
-                            value={state}
-                            onChange={(e) => setState(e.target.value)}
-                          />
-                        </div>
-                      </div>
+                      {/* Extended Reseller Form Fields */}
+                      {userType === "reseller" && (
+                        <div className="border p-3 mb-4 rounded bg-light">
+                          <h5 className="mb-3 text-primary">Reseller Information</h5>
+                          
+                          {/* Full Name */}
+                          <div className="row">
+                            <div className="col-md-6 mb-3">
+                              <label htmlFor="firstName" className="form-label">
+                                First Name <span className="text-danger">*</span>
+                              </label>
+                              <input
+                                type="text"
+                                className="form-control"
+                                id="firstName"
+                                value={firstName}
+                                onChange={(e) => setFirstName(e.target.value)}
+                                required
+                              />
+                            </div>
+                            <div className="col-md-6 mb-3">
+                              <label htmlFor="lastName" className="form-label">
+                                Last Name <span className="text-danger">*</span>
+                              </label>
+                              <input
+                                type="text"
+                                className="form-control"
+                                id="lastName"
+                                value={lastName}
+                                onChange={(e) => setLastName(e.target.value)}
+                                required
+                              />
+                            </div>
+                          </div>
 
-                      <div className="row">
-                        <div className="col-md-6 mb-3">
-                          <label htmlFor="phone" className="form-label">
-                            Phone Number
-                          </label>
-                          <input
-                            type="tel"
-                            className="form-control"
-                            id="phone"
-                            value={phoneNumber}
-                            onChange={(e) => setPhoneNumber(e.target.value)}
-                          />
+                          {/* Full Postal Address */}
+                          <div className="mb-3">
+                            <label htmlFor="fullAddress" className="form-label">
+                              Full Postal Address <span className="text-danger">*</span>
+                            </label>
+                            <textarea
+                              className="form-control"
+                              id="fullAddress"
+                              rows="3"
+                              placeholder="Enter your complete address including country"
+                              value={fullAddress}
+                              onChange={(e) => setFullAddress(e.target.value)}
+                              required
+                            />
+                          </div>
+
+                          {/* Selling Platform */}
+                          <div className="mb-3">
+                            <label htmlFor="sellingPlatform" className="form-label">
+                              Selling Platform <span className="text-danger">*</span>
+                            </label>
+                            <select
+                              className="form-select"
+                              id="sellingPlatform"
+                              value={sellingPlatform}
+                              onChange={(e) => setSellingPlatform(e.target.value)}
+                              required
+                            >
+                              <option value="">Select Platform</option>
+                              <option value="Amazon">Amazon</option>
+                              <option value="Etsy">Etsy</option>
+                              <option value="E-bay">E-bay</option>
+                              <option value="Other">Other</option>
+                            </select>
+                          </div>
+
+                          {/* Other Platform Input */}
+                          {sellingPlatform === "Other" && (
+                            <div className="mb-3">
+                              <label htmlFor="otherPlatform" className="form-label">
+                                Please specify your platform <span className="text-danger">*</span>
+                              </label>
+                              <input
+                                type="text"
+                                className="form-control"
+                                id="otherPlatform"
+                                placeholder="Enter your selling platform"
+                                value={otherPlatform}
+                                onChange={(e) => setOtherPlatform(e.target.value)}
+                                required
+                              />
+                            </div>
+                          )}
+
+                          {/* Contact Number */}
+                          <div className="mb-3">
+                            <label htmlFor="resellerPhone" className="form-label">
+                              Contact Number <span className="text-danger">*</span>
+                            </label>
+                            <input
+                              type="tel"
+                              className="form-control"
+                              id="resellerPhone"
+                              placeholder="Enter your contact number"
+                              value={phoneNumber}
+                              onChange={(e) => setPhoneNumber(e.target.value)}
+                              required
+                            />
+                          </div>
                         </div>
-                        <div className="col-md-6 mb-3">
-                          <label htmlFor="country" className="form-label">
-                            Country
-                          </label>
-                          <input
-                            type="text"
-                            className="form-control"
-                            id="country"
-                            value={country}
-                            onChange={(e) => setCountry(e.target.value)}
-                          />
-                        </div>
-                      </div>
+                      )}
+
+                      {/* Regular User Fields */}
+                      {userType === "regular" && (
+                        <>
+                          <div className="row">
+                            <div className="col-md-6 mb-3">
+                              <label htmlFor="city" className="form-label">
+                                City
+                              </label>
+                              <input
+                                type="text"
+                                className="form-control"
+                                id="city"
+                                value={city}
+                                onChange={(e) => setCity(e.target.value)}
+                              />
+                            </div>
+                            <div className="col-md-6 mb-3">
+                              <label htmlFor="state" className="form-label">
+                                State
+                              </label>
+                              <input
+                                type="text"
+                                className="form-control"
+                                id="state"
+                                value={state}
+                                onChange={(e) => setState(e.target.value)}
+                              />
+                            </div>
+                          </div>
+
+                          <div className="row">
+                            <div className="col-md-6 mb-3">
+                              <label htmlFor="phone" className="form-label">
+                                Phone Number
+                              </label>
+                              <input
+                                type="tel"
+                                className="form-control"
+                                id="phone"
+                                value={phoneNumber}
+                                onChange={(e) => setPhoneNumber(e.target.value)}
+                              />
+                            </div>
+                            <div className="col-md-6 mb-3">
+                              <label htmlFor="country" className="form-label">
+                                Country
+                              </label>
+                              <input
+                                type="text"
+                                className="form-control"
+                                id="country"
+                                value={country}
+                                onChange={(e) => setCountry(e.target.value)}
+                              />
+                            </div>
+                          </div>
+                        </>
+                      )}
+
                       <div className="row d-flex justify-content-center">
                         <button
                           type="submit"
@@ -652,83 +581,46 @@ const LoginRegister = () => {
                       </div>
                     </form>
                   </Tab.Pane>
-
-                  {/* Terms and Conditions Modal */}
-                  <Modal show={showTerms} onHide={handleCloseTerms} size="lg">
-                    <Modal.Header closeButton>
-                      <Modal.Title>Reseller Terms and Conditions</Modal.Title>
-                    </Modal.Header>
-                    <Modal.Body
-                      style={{ maxHeight: "60vh", overflowY: "auto" }}
-                    >
-                      <h5>Reseller Agreement</h5>
-                      <p>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                        Nullam auctor, nisl eget ultricies tincidunt, nisl nisl
-                        aliquet nisl, eget aliquet nisl nisl eget nisl. Nullam
-                        auctor, nisl eget ultricies tincidunt, nisl nisl aliquet
-                        nisl, eget aliquet nisl nisl eget nisl.
-                      </p>
-
-                      <h5>1. Definitions</h5>
-                      <p>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                        Nullam auctor, nisl eget ultricies tincidunt, nisl nisl
-                        aliquet nisl, eget aliquet nisl nisl eget nisl. Nullam
-                        auctor, nisl eget ultricies tincidunt, nisl nisl aliquet
-                        nisl, eget aliquet nisl nisl eget nisl.
-                      </p>
-
-                      <h5>2. Terms of Service</h5>
-                      <p>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                        Nullam auctor, nisl eget ultricies tincidunt, nisl nisl
-                        aliquet nisl, eget aliquet nisl nisl eget nisl. Nullam
-                        auctor, nisl eget ultricies tincidunt, nisl nisl aliquet
-                        nisl, eget aliquet nisl nisl eget nisl.
-                      </p>
-
-                      <h5>3. Pricing and Payment</h5>
-                      <p>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                        Nullam auctor, nisl eget ultricies tincidunt, nisl nisl
-                        aliquet nisl, eget aliquet nisl nisl eget nisl. Nullam
-                        auctor, nisl eget ultricies tincidunt, nisl nisl aliquet
-                        nisl, eget aliquet nisl nisl eget nisl.
-                      </p>
-
-                      <h5>4. Responsibilities</h5>
-                      <p>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                        Nullam auctor, nisl eget ultricies tincidunt, nisl nisl
-                        aliquet nisl, eget aliquet nisl nisl eget nisl. Nullam
-                        auctor, nisl eget ultricies tincidunt, nisl nisl aliquet
-                        nisl, eget aliquet nisl nisl eget nisl.
-                      </p>
-
-                      <h5>5. Term and Termination</h5>
-                      <p>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                        Nullam auctor, nisl eget ultricies tincidunt, nisl nisl
-                        aliquet nisl, eget aliquet nisl nisl eget nisl. Nullam
-                        auctor, nisl eget ultricies tincidunt, nisl nisl aliquet
-                        nisl, eget aliquet nisl nisl eget nisl.
-                      </p>
-                    </Modal.Body>
-                    <Modal.Footer>
-                      <Button variant="secondary" onClick={handleCloseTerms}>
-                        Reject
-                      </Button>
-                      <Button variant="primary" onClick={handleAcceptTerms}>
-                        Accept Terms
-                      </Button>
-                    </Modal.Footer>
-                  </Modal>
                 </Tab.Content>
               </Tab.Container>
             </div>
           </div>
         </div>
+
+        {/* Terms and Conditions Modal */}
+        <Modal show={showTerms} onHide={handleCloseTerms} size="lg">
+          <Modal.Header closeButton>
+            <Modal.Title>Reseller Terms and Conditions</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <div style={{ maxHeight: "400px", overflowY: "auto" }}>
+              <h5>Terms and Conditions for Resellers</h5>
+              <p>
+                By selecting "Reseller" and proceeding with registration, you agree to the following terms:
+              </p>
+              <ol>
+                <li>You will represent our products professionally and accurately.</li>
+                <li>You agree to follow all applicable laws and regulations in your jurisdiction.</li>
+                <li>You will not engage in deceptive or misleading marketing practices.</li>
+                <li>You understand that reseller pricing and terms may differ from regular customers.</li>
+                <li>You agree to maintain accurate records of your sales and transactions.</li>
+                <li>You will comply with all platform-specific rules (Amazon, Etsy, eBay, etc.).</li>
+                <li>You understand that this agreement may be terminated by either party with notice.</li>
+              </ol>
+              <p>
+                <strong>Note:</strong> Additional terms may apply based on your selling platform and location.
+              </p>
+            </div>
+          </Modal.Body>
+          <Modal.Footer>
+            <Button variant="secondary" onClick={handleCloseTerms}>
+              Cancel
+            </Button>
+            <Button variant="primary" onClick={handleAcceptTerms}>
+              Accept Terms
+            </Button>
+          </Modal.Footer>
+        </Modal>
       </LayoutOne>
     </Fragment>
   );

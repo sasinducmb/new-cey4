@@ -2,13 +2,15 @@ import { Fragment, useState } from "react";
 import SEO from "../../components/seo";
 import LayoutOne from "../../layouts/LayoutOne";
 import { useNavigate } from "react-router-dom";
-import WholeSale from "./WholeSale";
+
 function Collobaration() {
   const navigate = useNavigate();
   const [detailsOpen, setDetailsOpen] = useState(false);
+
   const toggleDetails = () => {
     setDetailsOpen(!detailsOpen);
   };
+
   const goToReselling = () => {
     setDetailsOpen(!detailsOpen);
     navigate("/reselling");
@@ -18,107 +20,104 @@ function Collobaration() {
     setDetailsOpen(!detailsOpen);
     navigate("/franchise");
   };
+
   const goToWholeSale = () => {
     setDetailsOpen(!detailsOpen);
     navigate("/wholesale");
   };
+
   return (
     <Fragment>
       <SEO titleTemplate="Collobaration" />
       <LayoutOne headerTop="visible">
-        <div className="container-fluid position-relative">
-          <div className="row">
-            <div className="col-md-12 border p-0 position-relative">
-              {/* Background Image */}
+        <div className="container-fluid position-relative p-0">
+          <div className="row m-0">
+            <div className="col-12 p-0">
               <img
                 src="assets/img/banner/Collobaration.png"
-                className="d-block w-100 rounded-0"
-                alt="First slide"
+                className="img-fluid w-100 banner-img"
+                alt="Collaboration Banner"
               />
-
-              {/* Transparent Box Overlay */}
-              <div className="overlay-box d-flex align-items-center justify-content-center Transparent flex-column">
-                <h1 style={{ fontWeight: 600 }}>Welcome To Commercial Arm </h1>
+              <div className="overlay-box d-flex align-items-center justify-content-center flex-column text-center Transparent ">
+                <h1 style={{ fontWeight: 600 }} className="">Welcome To Commercial Arm</h1>
                 <p>
-                  {" "}
                   <b>
                     New Eco-friendly Handmade, High Quality product collection
                     of cey4hub
                   </b>
                 </p>
-                <button className="btn btn-custom-com">
-                  Discovery our collection
+                <button className="btn btn-custom-com mt-2">
+                  Discover our collection
                 </button>
               </div>
             </div>
           </div>
         </div>
 
-        <div className="container">
-          <div className="row d-flex jjustify-content-between align-items-center mt-5">
-            <div className="col-md-4 text-center">
-              <div className="card-custom text-center">
+        <div className="container my-5">
+          <div className="row justify-content-center g-4">
+            {/* WHOLESALE */}
+            <div className="col-12 col-md-6 col-lg-4 d-flex justify-content-center">
+              <div className="card-custom text-center w-100 p-3">
                 <div className="card-title mt-2">WHOLESALE</div>
                 <button
                   onClick={goToWholeSale}
                   className="btn btn-custom mt-4"
                   aria-expanded={detailsOpen}
-                  aria-controls="details-content"
                 >
                   Details
                   <i
                     className={`dropdown-arrow ${detailsOpen ? "open" : ""}`}
                   />
                 </button>
-                {/* Leaves SVG Icon */}
                 <img
                   src="assets/img/banner/leaf-col.png"
-                  className="d-block w-100 rounded-0"
-                  alt="First slide"
+                  className="img-fluid mt-3"
+                  alt="Wholesale"
                 />
               </div>
             </div>
-            <div className="col-md-4 text-center">
-              <div className="card-custom text-center">
+
+            {/* RESELLING */}
+            <div className="col-12 col-md-6 col-lg-4 d-flex justify-content-center">
+              <div className="card-custom text-center w-100 p-3">
                 <div className="card-title mt-2">RESELLING</div>
                 <button
                   onClick={goToReselling}
                   className="btn btn-custom mt-4"
                   aria-expanded={detailsOpen}
-                  aria-controls="details-content"
                 >
                   Details
                   <i
                     className={`dropdown-arrow ${detailsOpen ? "open" : ""}`}
                   />
                 </button>
-                {/* Leaves SVG Icon */}
                 <img
                   src="assets/img/banner/leaf-col.png"
-                  className="d-block w-100 rounded-0"
-                  alt="First slide"
+                  className="img-fluid mt-3"
+                  alt="Reselling"
                 />
               </div>
             </div>
-            <div className="col-md-4 text-center">
-              <div className="card-custom text-center">
+
+            {/* FRANCHISE */}
+            <div className="col-12 col-md-6 col-lg-4 d-flex justify-content-center">
+              <div className="card-custom text-center w-100 p-3">
                 <div className="card-title mt-2">FRANCHISE</div>
                 <button
                   onClick={goToFranchise}
                   className="btn btn-custom mt-4"
                   aria-expanded={detailsOpen}
-                  aria-controls="details-content"
                 >
                   Details
                   <i
                     className={`dropdown-arrow ${detailsOpen ? "open" : ""}`}
                   />
                 </button>
-                {/* Leaves SVG Icon */}
                 <img
                   src="assets/img/banner/leaf-col.png"
-                  className="d-block w-100 rounded-0"
-                  alt="First slide"
+                  className="img-fluid mt-3"
+                  alt="Franchise"
                 />
               </div>
             </div>

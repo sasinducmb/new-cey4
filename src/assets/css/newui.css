@@ -41,7 +41,8 @@ body {
   left: 450px;
 }
 .btn-success {
-  border-radius: 25px;
+  
+  border-radius: 15px;
 }
 
 .img-fluid {
@@ -700,9 +701,6 @@ body {
   width: 200px;
   height: 56px;
   font-size: 0.9rem;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
   padding: 8px 12px;
   cursor: pointer;
   box-shadow: 0 2px 6px rgba(54, 179, 126, 0.3);
@@ -724,6 +722,12 @@ body {
     cursor: pointer;
     box-shadow: 0 2px 6px rgba(54, 179, 126, 0.3);
     transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+.btn-custom-com:hover,
+.btn-custom-com:focus {
+  background-color: #2b945f;
+  box-shadow: 0 4px 14px rgba(54, 179, 126, 0.5);
+  color: #ffffff;
 }
 .btn-custom-re:hover,
 .btn-custom-re:focus {
@@ -753,16 +757,57 @@ body {
 .dropdown-arrow.open {
   transform: rotate(-135deg);
 }
-
-
 .Transparent {
   position: absolute;
   top: 20%;
-  left: 25%;
+  left: 50%;
+  transform: translateX(-50%);
+  max-width: 90%;
   width: 800px;
-  height: 400px;
-  background-color: rgba(255, 255, 255, 0.5); /* Transparent color */
+  height: auto;
+  background-color: rgba(255, 255, 255, 0.5); /* Transparent white */
   border-radius: 8px;
-  padding: 20px;
+  padding: 30px;
   color: #000;
+  text-align: center;
+}
+
+/* Tablet (up to 768px) */
+@media (max-width: 768px) {
+  .Transparent {
+    width: 90%;
+    padding: 20px;
+    font-size: 0.95rem;
+  }
+   .banner-img {
+    height: 300px;
+  }
+
+  .Transparent h1 {
+    font-size: 1.5rem;
+  }
+
+  .Transparent p {
+    font-size: 1rem;
+  }
+}
+
+/* Mobile (up to 480px) */
+@media (max-width: 480px) {
+  .Transparent {
+    padding: 15px;
+  }
+
+  .Transparent h1 {
+    font-size: 1.2rem;
+  }
+
+  .Transparent p {
+    font-size: 0.9rem;
+  }
+
+  .btn-custom-com {
+    font-size: 0.9rem;
+    padding: 10px 16px;
+  }
 }

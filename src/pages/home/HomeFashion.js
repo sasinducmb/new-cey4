@@ -19,6 +19,7 @@ const HomeFashion = () => {
       >
         {/* hero slider */}
         <HeroSliderOne />
+        
 
         {/* featured icon */}
         <FeatureIcon spaceTopClass="pt-100" spaceBottomClass="pb-60" />
