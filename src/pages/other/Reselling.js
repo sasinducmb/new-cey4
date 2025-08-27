@@ -70,10 +70,13 @@ function Reselling() {
         <div className="container-fluid reselling px-3">
           {/* Header Section */}
           <div className="row">
-            <div className="col-12 d-flex justify-content-center align-items-center flex-column text-center py-5" >
+            <div className="col-12 d-flex justify-content-center align-items-center flex-column text-center py-5">
               <h2 className="fw-bold">Welcome To Commercial Arm</h2>
               <h1 className="fw-bold text-uppercase mt-2">Reselling</h1>
-              <p className="mt-4 mb-3 px-2 px-md-5 lead text-center text-dark " style={{lineHeight: "1.6"}}>
+              <p
+                className="mt-4 mb-3 px-2 px-md-5 lead text-center text-dark "
+                style={{ lineHeight: "1.6" }}
+              >
                 What is the reselling? Reselling is the process of buying a
                 product or service from one party, adding a profit to it, and
                 then selling it back to another party at a higher price. Sellers
@@ -273,9 +276,14 @@ function Reselling() {
                   borderRadius: "10px",
                 }}
               >
-                <h1 className="fw-bold text-white text-center">Rules & Conditions</h1>
+                <h1 className="fw-bold text-white text-center">
+                  Rules & Conditions
+                </h1>
                 <div className="mt-4">
-                  <ul className="list-unstyled text-white" style={{ lineHeight: "1.8",fontSize: "1.1rem" }}>
+                  <ul
+                    className="list-unstyled text-white"
+                    style={{ lineHeight: "1.8", fontSize: "1.1rem" }}
+                  >
                     <li>
                       <strong>1. Selling Level & Discounts:</strong> The selling
                       level and discount percentage will only be applied once
