@@ -58,7 +58,7 @@ function Collobaration() {
         {/* Introduction Section */}
         <div className="intro-section mt-5">
           <h1>Why Choose Us</h1>
-          <p className="intro-text">
+          <p className="intro-text text-center px-3 px-md-5">
             You are all welcome to the Cey4Hub website. This platform has been created to provide great business opportunities. It is designed for sellers across different economic levels to engage with us. The specialty of this platform is that it is the only e-commerce website offering 100% eco-friendly raw materials and handmade products. In today's economic landscape, consumers are more inclined towards environmentally friendly and high-quality products, making this platform an ideal choice for businesses looking to capitalize on this growing trend.
           </p>
         </div>

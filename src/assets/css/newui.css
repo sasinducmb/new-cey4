@@ -1166,3 +1166,77 @@ body {
   50% { transform: translateX(100%) translateY(100%) rotate(45deg); }
   100% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
 }
+
+/* Reselling Strategies Section */
+.reselling-strategies {
+  background: #1b5e20; /* Dark Green background for the section */
+  color: #ffffff; /* White text for readability */
+  padding: 2rem 1.5rem;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  margin-top: 3rem;
+}
+
+.reselling-strategies h3 {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #ffffff;
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.reselling-strategies ul {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+.reselling-strategies li {
+  font-size: 1.2rem;
+  font-weight: 500;
+  margin-bottom: 0.8rem;
+  color: #dcedc8; /* Light green color for the list items */
+}
+
+.reselling-strategies li::before {
+  content: '•'; /* Bullet point */
+  color: #388e3c; /* Dark Green bullet point */
+  font-weight: bold;
+  margin-right: 10px;
+}
+
+/* Styling for Mobile Version */
+.d-block.d-md-none {
+  background: #2c6e36; /* Darker green for mobile version */
+  color: #ffffff; /* White text */
+  padding: 1.5rem;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  margin-top: 1.5rem;
+}
+
+.d-block.d-md-none h3 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #ffffff;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.d-block.d-md-none ul {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+.d-block.d-md-none li {
+  font-size: 1rem;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+  color: #e8f5e9; /* Light green color for mobile list items */
+}
+
+.d-block.d-md-none li::before {
+  content: '•';
+  color: #a5d6a7; /* Lighter green bullet point */
+  font-weight: bold;
+  margin-right: 10px;
+}
