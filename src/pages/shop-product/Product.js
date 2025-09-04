@@ -7,13 +7,17 @@ import Breadcrumb from "../../wrappers/breadcrumb/Breadcrumb";
 import RelatedProductSlider from "../../wrappers/product/RelatedProductSlider";
 import ProductDescriptionTab from "../../wrappers/product/ProductDescriptionTab";
 import ProductImageDescription from "../../wrappers/product/ProductImageDescription";
-import { useGetVariationQuery } from "../../store/slices/user-slice";
+import { useGetVariationByProductQuery, useGetVariationQuery } from "../../store/slices/user-slice";
 const Product = () => {
   let { pathname } = useLocation();
   let { id } = useParams();
+
   const { products } = useSelector((state) => state.product);
   const product = products.find(product => product._id === id);
   const { data, isLoading } = useGetVariationQuery();
+  const { data: variationData } = useGetVariationByProductQuery(id);
+  console.log(variationData);
+
   // console.log(data);
   const filteredData = Array.isArray(data)
   ? data
@@ -49,6 +53,9 @@ const Product = () => {
           spaceBottomClass="pb-100"
           product={product}
           productVariation={filteredData}
+          // colors
+          colorVariation={variationData ? variationData.colors : []}
+
         />
 
         {/* product description tab */}

@@ -53,6 +53,14 @@ export const userApi = createApi({
       },
    
     }),
+    getVariationByProduct: builder.query({
+      query: (productId) => {
+        return {
+          url: `/colorVariation/getColorVariationsByProduct/${productId}`,
+          method: "GET",
+        };
+      },
+    }),
 
     updateUserProfile: builder.mutation({
       query: ({ userId, updatedData }) => ({
@@ -72,4 +80,5 @@ export const {
   useGetVariationQuery,
   useUpdateUserProfileMutation,
   useLogoutMutation,
+  useGetVariationByProductQuery,
 } = userApi;

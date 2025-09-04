@@ -7,10 +7,11 @@ import Zoom from "yet-another-react-lightbox/plugins/zoom";
 import Fullscreen from "yet-another-react-lightbox/plugins/fullscreen";
 import Swiper, { SwiperSlide } from "../../components/swiper";
 
-const ProductImageGallery = ({ product, variationImage }) => {
+const ProductImageGallery = ({ product, variationImage, colorImage }) => {
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
   const [index, setIndex] = useState(-1);
-  console.log(variationImage);
+  console.log(colorImage);
+
   const slides = variationImage
     ? [
         {
@@ -19,6 +20,16 @@ const ProductImageGallery = ({ product, variationImage }) => {
             "/"
           )}`,
           key: "variationImage",
+        },
+      ]
+    : colorImage
+    ? [
+        {
+          src: `${process.env.REACT_APP_BACKEND_URL}/${colorImage.replace(
+            /\\/g,
+            "/"
+          )}`,
+          key: "colorImage",
         },
       ]
     : [
@@ -36,6 +47,25 @@ const ProductImageGallery = ({ product, variationImage }) => {
           key: `additional-${i}`,
         })),
       ];
+  const variationImageUrl = variationImage
+    ? `${process.env.REACT_APP_BACKEND_URL}/${variationImage.replace(
+        /\\/g,
+        "/"
+      )}`
+    : null;
+
+  // Format colorImage URL properly (for debugging only now)
+  const colorImageUrl = colorImage
+    ? `${process.env.REACT_APP_BACKEND_URL}/${colorImage.replace(/\\/g, "/")}`
+    : null;
+
+  console.log(variationImageUrl);
+  console.log("Color Image URL:", colorImageUrl);
+  console.log(
+    "Currently showing:",
+    variationImage ? "variation" : colorImage ? "color" : "product"
+  );
+
   // Swiper slider settings
   const gallerySwiperParams = {
     spaceBetween: 10,

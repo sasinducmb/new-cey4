@@ -19,12 +19,22 @@ const ProductDescriptionInfo = ({
   compareItem,
   productVariation,
   onVariationClick,
+  onColorClick,
+  colorVariation,
 }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [selectedVariationId, setSelectedVariationId] = useState(null);
+  const [selectedColor, setSelectedColor] = useState(null);
+
   const handleVariationChange = (variationId) => {
     setSelectedVariationId(variationId);
+  };
+  const handleColorChange = (color) => {
+    setSelectedColor(color);
+  };
+  const handleResetColor = () => {
+    setSelectedColor(null); // Reset color selection
   };
   const handleResetSelection = () => {
     setSelectedVariationId(null); // Reset selection
@@ -50,6 +60,9 @@ const ProductDescriptionInfo = ({
   // console.log(productVariation);
   const selectedVariation = productVariation?.find(
     (variation) => variation._id === selectedVariationId
+  );
+  const selectedColorVariation = colorVariation?.find(
+    (variation) => variation._id === selectedColor
   );
 
   // Update the price based on the selected variation
@@ -143,6 +156,58 @@ const ProductDescriptionInfo = ({
           </div>
         )}
       </div>
+      {colorVariation && colorVariation.length > 0 && (
+        <div>
+          <h5 className="mt-3">Color Variation</h5>
+          <div className="d-flex gap-4 mt-2">
+            {colorVariation.map((color) => (
+              <div
+                key={color._id}
+                className="variation-item d-flex flex-column align-items-center"
+              >
+                <input
+                  type="radio"
+                  id={`variation-${color._id}`}
+                  name="colorVariation"
+                  value={color.colorName}
+                  style={{ cursor: "pointer", width: "40px", height: "40px" }}
+                  checked={selectedColor === color._id}
+                  onChange={() => handleColorChange(color._id)}
+                  onClick={() => onColorClick(color.mainImage)}
+                />
+                <label
+                  htmlFor={`variation-${color._id}`}
+                  className="mt-2 text-center"
+                >
+                  {color.colorName}
+                </label>
+              </div>
+            ))}
+          </div>
+          {selectedColor && (
+            <div className="mt-2 mb-3">
+              <button
+                onClick={() => {
+                  handleResetColor();
+                  onColorClick(null);
+                }}
+                style={{
+                  backgroundColor: "#f44336",
+                  color: "#fff",
+                  border: "none",
+                  padding: "0.5rem 1rem",
+                  borderRadius: "5px",
+                  cursor: "pointer",
+                  marginLeft: "20px",
+                }}
+              >
+                Reset Color
+              </button>
+            </div>
+          )}
+        </div>
+      )}
+
       {product.rating && product.rating > 0 ? (
         <div className="pro-details-rating-wrap">
           <div className="pro-details-rating">

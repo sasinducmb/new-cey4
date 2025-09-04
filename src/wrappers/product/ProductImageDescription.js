@@ -14,6 +14,7 @@ const ProductImageDescription = ({
   galleryType,
   product,
   productVariation,
+  colorVariation
 }) => {
   const currency = useSelector((state) => state.currency);
   const { cartItems } = useSelector((state) => state.cart);
@@ -46,11 +47,15 @@ const finalDiscountedPrice = +(
 
   // State to handle switching between Full Description and Specification
   const [activeSection, setActiveSection] = useState(null);
-  const [selectedVariation, setSelectedVariation] = useState(null); // Default to the first variation
+  const [selectedVariation, setSelectedVariation] = useState(null);
+  const [selectedColor, setSelectedColor] = useState(null); // Default to the first variation
   // Updated renderContent function with specifications and features
 
   const handleVariationClick = (variation) => {
     setSelectedVariation(variation);
+  };
+  const handleColorClick = (color) => {
+    setSelectedColor(color);
   };
   // console.log(selectedVariation);
   const renderContent = () => {
@@ -341,6 +346,7 @@ const finalDiscountedPrice = +(
               <ProductImageGallery
                 product={product}
                 variationImage={selectedVariation}
+                colorImage={selectedColor}
               />
             )}
           </div>
@@ -355,7 +361,9 @@ const finalDiscountedPrice = +(
               wishlistItem={wishlistItem}
               compareItem={compareItem}
               productVariation={productVariation}
+              colorVariation={colorVariation}
               onVariationClick={handleVariationClick}
+              onColorClick={handleColorClick}
               isReseller={isReseller}
             />
           </div>
