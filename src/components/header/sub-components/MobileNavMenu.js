@@ -43,6 +43,11 @@ const MobileNavMenu = () => {
           </Link>
         </li>
         <li>
+          <Link to={process.env.PUBLIC_URL + '/collabaration'}>
+            {t('Collaboration')}
+          </Link>
+        </li>
+        <li>
           <Link to={process.env.PUBLIC_URL + '/my-account'}>
             {t('my_account')}
           </Link>

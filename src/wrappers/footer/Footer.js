@@ -33,6 +33,9 @@ const Footer = () => {
                 <a href="/contact" className="text-white text-decoration-none">
                   Contact us
                 </a>
+                <a href="/collabaration" className="text-white text-decoration-none">
+                  Collaboration
+                </a>
                 {/* <a href="#" className="text-white text-decoration-none">Collabertaions</a> */}
               </div>
             </div>
