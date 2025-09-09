@@ -133,7 +133,7 @@ const About = () => {
                     alt="Respect for Nature"
                     className="img-fluid"
                   />
-                  <h5 className="card-title mt-3">RESPECT FOR NATURE</h5>
+                  <h5 className="card-title-ab mt-3">RESPECT FOR NATURE</h5>
                   <p className="card-text">
                     We value our connection to nature by making responsible
                     business decisions that protect the environment and promote
@@ -150,7 +150,7 @@ const About = () => {
                     alt="Stewardship"
                     className="img-fluid"
                   />
-                  <h5 className="card-title mt-3">STEWARDSHIP</h5>
+                  <h5 className="card-title-ab mt-3">STEWARDSHIP</h5>
                   <p className="card-text">
                   We lead with purpose, offering support and resources to empower future generations and build a healthy, ethical society.
                   </p>
@@ -165,7 +165,7 @@ const About = () => {
                     alt="Sustainability"
                     className="img-fluid"
                   />
-                  <h5 className="card-title mt-3">SUSTAINABILITY</h5>
+                  <h5 className="card-title-ab mt-3">SUSTAINABILITY</h5>
                   <p className="card-text">
                   We meet today's needs responsibly, ensuring a sustainable future through efficiency, conservation, and respect for nature
                   </p>
@@ -180,7 +180,7 @@ const About = () => {
                     alt="Reduced Energy Consumption"
                     className="img-fluid"
                   />
-                  <h5 className="card-title mt-3">
+                  <h5 className="card-title-ab mt-3">
                     REDUCED ENERGY CONSUMPTION
                   </h5>
                   <p className="card-text">
@@ -197,7 +197,7 @@ const About = () => {
                     alt="Zero Waste"
                     className="img-fluid"
                   />
-                  <h5 className="card-title mt-3">ZERO WASTE</h5>
+                  <h5 className="card-title-ab mt-3">ZERO WASTE</h5>
                   <p className="card-text">
                   From production to consumption, we use eco-friendly, reusable, and biodegradable materials, minimizing waste and contributing to a sustainable future
                   </p>
@@ -213,7 +213,7 @@ const About = () => {
                     alt="Zero Waste"
                     className="img-fluid"
                   />
-                  <h5 className="card-title mt-3">
+                  <h5 className="card-title-ab mt-3">
                     Sustainable Transport & Packaging
                   </h5>
                   <p className="card-text">
@@ -230,7 +230,7 @@ const About = () => {
                     alt="Zero Waste"
                     className="img-fluid"
                   />
-                  <h5 className="card-title mt-3">
+                  <h5 className="card-title-ab mt-3">
                     Local and Sustainable Food
                   </h5>
                   <p className="card-text">
@@ -247,7 +247,7 @@ const About = () => {
                     alt="Zero Waste"
                     className="img-fluid"
                   />
-                  <h5 className="card-title mt-3">
+                  <h5 className="card-title-ab mt-3">
                     Natural Habitats and Wildlife
                   </h5>
                   <p className="card-text">
@@ -264,7 +264,7 @@ const About = () => {
                     alt="Zero Waste"
                     className="img-fluid"
                   />
-                  <h5 className="card-title mt-3">Culture and Heritage</h5>
+                  <h5 className="card-title-ab mt-3">Culture and Heritage</h5>
                   <p className="card-text">
                   Our approach honors cultural heritage and traditions, preserving human history and passing its value to future generations.
                   </p>
