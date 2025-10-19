@@ -28,7 +28,7 @@ const LayoutOne = ({
         spaceBottomClass="pb-70"
       /> */}
       <WhatsAppWidget/>
-      <NewsletterSection/>
+      {/* <NewsletterSection/> */}
       <Footer/>
       {/* <ScrollToTop/> */}
     </Fragment>

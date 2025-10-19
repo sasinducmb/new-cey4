@@ -102,6 +102,14 @@ const Footer = () => {
                 Privacy policy
               </a>
             </div>
+            <div className="small mt-2">
+              <a
+                href="/refund"
+                className="text-white text-decoration-none"
+              >
+                Refund policy
+              </a>
+            </div>
 
             <div className="small mt-2">Cey4hub © all right reserved 2025</div>
           </div>

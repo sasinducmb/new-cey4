@@ -8,6 +8,7 @@ import Collobaration from "./pages/other/Collobaration";
 import Reselling from "./pages/other/Reselling";
 import Franchise from "./pages/other/Franchise";
 import WholeSale from "./pages/other/WholeSale";
+import Refund from "./pages/other/Refund";
 
 // home pages
 const HomeFashion = lazy(() => import("./pages/home/HomeHandmade"));
@@ -447,6 +448,11 @@ const App = () => {
             <Route
               path={process.env.PUBLIC_URL + "/wholesale"}
               element={<WholeSale />}/>
+
+            <Route
+              path={process.env.PUBLIC_URL + "/refund"}
+              element={<Refund />}/>
+
 
             {/* Not found page */}
 
