@@ -44,22 +44,25 @@ const finalDiscountedPrice = +(
       setIsReseller(true);
     }
   }, [data]);
+  const getProductImage = (product) => {
+  if (product?.mainImage && product.mainImage.trim() !== "") {
+    return product.mainImage; // Cloudinary full URL
+  }
+  return "/placeholder.png"; // fallback image
+};
   return (
     <Fragment>
       <div className={clsx("product-wrap", spaceBottomClass)}>
         <div className="product-img">
           <Link to={`${process.env.REACT_APP_MAIN_URL}/product/${product._id}`}>
-            <img
-              className="default-img"
-              src={
-                product.mainImage
-                  ? `${
-                      process.env.REACT_APP_BACKEND_URL
-                    }/${product.mainImage.replace(/\\/g, "/")}`
-                  : "path/to/default-image.jpg" // Provide a fallback image if mainImage is null or undefined
-              }
-              alt={product.name || "Product Image"} // Add an alt text for better accessibility
-            />
+           {product?.mainImage && (
+          <img
+            className="default-img"
+            src={product.mainImage}
+            alt={product.name || "Product Image"}
+            loading="lazy"
+          />
+        )}
             {/* {product.additionalImages && product.additionalImages.length > 0 ? (
     <img
       className="hover-img"

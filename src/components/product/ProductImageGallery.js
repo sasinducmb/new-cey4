@@ -10,8 +10,11 @@ import Swiper, { SwiperSlide } from "../../components/swiper";
 const ProductImageGallery = ({ product, variationImage, colorImage }) => {
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
   const [index, setIndex] = useState(-1);
-  console.log(colorImage);
-
+  // console.log(colorImage);
+const resolveImage = (img) =>
+  img?.startsWith("http")
+    ? img
+    : `${process.env.REACT_APP_BACKEND_URL}/${img.replace(/\\/g, "/")}`;
   const slides = variationImage
     ? [
         {
@@ -33,20 +36,15 @@ const ProductImageGallery = ({ product, variationImage, colorImage }) => {
         },
       ]
     : [
-        {
-          src: `${
-            process.env.REACT_APP_BACKEND_URL
-          }/${product.mainImage.replace(/\\/g, "/")}`,
-          key: "mainImage",
-        },
-        ...product.additionalImages.map((img, i) => ({
-          src: `${process.env.REACT_APP_BACKEND_URL}/${img.replace(
-            /\\/g,
-            "/"
-          )}`,
-          key: `additional-${i}`,
-        })),
-      ];
+    {
+      src: resolveImage(product.mainImage),
+      key: "mainImage",
+    },
+    ...(product.additionalImages || []).map((img, i) => ({
+      src: resolveImage(img),
+      key: `additional-${i}`,
+    })),
+  ];
   const variationImageUrl = variationImage
     ? `${process.env.REACT_APP_BACKEND_URL}/${variationImage.replace(
         /\\/g,
