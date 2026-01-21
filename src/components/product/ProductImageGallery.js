@@ -7,64 +7,53 @@ import Zoom from "yet-another-react-lightbox/plugins/zoom";
 import Fullscreen from "yet-another-react-lightbox/plugins/fullscreen";
 import Swiper, { SwiperSlide } from "../../components/swiper";
 
+/**
+ * Resolves image for both:
+ * - Cloudinary URLs
+ * - Old local backend paths
+ */
+const resolveImage = (img) => {
+  if (!img) return "";
+  if (img.startsWith("http")) return img;
+  return `${process.env.REACT_APP_BACKEND_URL}/${img.replace(/\\/g, "/")}`;
+};
+
 const ProductImageGallery = ({ product, variationImage, colorImage }) => {
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
   const [index, setIndex] = useState(-1);
-  // console.log(colorImage);
-const resolveImage = (img) =>
-  img?.startsWith("http")
-    ? img
-    : `${process.env.REACT_APP_BACKEND_URL}/${img.replace(/\\/g, "/")}`;
+
+  /**
+   * Priority:
+   * 1. variationImage
+   * 2. colorImage
+   * 3. product images
+   */
   const slides = variationImage
     ? [
         {
-          src: `${process.env.REACT_APP_BACKEND_URL}/${variationImage.replace(
-            /\\/g,
-            "/"
-          )}`,
+          src: resolveImage(variationImage),
           key: "variationImage",
         },
       ]
     : colorImage
     ? [
         {
-          src: `${process.env.REACT_APP_BACKEND_URL}/${colorImage.replace(
-            /\\/g,
-            "/"
-          )}`,
+          src: resolveImage(colorImage),
           key: "colorImage",
         },
       ]
     : [
-    {
-      src: resolveImage(product.mainImage),
-      key: "mainImage",
-    },
-    ...(product.additionalImages || []).map((img, i) => ({
-      src: resolveImage(img),
-      key: `additional-${i}`,
-    })),
-  ];
-  const variationImageUrl = variationImage
-    ? `${process.env.REACT_APP_BACKEND_URL}/${variationImage.replace(
-        /\\/g,
-        "/"
-      )}`
-    : null;
+        {
+          src: resolveImage(product.mainImage),
+          key: "mainImage",
+        },
+        ...(product.additionalImages || []).map((img, i) => ({
+          src: resolveImage(img),
+          key: `additional-${i}`,
+        })),
+      ];
 
-  // Format colorImage URL properly (for debugging only now)
-  const colorImageUrl = colorImage
-    ? `${process.env.REACT_APP_BACKEND_URL}/${colorImage.replace(/\\/g, "/")}`
-    : null;
-
-  console.log(variationImageUrl);
-  console.log("Color Image URL:", colorImageUrl);
-  console.log(
-    "Currently showing:",
-    variationImage ? "variation" : colorImage ? "color" : "product"
-  );
-
-  // Swiper slider settings
+  // Main gallery swiper
   const gallerySwiperParams = {
     spaceBetween: 10,
     loop: true,
@@ -77,6 +66,7 @@ const resolveImage = (img) =>
     modules: [EffectFade, Thumbs],
   };
 
+  // Thumbnail swiper
   const thumbnailSwiperParams = {
     onSwiper: setThumbsSwiper,
     spaceBetween: 10,
@@ -93,26 +83,24 @@ const resolveImage = (img) =>
       <div className="product-large-image-wrapper">
         {product.discount || product.new ? (
           <div className="product-img-badges">
-            {product.discount ? (
+            {product.discount && (
               <span className="pink">-{product.discount}%</span>
-            ) : (
-              ""
             )}
-            {product.new ? <span className="purple">New</span> : ""}
+            {product.new && <span className="purple">New</span>}
           </div>
-        ) : (
-          ""
-        )}
-        {slides.length > 0 ? (
+        ) : null}
+
+        {slides.length > 0 && (
           <Swiper options={gallerySwiperParams}>
             {slides.map((slide, key) => (
-              <SwiperSlide key={key}>
+              <SwiperSlide key={slide.key || key}>
                 <button
                   className="lightgallery-button"
                   onClick={() => setIndex(key)}
                 >
                   <i className="pe-7s-expand1"></i>
                 </button>
+
                 <div className="single-image">
                   <img
                     src={slide.src}
@@ -122,6 +110,8 @@ const resolveImage = (img) =>
                 </div>
               </SwiperSlide>
             ))}
+
+            {/* Lightbox */}
             <AnotherLightbox
               open={index >= 0}
               index={index}
@@ -130,14 +120,16 @@ const resolveImage = (img) =>
               plugins={[Thumbnails, Zoom, Fullscreen]}
             />
           </Swiper>
-        ) : null}
+        )}
       </div>
-      {!variationImage && (
+
+      {/* Thumbnails only for product images */}
+      {!variationImage && !colorImage && (
         <div className="product-small-image-wrapper mt-15">
-          {slides.length > 0 ? (
+          {slides.length > 0 && (
             <Swiper options={thumbnailSwiperParams}>
               {slides.map((slide, key) => (
-                <SwiperSlide key={key}>
+                <SwiperSlide key={slide.key || key}>
                   <div className="single-image">
                     <img
                       src={slide.src}
@@ -148,7 +140,7 @@ const resolveImage = (img) =>
                 </SwiperSlide>
               ))}
             </Swiper>
-          ) : null}
+          )}
         </div>
       )}
     </Fragment>
@@ -158,11 +150,13 @@ const resolveImage = (img) =>
 ProductImageGallery.propTypes = {
   product: PropTypes.shape({
     mainImage: PropTypes.string.isRequired,
-    additionalImages: PropTypes.arrayOf(PropTypes.string).isRequired,
+    additionalImages: PropTypes.arrayOf(PropTypes.string),
     discount: PropTypes.number,
     new: PropTypes.bool,
     name: PropTypes.string.isRequired,
   }).isRequired,
+  variationImage: PropTypes.string,
+  colorImage: PropTypes.string,
 };
 
 export default ProductImageGallery;
